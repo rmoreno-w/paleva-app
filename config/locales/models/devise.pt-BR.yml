@@ -1,0 +1,8 @@
+pt-BR:
+  activerecord:
+    attributes:
+      user:
+        name: Nome
+        family_name: Sobrenome
+        registration_number: CPF
+        name: Nome
