@@ -20,6 +20,12 @@
 
   <body>
     <main class="container mx-auto mt-28 px-5 flex">
+        <nav>
+            <% if user_signed_in? %>
+                <p>Olá, <%= current_user.name %></p>
+                <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
+            <% end %>
+        </nav>
         <% if flash[:notice] %>
             <p class="notice"><%= notice %></p>
         <% end %>

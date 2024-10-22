@@ -1,0 +1,13 @@
+<h2>Boas vindas ao PaLevá!</h2>
+
+<% if user_signed_in? %>
+    <section>
+        <p>Meus restaurantes</p>
+    </section>
+<% else %>
+    <section>
+        <p>Para acessar o sistema, faça login ou crie uma conta</p>
+        <%= link_to 'Criar Conta', new_user_registration_path %>
+        <%= link_to 'Entrar', new_user_session_path %>
+    </section>
+<% end %>
