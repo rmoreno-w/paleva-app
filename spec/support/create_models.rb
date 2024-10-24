@@ -8,7 +8,7 @@ def create_user
   )
 end
 
-def create_restaurant
+def new_restaurant
   Restaurant.new(
     brand_name: 'Pizzaria Campus du Codi',
     corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
@@ -16,5 +16,18 @@ def create_restaurant
     address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
     phone: '12987654321',
     email: 'campus@ducodi.com.br'
+  )
+end
+
+def create_restaurant_and_user
+  user = create_user
+  Restaurant.create!(
+    brand_name: 'Pizzaria Campus du Codi',
+    corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+    registration_number: '30.883.175/2481-06',
+    address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+    phone: '12987654321',
+    email: 'campus@ducodi.com.br',
+    user: user
   )
 end

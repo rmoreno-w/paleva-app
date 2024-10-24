@@ -58,7 +58,7 @@ describe 'User' do
 
   it 'sees the restaurants detail page if logged in and has a restaurant' do
     user = create_user
-    r = create_restaurant
+    r = new_restaurant
     r.user = user
     r.save
     login_as user

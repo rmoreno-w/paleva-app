@@ -89,7 +89,7 @@ RSpec.describe User, type: :model do
       end
     end
 
-    context 'length' do
+    context '#length' do
       it 'password should be at least 12 characters long' do
         # Arrange
         user = User.new(
@@ -108,7 +108,7 @@ RSpec.describe User, type: :model do
       end
     end
 
-    context 'uniqueness' do
+    context '#uniqueness' do
       it 'registration number should be unique' do
         # Arrange
         User.create!(
@@ -135,7 +135,7 @@ RSpec.describe User, type: :model do
       end
     end
 
-    context 'registration number validity' do
+    context '#registration number validity' do
       it 'should match the pattern' do
         user = User.new(
           name: 'Luan',
