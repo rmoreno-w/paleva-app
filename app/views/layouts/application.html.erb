@@ -18,20 +18,24 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+  <body class="flex flex-col bg-[#F2F3F5]">
+    <header class="flex justify-between border-b-2 border-blue-400 items-center bg-[#FFFFFF] h-20 p-5">
+        <h1>PaLevá</h1>
         <nav>
             <% if user_signed_in? %>
                 <p>Olá, <%= current_user.name %></p>
                 <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
             <% end %>
         </nav>
-        <% if flash[:notice] %>
-            <p class="notice"><%= notice %></p>
-        <% end %>
-        <% if flash[:alert] %>
-            <p class="alert"><%= alert %></p>
-        <% end %>
+    </header>
+    <% if flash[:notice] %>
+        <p class="notice"><%= notice %></p>
+    <% end %>
+    <% if flash[:alert] %>
+        <p class="alert"><%= alert %></p>
+    <% end %>
+    <%# <main class="container mx-auto mt-28 px-5 flex"> %>
+    <main class="flex flex-col mx-auto mt-20">
         <%= yield %>
     </main>
   </body>

@@ -1,8 +1,10 @@
 <h2>Boas vindas ao PaLevá!</h2>
 
-<% if user_signed_in? %>
+<% if user_signed_in? && current_user.has_restaurant? %>
     <section>
-        <p>Meus restaurantes</p>
+        <p>Meu Restaurante</p>
+
+        <p><%= current_user.restaurant.brand_name%></p>
     </section>
 <% else %>
     <section>

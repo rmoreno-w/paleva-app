@@ -47,7 +47,7 @@ describe 'User' do
       # Assert
       # expect(current_path).to eq restaurants_path
       expect(page).to have_content 'CPF não pode ficar em branco'
-      expect(page).to have_content 'CPF deve ser um número válido'
+      expect(page).to have_content 'CPF deve ser um número de CPF válido'
       expect(page).to have_content 'Nome não pode ficar em branco'
       expect(page).not_to have_content 'Boas vindas! Sua conta foi criada com sucesso.'
       expect(page).not_to have_content 'Olá, Aloisio'

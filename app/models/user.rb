@@ -8,10 +8,16 @@ class User < ApplicationRecord
   validates :registration_number, uniqueness: true
   validate :registration_number_formatting
 
+  has_one :restaurant
+
+  def has_restaurant?
+    self.restaurant.present?
+  end
+
   private
   def registration_number_formatting
     unless CPF.valid?(self.registration_number)
-      self.errors.add(:registration_number, 'deve ser um número válido')
+      self.errors.add(:registration_number, 'deve ser um número de CPF válido')
     end
   end
 end

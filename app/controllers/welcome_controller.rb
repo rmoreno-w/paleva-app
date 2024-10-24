@@ -1,3 +1,7 @@
 class WelcomeController < ApplicationController
-  def index; end
+  def index
+    if user_signed_in?
+      current_user.has_restaurant? ?  nil : redirect_to(new_restaurant_path)
+    end
+  end
 end

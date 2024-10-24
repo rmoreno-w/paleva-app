@@ -1,0 +1,37 @@
+<h2>Criar meu restaurante</h2>
+
+<h3>O PaLevá é um sistema de gerenciamento de Restaurantes completo e para ter acesso a todas funcionalidades, primeiro você precisa criar seu restaurante</h3>
+
+<%= form_with(model: @restaurant) do | f | %>
+    <div>
+        <%= f.label :brand_name %>
+        <%= f.text_field :brand_name %>
+    </div>
+
+    <div>
+        <%= f.label :corporate_name %>
+        <%= f.text_field :corporate_name %>
+    </div>
+
+    <div>
+        <%= f.label :registration_number %>
+        <%= f.text_field :registration_number %>
+    </div>
+
+    <div>
+        <%= f.label :address %>
+        <%= f.text_field :address %>
+    </div>
+
+    <div>
+        <%= f.label :phone, 'Telefone (digite apenas os números)' %>
+        <%= f.text_field :phone %>
+    </div>
+
+    <div>
+        <%= f.label :email %>
+        <%= f.email_field :email %>
+    </div>
+
+    <%= f.submit %>
+<% end %>
