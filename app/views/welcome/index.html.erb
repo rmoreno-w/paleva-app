@@ -5,6 +5,7 @@
         <p>Meu Restaurante</p>
 
         <p><%= current_user.restaurant.brand_name%></p>
+        <%= link_to 'Horários de Funcionamento', new_restaurant_restaurant_operating_hour_path(current_user.restaurant) %>
     </section>
 <% else %>
     <section>

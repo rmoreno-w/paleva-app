@@ -31,6 +31,6 @@ class RestaurantsController < ApplicationController
   end
 
   def has_restaurant?
-    current_user.has_restaurant? ? redirect_to(root_path) : nil
+    current_user.has_restaurant? && redirect_to(root_path)
   end
 end

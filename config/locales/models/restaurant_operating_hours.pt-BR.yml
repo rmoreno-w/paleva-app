@@ -1,0 +1,21 @@
+pt-BR:
+  opened: Aberto
+  closed: Fechado
+  sunday: Domingo
+  monday: Segunda-feira
+  tuesday: Terça-feira
+  wednesday: Quarta-feira
+  thursday: Quinta-feira
+  friday: Sexta-feira
+  saturday: Sábado
+  activerecord:
+    models:
+      restaurant_operating_hour:
+        one: Horário de Funcionamento
+        other: Horários de Funcionamento
+    attributes:
+      restaurant_operating_hour:
+        start_time: Início do Período
+        start_time: Fim do Período
+        status: Status
+        weekday: Dia da Semana

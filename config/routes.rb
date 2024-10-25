@@ -13,5 +13,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "welcome#index"
 
-  resources :restaurants, only: [ :new, :create ]
+  resources :restaurants, only: [ :new, :create ] do
+    resources :restaurant_operating_hours, only: [ :new, :create ]
+  end
 end
