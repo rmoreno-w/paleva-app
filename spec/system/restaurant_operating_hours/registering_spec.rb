@@ -2,14 +2,20 @@ require 'rails_helper'
 
 describe 'User' do
   context 'visits the page to register an operating hour for a restaurant' do
-    it 'but has to first be logged in' do
-      create_restaurant_and_user
+    it 'and should land in the correct page' do
+      restaurant = create_restaurant_and_user
 
-      # Act
       visit root_path
+      click_on 'Entrar'
+      fill_in 'E-mail', with: 'aloisio@email.com'
+      fill_in 'Senha', with: 'fortissima12'
+      click_on 'Entrar'
+      click_on 'Criar Horário'
+      
 
       # Assert
-      expect(page).not_to have_content 'Horários de Funcionamento'
+      expect(current_path).to eq new_restaurant_restaurant_operating_hour_path(restaurant.id)
+      expect(page).to have_content 'Criar Horário de Funcionamento'
     end
 
     it 'and succeeds' do
