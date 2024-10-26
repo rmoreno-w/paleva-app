@@ -1,4 +1,7 @@
 pt-BR:
+  time:
+    formats:
+      hours: "%H:%M"
   opened: Aberto
   closed: Fechado
   sunday: Domingo
@@ -16,6 +19,6 @@ pt-BR:
     attributes:
       restaurant_operating_hour:
         start_time: Início do Período
-        start_time: Fim do Período
+        end_time: Fim do Período
         status: Status
         weekday: Dia da Semana

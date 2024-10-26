@@ -13,5 +13,10 @@ pt-BR:
         phone: Telefone
         email: E-mail
         code: Código
-        operating_hours: Horários de Funcionamento
         user_id: Usuário
+        restaurant_operating_hours: Horários de Funcionamento
+      restaurant/restaurant_operating_hours:
+        start_time: Início do Período
+        end_time: Fim do Período
+        status: Status
+        weekday: Dia da Semana

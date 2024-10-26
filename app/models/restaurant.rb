@@ -1,5 +1,9 @@
 class Restaurant < ApplicationRecord
   belongs_to :user
+  
+  has_many :restaurant_operating_hours, inverse_of: :restaurant
+
+  accepts_nested_attributes_for :restaurant_operating_hours
 
   validates :brand_name, :corporate_name, :registration_number, :address, :phone, :email, :code, presence: true
   validates :phone, length: { minimum: 10, maximum: 11 }

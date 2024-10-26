@@ -1,4 +1,4 @@
-<h2>Horários de Funcionamento</h2>
+<h2>Criar Horário de Funcionamento</h2>
 
 <%= form_with model:[@restaurant, @restaurant_operating_hour]  do | f |  %>
     <%= f.label :start_time %>
@@ -15,22 +15,3 @@
 
     <%= f.submit %>
 <% end %>
-
-
-<!-- <%= form_with url: restaurant_restaurant_operating_hours_path, method: :post do | f |  %>
-        <div data-controller="fields">
-            <%= f.label :start_time %>
-            <%= f.time_field :start_time %>
-
-            <%= f.label :end_time %>
-            <%= f.time_field :end_time %>
-
-            <%= f.label :status %>
-            <%= f.collection_select :status, RestaurantOperatingHour.statuses.keys.map { |key| [I18n.t("#{key}"), key] }, :second, :first %>
-
-            <%= f.label :weekday %>
-            <%= f.collection_select :weekday, RestaurantOperatingHour.weekdays.keys.map { |key| [I18n.t("#{key}"), key] }, :second, :first %>
-            <button data-fields-target="add" data-action="click->fields#addOperationTime">+</button>
-    </div>
-    <%= f.submit %>
-<% end %> -->

@@ -47,7 +47,13 @@ describe 'User' do
     fill_in 'Endereço Completo', with: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP'
     fill_in 'Telefone (digite apenas os números)', with: '12987654321'
     fill_in 'E-mail', with: 'campus@ducodi.com.br'
-    # fill_in 'Horários de Funcionamento', with: ''
+    
+    within '#operating-hours' do
+      select 'Terça-feira', from: 'Dia da Semana'
+      fill_in 'Início do Período', with: '08:00'
+      fill_in 'Fim do Período', with: '12:00'
+      select 'Aberto', from: 'Status'
+    end
     click_on 'Criar Restaurante'
 
     expect(page).to have_content 'Restaurante criado com sucesso!'

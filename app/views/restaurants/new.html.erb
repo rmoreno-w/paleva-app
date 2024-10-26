@@ -33,5 +33,26 @@
         <%= f.email_field :email %>
     </div>
 
+    <div id="operating-hours" class="flex flex-col gap-4 max-w-[50%]">
+        <p><%= "#{I18n.t('activerecord.models.restaurant_operating_hour.one')} (Mais horários podem ser adicionados posteriormente)" %></p>
+        <%= f.fields_for :restaurant_operating_hours do |hour_form| %>
+            <div class="flex flex-col mb-4">
+                <%= hour_form.label :weekday %>
+                <%= hour_form.collection_select :weekday, @weekdays, :second, :first %>
+
+                <div>
+                    <%= hour_form.label :start_time %>
+                    <%= hour_form.time_field :start_time %>
+
+                    <%= hour_form.label :end_time %>
+                    <%= hour_form.time_field :end_time %>
+                </div>
+
+                <%= hour_form.label :status %>
+                <%= hour_form.collection_select :status, @statuses, :second, :first %>
+            </div>
+        <% end %>
+    <div>
+
     <%= f.submit %>
 <% end %>
