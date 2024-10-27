@@ -1,0 +1,39 @@
+<h2><%= @beverage.name%></h2>
+
+<section>
+    <ul>
+        <li>
+            <p>
+                <span><%= Beverage.human_attribute_name :description %></span><%= @beverage.description%>
+            </p>
+        </li>
+        <li>
+            <p>
+                <span><%= Beverage.human_attribute_name :calories %></span><%= @beverage.calories%>
+            </p>
+        </li>
+        <li>
+            <p>
+                <span><%= Beverage.human_attribute_name :is_alcoholic %></span>
+                <% if @beverage.is_alcoholic %>
+                    ✅
+                <% else %>
+                    ❌
+                <% end %>
+            </p>
+        </li>
+        <li>
+            <span>Foto da Bebida</span>
+            <% if @beverage.picture.present? %>
+                <div class="w-60 h-60">
+                    <%= image_tag @beverage.picture %>
+                </div>
+            <% else %>
+                <p>Esta Bebida ainda não possui uma foto :(</p>
+            <% end %>
+        </li>
+    </ul>
+</section>
+
+<%= link_to 'Alterar Bebida', edit_restaurant_beverage_path(@restaurant.id, @beverage.id) %>
+<%= button_to 'Remover Bebida', restaurant_beverage_path(@restaurant.id, @beverage.id), method: :delete %>

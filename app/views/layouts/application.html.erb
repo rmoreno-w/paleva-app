@@ -28,6 +28,7 @@
 
                 <% if current_user.has_restaurant? %>
                     <%= link_to 'Pratos', restaurant_dishes_path(current_user.restaurant) %>
+                    <%= link_to 'Bebidas', restaurant_beverages_path(current_user.restaurant) %>
                 <% end %>
             <% end %>
         </nav>

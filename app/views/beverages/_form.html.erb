@@ -1,0 +1,28 @@
+<%= form_with model: [@restaurant, @beverage] do |f| %>
+    <div>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+    </div>
+
+    <div>
+        <%= f.label :description %>
+        <%= f.text_area :description %>
+    </div>
+
+    <div>
+        <%= f.label :calories, 'Calorias (não obrigatório)' %>
+        <%= f.number_field :calories, min: 0, step: 1 %>
+    </div>
+
+    <div>
+        <%= f.label :is_alcoholic %>
+        <%= f.check_box :is_alcoholic %>
+    </div>
+
+    <div>
+        <%= f.label :picture %>
+        <%= f.file_field :picture %>
+    </div>
+
+    <%= f.submit %>
+<% end %>

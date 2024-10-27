@@ -42,3 +42,15 @@ def create_dish
     restaurant: restaurant
   )
 end
+
+def create_beverage
+  restaurant = create_restaurant_and_user
+
+  Beverage.create!(
+    name: 'Agua de coco Sócoco',
+    description: 'Caixa de 1L. Já vem gelada',
+    calories: 150,
+    is_alcoholic: false,
+    restaurant: restaurant
+  )
+end

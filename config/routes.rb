@@ -16,5 +16,6 @@ Rails.application.routes.draw do
   resources :restaurants, only: [ :new, :create ] do
     resources :restaurant_operating_hours, only: [ :new, :create ]
     resources :dishes, only: [ :index, :show, :new, :create, :edit, :update, :destroy ]
+    resources :beverages, only: [ :index, :show, :new, :create, :edit, :update, :destroy ]
   end
 end

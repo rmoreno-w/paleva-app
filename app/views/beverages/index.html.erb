@@ -1,0 +1,15 @@
+<h2>Bebidas do Meu Restaurante</h2>
+
+<% if @beverages.empty? %>
+    <p>Ainda não há bebidas cadastradas para o seu restaurante.</p>
+<% else %>
+    <ul>
+        <% @beverages.each do |beverage| %>
+            <%= link_to restaurant_beverage_path(@restaurant.id, beverage.id) do %>
+                <li><%= beverage.name%></li>
+            <% end %>
+        <% end %>
+    </ul>
+<% end %>
+
+<%= link_to 'Criar Bebida', new_restaurant_beverage_path(current_user.restaurant) %>
