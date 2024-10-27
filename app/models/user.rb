@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_one :restaurant
 
   def has_restaurant?
-    self.restaurant.present?
+    self.restaurant.present? && self.restaurant.persisted?
   end
 
   private

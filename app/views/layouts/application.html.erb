@@ -25,6 +25,10 @@
             <% if user_signed_in? %>
                 <p>Olá, <%= current_user.name %></p>
                 <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
+
+                <% if current_user.has_restaurant? %>
+                    <%= link_to 'Pratos', restaurant_dishes_path(current_user.restaurant) %>
+                <% end %>
             <% end %>
         </nav>
     </header>

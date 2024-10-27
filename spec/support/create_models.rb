@@ -31,3 +31,14 @@ def create_restaurant_and_user
     user: user
   )
 end
+
+def create_dish
+  restaurant = create_restaurant_and_user
+
+  Dish.create!(
+    name: 'Petit Gateau de Mousse Insuflado',
+    description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+    calories: 580,
+    restaurant: restaurant
+  )
+end
