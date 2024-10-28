@@ -1,0 +1,21 @@
+<h2>Resultados da busca por: <%= @query %></h2>
+
+<ul>
+    <% if @results.empty? %>
+        <p>Nenhum resultado encontrado na busca por bebidas e pratos com "<%= @query %>"</p>
+    <% else %>
+        <% @results.each do |item| %>
+            <li>
+                <p><%= item.name %></p>
+
+                <% if item.class == Dish %>
+                    <%= link_to 'Ver detalhes', restaurant_dish_path(@restaurant, item) %>
+                    <%= link_to 'Editar', edit_restaurant_dish_path(@restaurant, item) %>
+                <% else %>
+                    <%= link_to 'Ver detalhes', restaurant_beverage_path(@restaurant, item) %>
+                    <%= link_to 'Editar', edit_restaurant_beverage_path(@restaurant, item) %>
+                <% end %>
+            </li>
+        <% end %>
+    <% end %>
+<ul>

@@ -19,19 +19,28 @@
   </head>
 
   <body class="flex flex-col bg-[#F2F3F5]">
-    <header class="flex justify-between border-b-2 border-blue-400 items-center bg-[#FFFFFF] h-20 p-5">
+    <header class="flex justify-between items-center border-b-2 border-blue-400 bg-[#FFFFFF] p-5">
         <h1>PaLevá</h1>
-        <nav>
-            <% if user_signed_in? %>
-                <p>Olá, <%= current_user.name %></p>
-                <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
 
+        <% if user_signed_in? %>
+            <nav class= "flex gap-10 items-center">
                 <% if current_user.has_restaurant? %>
+                    <%= form_with url: restaurant_menu_items_search_path(current_user), method: :get do | f | %>
+                        <%= f.label :query, 'Procurar no Menu' %>
+                        <%= f.search_field :query, placeholder: 'Ex: Pizza, Caipirinha...' %>
+
+                        <%= f.submit 'Buscar' %>
+                    <% end %>
                     <%= link_to 'Pratos', restaurant_dishes_path(current_user.restaurant) %>
                     <%= link_to 'Bebidas', restaurant_beverages_path(current_user.restaurant) %>
                 <% end %>
-            <% end %>
-        </nav>
+
+                <div>
+                    <p>Olá, <%= current_user.name %></p>
+                    <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
+                </div>
+            </nav>
+        <% end %>
     </header>
     <% if flash[:notice] %>
         <p class="notice"><%= notice %></p>
