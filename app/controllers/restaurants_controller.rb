@@ -11,22 +11,12 @@ class RestaurantsController < ApplicationController
   end
 
   def create
-    # operating_hours_params, restaurant_data = get_restaurant_data_from_params
     p = get_restaurant_data_from_params
     @restaurant = Restaurant.new(p)
     @restaurant.user = current_user
-    # @restaurant.save
-    # puts p
 
 
-    # puts operating_hours_params
-    
     if @restaurant.save
-      # operating_hours_params.each do |op_hour|
-      #   r_op = RestaurantOperatingHour.new(op_hour)
-      #   r_op.restaurant = @restaurant
-      #   r_op.save
-      # end
       redirect_to root_path, notice: 'Restaurante criado com sucesso!'
     else
       @weekdays = RestaurantOperatingHour.weekdays.each_pair.to_a.map{ |day, value| [I18n.t(day), value] }
@@ -38,7 +28,6 @@ class RestaurantsController < ApplicationController
 
   private
   def get_restaurant_data_from_params
-    # puts params.inspect
     received_params = params.require(:restaurant).permit(
       :brand_name,
       :corporate_name,
@@ -54,22 +43,12 @@ class RestaurantsController < ApplicationController
         :status
       ])
 
-      # received_params[:restaurant_operating_hours_attributes][:weekday] = received_params[:restaurant_operating_hours_attributes][:weekday].to_i
-      # received_params[:restaurant_operating_hours_attributes][:status] = received_params[:restaurant_operating_hours_attributes][:status].to_i
+    received_params[:restaurant_operating_hours_attributes].each do |index, hours_params|
+      hours_params[:weekday] = hours_params[:weekday].to_i
+      hours_params[:status] = hours_params[:status].to_i
+    end
 
-      # operating_hours_params = received_params.delete(:restaurant_operating_hours_attributes)
-
-      received_params[:restaurant_operating_hours_attributes].each do |index, hours_params|
-        hours_params[:weekday] = hours_params[:weekday].to_i
-        hours_params[:status] = hours_params[:status].to_i
-        # puts received_params
-        # puts 'aq'
-      end
-
-
-      # puts 
-      # puts received_params.as_json
-      received_params
+    received_params
   end
 
   def has_restaurant?
