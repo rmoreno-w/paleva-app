@@ -32,6 +32,23 @@ def create_restaurant_and_user
   )
 end
 
+def new_dish
+  Dish.new(
+    name: 'Petit Gateau de Mousse Insuflado',
+    description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+    calories: 580,
+  )
+end
+
+def new_beverage
+  Beverage.new(
+    name: 'Agua de coco Sócoco',
+    description: 'Caixa de 1L. Já vem gelada',
+    calories: 150,
+    is_alcoholic: false,
+  )
+end
+
 def create_dish
   restaurant = create_restaurant_and_user
 

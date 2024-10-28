@@ -240,5 +240,33 @@ describe 'User' do
       expect(page).not_to have_content 'Bala 7 Belo'
       expect(page).not_to have_content 'Whisky Jack Daniels Honey'
     end
+
+    it 'and is able to find the search field in the navigation bar in any page thath needs login and a restaurant - If it already has a restaurant' do
+      restaurant = create_restaurant_and_user
+      login_as restaurant.user
+      beverage = Beverage.create!(
+        name: 'Agua de coco Sócoco',
+        description: 'Caixa de 1L. Já vem gelada',
+        calories: 150,
+        is_alcoholic: false,
+        restaurant: restaurant
+      )
+
+      dish = Dish.create!(
+        name: 'Sufflair',
+        description: 'Chocolate Nestle 150g',
+        calories: 258,
+        restaurant: restaurant
+      )
+
+      pages = list_pages(beverage: beverage, restaurant: restaurant, dish: dish)
+
+      pages.each do |page_url|
+        visit page_url
+
+        expect(page).to have_content 'Procurar no Menu'
+        expect(page).to have_selector 'input[placeholder="Ex: Pizza, Caipirinha..."]'
+      end
+    end
   end
 end

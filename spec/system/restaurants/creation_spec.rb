@@ -20,6 +20,17 @@ describe 'User' do
     expect(current_path).not_to eq new_user_session_path
   end
 
+  it 'can not access the restaurant creation page if they hava a previous restaurant' do
+    restaurant = create_restaurant_and_user
+    login_as restaurant.user
+    
+    visit new_restaurant_path
+    
+    expect(page).not_to have_content 'Criar meu restaurante'
+    expect(current_path).not_to eq new_restaurant_path
+    expect(current_path).to eq root_path
+  end
+
   it 'sees the restaurant creation page if logged in and has no previous restaurant' do
     user = create_user
 
@@ -96,5 +107,51 @@ describe 'User' do
     expect(page).to have_content 'Criar meu restaurante'
     expect(page).to have_content 'primeiro você precisa criar seu restaurante'
     expect(current_path).to eq '/restaurants'
+  end
+
+  it 'must have a restaurant before navigating to any page. If it doesnt, it is redirected to creation page' do
+    user = create_user
+    login_as user
+
+    second_user = User.create!(
+        name: 'Jacquin',
+        family_name: 'DuFrance',
+        registration_number: CPF.generate,
+        email: 'ajc@cquin.com',
+        password: 'fortissima12'
+      )
+
+    restaurant = Restaurant.create!(
+      brand_name: 'Boulangerie JQ',
+      corporate_name: 'JQ Pães e Bolos Artesanais S.A.',
+      registration_number: CNPJ.generate,
+      address: 'Rua Paris Elysees, 50. Bairro Dumont. CEP: 55.001-002. Vinhedo - SP',
+      phone: '12988774532',
+      email: 'atendimento@bjq.com.br',
+      user: second_user
+    )
+
+    beverage = Beverage.create!(
+      name: 'Agua de coco Sócoco',
+      description: 'Caixa de 1L. Já vem gelada',
+      calories: 150,
+      is_alcoholic: false,
+      restaurant: restaurant
+    )
+
+    dish = Dish.create!(
+      name: 'Sufflair',
+      description: 'Chocolate Nestle 150g',
+      calories: 258,
+      restaurant: restaurant
+    )
+
+    pages = list_pages(beverage: beverage, restaurant: restaurant, dish: dish)
+
+    pages.each do |page_url|
+      visit page_url
+
+      expect(page).to have_content 'Criar meu restaurante'
+    end
   end
 end
