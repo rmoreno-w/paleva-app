@@ -21,7 +21,10 @@ Rails.application.routes.draw do
       post 'activate', on: :member
     end
 
-    resources :beverages, only: [ :index, :show, :new, :create, :edit, :update, :destroy ]
+    resources :beverages, only: [ :index, :show, :new, :create, :edit, :update, :destroy ] do
+      post 'deactivate', on: :member
+      post 'activate', on: :member
+    end
 
     get '/menu_items_search', to: 'menu_search#index'
   end

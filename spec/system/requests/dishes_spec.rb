@@ -168,6 +168,7 @@ describe 'User' do
     )
 
     post(deactivate_restaurant_dish_path(dish.restaurant.id, second_dish.id))
+
     expect(response).to redirect_to root_path
   end
 
@@ -219,6 +220,7 @@ describe 'User' do
     )
 
     post(activate_restaurant_dish_path(dish.restaurant.id, second_dish.id))
+
     expect(response).to redirect_to root_path
   end
 end

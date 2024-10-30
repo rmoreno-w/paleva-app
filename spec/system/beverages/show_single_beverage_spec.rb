@@ -20,7 +20,7 @@ describe 'User' do
       expect(page).to have_content 'Caixa de 1L. Já vem gelada'
       expect(page).to have_content '150'
       expect(page).to have_content '❌'
-      expect(page).to have_content I18n.t(beverage.status)
+      expect(page).to have_content 'Ativo 🟢'
     end
 
     it 'and should not be able to access a beverage from another user' do
@@ -69,6 +69,41 @@ describe 'User' do
       expect(current_path).to eq root_path
       expect(page).to have_content 'Ops! Você não tem acesso a bebidas que não são do seu restaurante'
       expect(page).not_to have_content first_beverage.name
+    end
+
+    it 'and should see the button to inactivate a beverage, if it is active (default)' do
+      beverage = create_beverage
+
+      # Act
+      visit root_path
+      click_on 'Entrar'
+      fill_in 'E-mail', with: 'aloisio@email.com'
+      fill_in 'Senha', with: 'fortissima12'
+      click_on 'Entrar'
+      click_on 'Bebidas'
+      click_on 'Agua de coco Sócoco'
+
+      # Assert
+      expect(current_path).to eq restaurant_beverage_path(beverage.restaurant.id, beverage.id)
+      expect(page).to have_button 'Desativar Bebida'
+    end
+
+    it 'and should see the button to activate a beverage, if it is inactive' do
+      beverage = create_beverage
+      beverage.inactive!
+
+      # Act
+      visit root_path
+      click_on 'Entrar'
+      fill_in 'E-mail', with: 'aloisio@email.com'
+      fill_in 'Senha', with: 'fortissima12'
+      click_on 'Entrar'
+      click_on 'Bebidas'
+      click_on 'Agua de coco Sócoco'
+
+      # Assert
+      expect(current_path).to eq restaurant_beverage_path(beverage.restaurant.id, beverage.id)
+      expect(page).to have_button 'Ativar Bebida'
     end
   end
 end

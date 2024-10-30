@@ -19,6 +19,7 @@ describe 'User' do
       expect(page).to have_content 'Petit Gateau de Mousse Insuflado'
       expect(page).to have_content 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse'
       expect(page).to have_content '580'
+      expect(page).to have_content 'Ativo 🟢'
     end
 
     it 'and should not be able to access a dish from another user' do
@@ -81,10 +82,6 @@ describe 'User' do
 
       # Assert
       expect(current_path).to eq restaurant_dish_path(dish.restaurant.id, dish.id)
-      expect(page).to have_content 'Petit Gateau de Mousse Insuflado'
-      expect(page).to have_content 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse'
-      expect(page).to have_content '580'
-      expect(page).to have_content 'Ativo 🟢'
       expect(page).to have_button 'Desativar Prato'
     end
 
@@ -103,10 +100,6 @@ describe 'User' do
 
       # Assert
       expect(current_path).to eq restaurant_dish_path(dish.restaurant.id, dish.id)
-      expect(page).to have_content 'Petit Gateau de Mousse Insuflado'
-      expect(page).to have_content 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse'
-      expect(page).to have_content '580'
-      expect(page).to have_content 'Inativo 🔴'
       expect(page).to have_button 'Ativar Prato'
     end
   end

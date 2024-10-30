@@ -127,4 +127,108 @@ describe 'User' do
 
     expect(response.status).to eq 422
   end
+
+  it 'inactivates a beverage but is not authenticated' do
+    beverage = create_beverage
+
+    post(deactivate_restaurant_beverage_path(beverage.restaurant.id, beverage.id))
+
+    expect(response).to redirect_to new_user_session_path
+  end
+
+  it 'inactivates a beverage with success' do
+    beverage = create_beverage
+    login_as beverage.restaurant.user
+
+    post(deactivate_restaurant_beverage_path(beverage.restaurant.id, beverage.id))
+
+    expect(response.status).to redirect_to restaurant_beverage_path(beverage.restaurant, beverage)
+  end
+
+  it 'fails to inactivate a beverage with invalid data' do
+    beverage = create_beverage
+    login_as beverage.restaurant.user
+    second_user = User.create!(
+      name: 'Jacquin',
+      family_name: 'DuFrance',
+      registration_number: CPF.generate,
+      email: 'ajc@cquin.com',
+      password: 'fortissima12'
+    )
+
+    second_restaurant = Restaurant.create!(
+      brand_name: 'Boulangerie JQ',
+      corporate_name: 'JQ Pães e Bolos Artesanais S.A.',
+      registration_number: CNPJ.generate,
+      address: 'Rua Paris Elysees, 50. Bairro Dumont. CEP: 55.001-002. Vinhedo - SP',
+      phone: '12988774532',
+      email: 'atendimento@bjq.com.br',
+      user: second_user
+    )
+
+    second_beverage = Beverage.create!(
+      name: 'Coca Cola Zero Açucar 2L',
+      description: 'Garrafa de Plástico Retornável. Converta em créditos caso não deseje mais usar a garrafa',
+      calories: 97,
+      is_alcoholic: false,
+      restaurant: second_restaurant
+    )
+
+    post(deactivate_restaurant_beverage_path(beverage.restaurant.id, second_beverage.id))
+
+    expect(response).to redirect_to root_path
+  end
+
+  it 'activates a beverage but is not authenticated' do
+    beverage = create_beverage
+
+    post(activate_restaurant_beverage_path(beverage.restaurant.id, beverage.id))
+
+    expect(response).to redirect_to new_user_session_path
+  end
+
+  it 'activates a beverage with success' do
+    beverage = create_beverage
+    beverage.inactive!
+    login_as beverage.restaurant.user
+
+    post(activate_restaurant_beverage_path(beverage.restaurant.id, beverage.id))
+
+    expect(response.status).to redirect_to restaurant_beverage_path(beverage.restaurant, beverage)
+  end
+
+  it 'fails to activate a beverage with invalid data' do
+    beverage = create_beverage
+    beverage.inactive!
+    login_as beverage.restaurant.user
+    second_user = User.create!(
+      name: 'Jacquin',
+      family_name: 'DuFrance',
+      registration_number: CPF.generate,
+      email: 'ajc@cquin.com',
+      password: 'fortissima12'
+    )
+
+    second_restaurant = Restaurant.create!(
+      brand_name: 'Boulangerie JQ',
+      corporate_name: 'JQ Pães e Bolos Artesanais S.A.',
+      registration_number: CNPJ.generate,
+      address: 'Rua Paris Elysees, 50. Bairro Dumont. CEP: 55.001-002. Vinhedo - SP',
+      phone: '12988774532',
+      email: 'atendimento@bjq.com.br',
+      user: second_user
+    )
+
+    second_beverage = Beverage.create!(
+      name: 'Coca Cola Zero Açucar 2L',
+      description: 'Garrafa de Plástico Retornável. Converta em créditos caso não deseje mais usar a garrafa',
+      calories: 97,
+      is_alcoholic: false,
+      restaurant: second_restaurant
+    )
+
+    post(activate_restaurant_beverage_path(beverage.restaurant.id, second_beverage.id))
+
+    expect(response).to redirect_to root_path
+  end
 end

@@ -19,7 +19,7 @@ class BeveragesController < UserController
     @beverage = @restaurant.beverages.create(get_beverage_params)
 
     if @beverage.persisted?
-      redirect_to restaurant_beverage_path(@restaurant, @beverage), notice: 'Prato criado com sucesso'
+      redirect_to restaurant_beverage_path(@restaurant, @beverage), notice: 'Bebida criado com sucesso'
     else
       flash.now[:alert] = "Erro ao criar a bebida. #{@beverage.errors.full_messages.to_s}"
       render 'new', status: :unprocessable_entity
@@ -38,6 +38,7 @@ class BeveragesController < UserController
     found_beverage = Beverage.find(beverage_id)
 
     verify_beverage_owner(found_beverage)
+    return if performed?
 
     if @beverage.update(get_beverage_params)
       redirect_to restaurant_beverage_path(@restaurant, @beverage), notice: 'Bebida alterada com sucesso'
@@ -52,11 +53,44 @@ class BeveragesController < UserController
     found_beverage = Beverage.find(beverage_id)
 
     verify_beverage_owner(found_beverage)
+    return if performed?
 
     if @beverage.destroy
       redirect_to restaurant_beverages_path, notice: "Bebida deletada com sucesso!"
     else
       flash.now[:alert] = "Não foi possível deletar a Bebida"
+      render 'show', status: :unprocessable_entity
+    end
+  end
+
+  def deactivate
+    beverage_id = params[:id]
+    found_beverage = Beverage.find(beverage_id)
+    
+    verify_beverage_owner(found_beverage)
+    return if performed?
+
+    if @beverage.active? && @beverage.inactive!
+      flash[:notice] = 'Sucesso! Bebida desativada'
+      redirect_to restaurant_beverage_path(@restaurant, @beverage)
+    else
+      flash.now[:notice] = 'Ocorreu um erro ao desativar a Bebida'
+      render 'show', status: :unprocessable_entity
+    end
+  end
+
+  def activate
+    beverage_id = params[:id]
+    found_beverage = Beverage.find(beverage_id)
+
+    verify_beverage_owner(found_beverage)
+    return if performed?
+
+    if @beverage.inactive? && @beverage.active!
+      flash[:notice] = 'Sucesso! Bebida ativada'
+      redirect_to restaurant_beverage_path(@restaurant, @beverage)
+    else
+      flash.now[:notice] = 'Ocorreu um erro ao ativar a Bebida'
       render 'show', status: :unprocessable_entity
     end
   end
@@ -84,7 +118,7 @@ class BeveragesController < UserController
     if found_beverage.restaurant.id != @restaurant.id
       redirect_to root_path, alert: 'Ops! Você não tem acesso a bebidas que não são do seu restaurante'
     else
-        @beverage = found_beverage
+      @beverage = found_beverage
     end
   end
 end
