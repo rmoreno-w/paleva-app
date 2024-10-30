@@ -9,7 +9,9 @@
     <ul class="mt-10 flex flex-col gap-4 list-disc marker:text-projectPurple">
         <% @dishes.each do |dish| %>
             <%= link_to restaurant_dish_path(@restaurant.id, dish.id) do %>
-                <li class="hover:cursor-pointer hover:underline hover:decoration-projectPurple  hover:decoration-2 hover:underline-offset-2 transition-transform"><%= dish.name%></li>
+                <li class="hover:cursor-pointer hover:underline hover:decoration-projectPurple  hover:decoration-2 hover:underline-offset-2 transition-transform">
+                    <span class="font-bold"><%= dish.name%></span> - <%= I18n.t(dish.status) %>
+                </li>
             <% end %>
         <% end %>
     </ul>

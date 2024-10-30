@@ -57,14 +57,16 @@ describe 'User' do
 
       login_as restaurant.user
       visit root_path
-      within 'nav' do
+      within '#menu-search' do
         fill_in 'Procurar no Menu', with: 'f'
         click_on 'Buscar'
       end
 
+      dish = Dish.last
       expect(page).to have_content 'Resultados da busca por: f'
       expect(page).to have_content 'Sufflair'
       expect(page).to have_content 'Whisky Jack Daniels Honey'
+      expect(page).to have_content I18n.t(dish.status)
       expect(page).not_to have_content 'Agua de coco Sócoco'
 
     end

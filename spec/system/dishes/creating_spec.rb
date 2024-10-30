@@ -49,6 +49,7 @@ describe 'User' do
       expect(page).to have_content 'Brownie de Chocolate Branco'
       expect(page).to have_content 'Deliciosa massa artesanal feita com chocolate sem açucar, nozes, macadâmia e farinha de aveia. Super fofinha, com casquinha e cobertura de ganache sem açúcar'
       expect(page).to have_content '378'
+      expect(page).to have_content 'Ativo 🟢'
       expect(dish.picture.attached?).to eq true
       expect(page).to have_css('img[src*="browniee.jpg"]')
     end

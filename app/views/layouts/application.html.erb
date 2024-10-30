@@ -30,7 +30,7 @@
                 <% if current_user.has_restaurant? %>
                     <%= form_with url: restaurant_menu_items_search_path(current_user), class: 'flex flex-col', method: :get do | f | %>
                         <%= f.label :query, 'Procurar no Menu', class: 'input_label text-center' %>
-                        <div>
+                        <div id="menu-search">
                             <%= f.search_field :query, placeholder: 'Ex: Pizza, Caipirinha...', class: 'input' %>
                             <%= f.submit 'Buscar', class: 'form_button' %>
                         </div>

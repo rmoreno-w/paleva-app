@@ -6,7 +6,7 @@
     <% else %>
         <% @results.each do |item| %>
             <li>
-                <p><%= item.name %></p>
+                <p><%= item.name %> - <%= I18n.t(item.status) if item.class == Dish %></p>
 
                 <% if item.class == Dish %>
                     <%= link_to 'Ver detalhes', restaurant_dish_path(@restaurant, item) %>

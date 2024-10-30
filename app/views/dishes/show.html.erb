@@ -3,6 +3,15 @@
 
 <section class="my-10 flex justify-between max-w-5xl border-2 border-projectPurpleLighter rounded-xl p-5">
     <article class="flex flex-col gap-2">
+        <span class="font-bold text-lg text-projectPurple"><%= Dish.human_attribute_name :status %></span>
+        <p>
+            <% if @dish.active? %>
+                <%= I18n.t('active') %>
+            <% else %>
+                <%= I18n.t('inactive') %>
+            <% end %>
+        </p>
+
         <span class="font-bold text-lg text-projectPurple"><%= Dish.human_attribute_name :description %></span>
         <p>
             <%= @dish.description%>

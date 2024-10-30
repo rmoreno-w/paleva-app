@@ -88,6 +88,8 @@ describe 'User' do
       expect(page).to have_content 'Pratos do Meu Restaurante'
       expect(page).to have_content first_dish.name
       expect(page).to have_content second_dish.name
+      expect(page).to have_content I18n.t(first_dish.status)
+      expect(page).to have_content I18n.t(second_dish.status)
       expect(page).not_to have_content third_dish.name
     end
   end

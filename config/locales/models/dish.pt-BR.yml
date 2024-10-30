@@ -1,4 +1,6 @@
 pt-BR:
+  active: Ativo 🟢
+  inactive: Inativo 🔴
   activerecord:
     models:
       dish:
@@ -10,3 +12,4 @@ pt-BR:
         description: Descrição
         calories: Calorias
         picture: Foto do Prato
+        status: Status
