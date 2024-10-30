@@ -16,6 +16,7 @@ describe 'User' do
 
       expect(current_path).to eq restaurant_beverage_path(beverage.restaurant.id, beverage.id)
       expect(page).to have_content 'Inativo 🔴'
+      expect(page).to have_content 'Sucesso! Bebida desativada'
       expect(page).to have_button 'Ativar Bebida'
     end
   end
@@ -36,6 +37,7 @@ describe 'User' do
 
       expect(current_path).to eq restaurant_beverage_path(beverage.restaurant.id, beverage.id)
       expect(page).to have_content 'Ativo 🟢'
+      expect(page).to have_content 'Sucesso! Bebida ativada'
       expect(page).to have_button 'Desativar Bebida'
     end
   end
