@@ -20,6 +20,7 @@ describe 'User' do
       expect(page).to have_content 'Caixa de 1L. Já vem gelada'
       expect(page).to have_content '150'
       expect(page).to have_content '❌'
+      expect(page).to have_content I18n.t(beverage.status)
     end
 
     it 'and should not be able to access a beverage from another user' do

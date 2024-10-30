@@ -91,6 +91,8 @@ describe 'User' do
       expect(page).to have_content 'Bebidas do Meu Restaurante'
       expect(page).to have_content first_beverage.name
       expect(page).to have_content second_beverage.name
+      expect(page).to have_content I18n.t(first_beverage.status)
+      expect(page).to have_content I18n.t(second_beverage.status)
       expect(page).not_to have_content third_beverage.name
     end
   end

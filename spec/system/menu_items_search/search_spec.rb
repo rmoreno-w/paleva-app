@@ -63,10 +63,15 @@ describe 'User' do
       end
 
       dish = Dish.last
+      first_beverage = Beverage.first
+      last_beverage = Beverage.last
+
       expect(page).to have_content 'Resultados da busca por: f'
       expect(page).to have_content 'Sufflair'
       expect(page).to have_content 'Whisky Jack Daniels Honey'
       expect(page).to have_content I18n.t(dish.status)
+      expect(page).to have_content I18n.t(first_beverage.status)
+      expect(page).to have_content I18n.t(last_beverage.status)
       expect(page).not_to have_content 'Agua de coco Sócoco'
 
     end
@@ -147,7 +152,7 @@ describe 'User' do
     it 'and sees a list with all the dishes and beverages when the query is blank' do
       restaurant = create_restaurant_and_user
 
-      beverage = Beverage.create!(
+      Beverage.create!(
         name: 'Agua de coco Sócoco',
         description: 'Caixa de 1L. Já vem gelada',
         calories: 150,

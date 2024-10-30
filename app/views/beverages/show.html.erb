@@ -2,6 +2,15 @@
 
 <section class="my-10 flex justify-between max-w-5xl border-2 border-projectPurpleLighter rounded-xl p-5">
     <article class="flex flex-col gap-2">
+        <span class="font-bold text-lg text-projectPurple"><%= Beverage.human_attribute_name :is_alcoholic %></span>
+        <p>
+            <% if @beverage.active? %>
+                Ativo 🟢
+            <% else %>
+                Inativo 🔴
+            <% end %>
+        </p>
+
         <span class="font-bold text-lg text-projectPurple"><%= Beverage.human_attribute_name :description %></span>
         <p>
             <%= @beverage.description%>
