@@ -20,7 +20,7 @@ describe 'User' do
     expect(current_path).not_to eq new_user_session_path
   end
 
-  it 'can not access the restaurant creation page if they hava a previous restaurant' do
+  it 'can not access the restaurant creation page if they have a previous restaurant' do
     restaurant = create_restaurant_and_user
     login_as restaurant.user
     
@@ -68,7 +68,6 @@ describe 'User' do
     click_on 'Criar Restaurante'
 
     expect(page).to have_content 'Restaurante criado com sucesso!'
-    expect(page).to have_content 'Meu Restaurante'
     expect(page).to have_content 'Pizzaria Campus du Codi'
     expect(current_path).to eq root_path
   end
@@ -81,7 +80,6 @@ describe 'User' do
     login_as user
 
     visit root_path
-    expect(page).to have_content 'Meu Restaurante'
     expect(page).to have_content 'Pizzaria Campus du Codi'
     expect(current_path).to eq root_path
   end

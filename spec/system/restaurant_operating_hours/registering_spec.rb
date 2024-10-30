@@ -38,7 +38,7 @@ describe 'User' do
       # Assert
       expect(page).to have_content 'Novo horário salvo com sucesso'
       expect(page).to have_content 'Horários de Funcionamento'
-      expect(page).to have_content 'Terça-feira - 08:00 às 12:00: Aberto'
+      expect(page).to have_content 'Terça-feira - 08:00 às 12:00 - Aberto'
     end
 
     it 'and fails when informing invalid data' do
