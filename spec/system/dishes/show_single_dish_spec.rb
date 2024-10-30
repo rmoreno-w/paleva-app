@@ -66,5 +66,48 @@ describe 'User' do
       expect(page).to have_content 'Ops! Você não tem acesso a pratos que não são do seu restaurante'
       expect(page).not_to have_content first_dish.name
     end
+
+    it 'and should see the button to inactivate a dish, if it is active (default)' do
+      dish = create_dish
+
+      # Act
+      visit root_path
+      click_on 'Entrar'
+      fill_in 'E-mail', with: 'aloisio@email.com'
+      fill_in 'Senha', with: 'fortissima12'
+      click_on 'Entrar'
+      click_on 'Pratos'
+      click_on 'Petit Gateau de Mousse Insuflado'
+
+      # Assert
+      expect(current_path).to eq restaurant_dish_path(dish.restaurant.id, dish.id)
+      expect(page).to have_content 'Petit Gateau de Mousse Insuflado'
+      expect(page).to have_content 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse'
+      expect(page).to have_content '580'
+      expect(page).to have_content 'Ativo 🟢'
+      expect(page).to have_button 'Desativar Prato'
+    end
+
+    it 'and should see the button to activate a dish, if it is inactive' do
+      dish = create_dish
+      dish.inactive!
+
+      # Act
+      visit root_path
+      click_on 'Entrar'
+      fill_in 'E-mail', with: 'aloisio@email.com'
+      fill_in 'Senha', with: 'fortissima12'
+      click_on 'Entrar'
+      click_on 'Pratos'
+      click_on 'Petit Gateau de Mousse Insuflado'
+
+      # Assert
+      expect(current_path).to eq restaurant_dish_path(dish.restaurant.id, dish.id)
+      expect(page).to have_content 'Petit Gateau de Mousse Insuflado'
+      expect(page).to have_content 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse'
+      expect(page).to have_content '580'
+      expect(page).to have_content 'Inativo 🔴'
+      expect(page).to have_button 'Ativar Prato'
+    end
   end
 end

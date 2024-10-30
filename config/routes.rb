@@ -15,8 +15,14 @@ Rails.application.routes.draw do
 
   resources :restaurants, only: [ :new, :create ] do
     resources :restaurant_operating_hours, only: [ :new, :create ]
-    resources :dishes, only: [ :index, :show, :new, :create, :edit, :update, :destroy ]
+
+    resources :dishes, only: [ :index, :show, :new, :create, :edit, :update, :destroy ] do
+      post 'deactivate', on: :member
+      post 'activate', on: :member
+    end
+
     resources :beverages, only: [ :index, :show, :new, :create, :edit, :update, :destroy ]
+
     get '/menu_items_search', to: 'menu_search#index'
   end
 end

@@ -23,7 +23,7 @@
         </p>
     </article>
 
-    <div>
+    <div class="flex flex-col items-end">
         <picture>
             <figcaption class="font-bold text-lg text-projectPurple">Foto do Prato</figcaption>
             <% if @dish.picture.present? %>
@@ -36,6 +36,11 @@
         </picture>
 
         <div class="flex gap-2 justify-end max-w-5xl mt-10">
+            <% if @dish.active? %>
+                <%= button_to 'Desativar Prato', deactivate_restaurant_dish_path(@restaurant.id, @dish.id), method: :post, class: 'outline_button' %>
+            <% else %>
+                <%= button_to 'Ativar Prato', activate_restaurant_dish_path(@restaurant.id, @dish.id), method: :post, class: 'outline_button' %>
+            <% end %>
             <%= link_to 'Alterar Prato', edit_restaurant_dish_path(@restaurant.id, @dish.id), class: 'outline_button' %>
             <%= button_to 'Remover Prato', restaurant_dish_path(@restaurant.id, @dish.id), method: :delete, class: 'outline_button bg-projectRed text-projectWhite border-0' %>
         </div>
