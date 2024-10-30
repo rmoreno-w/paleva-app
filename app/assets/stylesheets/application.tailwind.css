@@ -2,12 +2,64 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-
 @layer components {
-  .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
-  }
-}
+    .site-header {
+        @apply sticky z-10 top-0 flex justify-between items-center py-4 px-32 bg-[#F5F5FA] p-5 border border-[#34343410] drop-shadow-[5px_5px_20px_rgba(148,72,188,0.4)];
+    }
 
-*/
+    .site-main {
+        @apply min-h-[400px] flex flex-col mx-20 my-24 p-12 bg-[#F5F5FA] border border-[#34343410] rounded-3xl drop-shadow-[5px_5px_20px_rgba(148,72,188,0.4)];
+    }
+
+    .nav_link_active {
+        @apply relative text-projectBlack font-light mx-4 decoration-2 underline-offset-4 decoration-projectPurple border-b-2 border-b-projectGreen hover:no-underline;
+    }
+
+    .nav_link_inactive {
+        @apply relative text-projectBlack font-light mx-4 hover:underline decoration-2 underline-offset-4 decoration-projectPurple;
+    }
+
+    .link_separator {
+        @apply h-4 w-[2px] bg-projectPurple self-center;
+    }
+
+    h2 {
+        @apply text-2xl font-bold text-projectPurple;
+    }
+
+    h3 {
+        @apply text-xl font-bold text-projectBlack;
+    }
+
+    .form {
+        @apply flex flex-col self-start w-1/2 gap-4 mt-10;
+    }
+
+    .input {
+        @apply bg-transparent border-2 border-projectPurple focus:bg-transparent transition-all duration-300 focus:outline-none focus:ring focus:ring-projectGreen focus:ring-offset-2 focus:ring-offset-projectWhite focus:border-projectGreen rounded p-2;
+    }
+
+    .input_label {
+        @apply font-semibold;
+    }
+
+    .input_container {
+        @apply flex flex-col gap-2;
+    }
+
+    .form_button {
+        @apply hover:cursor-pointer bg-projectPurple text-projectWhite p-3 rounded-md transition duration-300 font-bold hover:brightness-90 mt-4 focus:ring focus:ring-projectPurple/70 focus:ring-offset-2 focus:ring-offset-projectWhite;
+    }
+
+    .outline_button {
+        @apply hover:cursor-pointer border-2 border-projectPurple p-3 rounded-md transition duration-300 font-bold hover:brightness-90 focus:ring focus:ring-projectPurple/70 focus:ring-offset-2 focus:ring-offset-projectWhite;
+    }
+
+    .notice_flash {
+        @apply my-6 p-5 bg-projectGreen text-projectBlack rounded-3xl font-bold absolute top-[116px] left-20 right-20;
+    }
+
+    .alert_flash {
+        @apply my-6 p-5 bg-projectRed text-projectWhite rounded-3xl font-bold absolute top-[116px] left-20 right-20;
+    }
+}

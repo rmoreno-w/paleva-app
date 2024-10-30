@@ -1,29 +1,34 @@
 <h2><%= @dish.name%></h2>
 
-<section>
-    <ul>
-        <li>
-            <p>
-                <span><%= Dish.human_attribute_name :description %></span><%= @dish.description%>
-            </p>
-        </li>
-        <li>
-            <p>
-                <span><%= Dish.human_attribute_name :calories %></span><%= @dish.calories%>
-            </p>
-        </li>
-        <li>
-            <span>Foto do Prato</span>
+
+<section class="my-10 flex justify-between max-w-5xl border-2 border-projectPurpleLighter rounded-xl p-5">
+    <article class="flex flex-col gap-2">
+        <span class="font-bold text-lg text-projectPurple"><%= Dish.human_attribute_name :description %></span>
+        <p>
+            <%= @dish.description%>
+        </p>
+
+        <span class="font-bold text-lg text-projectPurple"><%= Dish.human_attribute_name :calories %></span>
+        <p>
+            <%= @dish.calories%>
+        </p>
+    </article>
+
+    <div>
+        <picture>
+            <figcaption class="font-bold text-lg text-projectPurple">Foto do Prato</figcaption>
             <% if @dish.picture.present? %>
                 <div class="w-60 h-60">
                     <%= image_tag @dish.picture %>
                 </div>
             <% else %>
-                <p>Este Prato ainda não possui uma foto :(</p>
+                <figcaption>Este Prato ainda não possui uma foto :(</figcaption>
             <% end %>
-        </li>
-    </ul>
-</section>
+        </picture>
 
-<%= link_to 'Alterar Prato', edit_restaurant_dish_path(@restaurant.id, @dish.id) %>
-<%= button_to 'Remover Prato', restaurant_dish_path(@restaurant.id, @dish.id), method: :delete %>
+        <div class="flex gap-2 justify-end max-w-5xl mt-10">
+            <%= link_to 'Alterar Prato', edit_restaurant_dish_path(@restaurant.id, @dish.id), class: 'outline_button' %>
+            <%= button_to 'Remover Prato', restaurant_dish_path(@restaurant.id, @dish.id), method: :delete, class: 'outline_button bg-projectRed text-projectWhite border-0' %>
+        </div>
+    </div>
+</section>

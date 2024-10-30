@@ -1,26 +1,38 @@
-<h2>Boas vindas ao PaLevá!</h2>
-
 <% if user_signed_in? && current_user.has_restaurant? %>
-    <section>
-        <p>Meu Restaurante</p>
+    <section class="flex flex-col gap-10">
+        <h2>
+            <%= current_user.restaurant.brand_name%>
+        </h2>
 
-        <p><%= current_user.restaurant.brand_name%></p>
-        <p><%= Restaurant.human_attribute_name :restaurant_operating_hours %></p>
+        <div class="flex items-center gap-10">
+            <h3><%= Restaurant.human_attribute_name :restaurant_operating_hours %></h3>
+            <%= link_to '+ Criar Horário', new_restaurant_restaurant_operating_hour_path(current_user.restaurant), class: 'outline_button' %>
+        </div>
 
         <% if @restaurant.restaurant_operating_hours.present? %>
-            <% @restaurant.restaurant_operating_hours.each do |op_hour| %>
-                <p><%=  t(op_hour.weekday) %> - <%=  l(op_hour.start_time, format: :hours) %> às <%=  l(op_hour.end_time, format: :hours) %>: <%=  t(op_hour.status) %></p>
-            <% end %>
+            <ul class="list-disc marker:text-projectPurple">
+                <% @restaurant.restaurant_operating_hours.each do |op_hour| %>
+                    <li><%=  t(op_hour.weekday) %> - <%=  l(op_hour.start_time, format: :hours) %> às <%=  l(op_hour.end_time, format: :hours) %> - <%=  t(op_hour.status) %></li>
+                <% end %>
+            </ul>
         <% else %>
             <p>Ainda não há horários cadastrados.</p>
         <% end %>
 
-        <%= link_to 'Criar Horário', new_restaurant_restaurant_operating_hour_path(current_user.restaurant) %>
     </section>
 <% else %>
-    <section>
-        <p>Para acessar o sistema, faça login ou crie uma conta</p>
-        <%= link_to 'Criar Conta', new_user_registration_path %>
-        <%= link_to 'Entrar', new_user_session_path %>
+    <section class="grid grid-cols-2 gap-10 -m-12 min-h-[400px]">
+        <div class="py-12 pl-12 flex flex-col justify-around">
+            <h2 class="text-center text-projectBlack">Para acessar o sistema, faça <span class="text-projectPurple">login</span> ou <span class="text-projectPurple">crie uma conta</span></h2>
+
+            <div class="mt-10 flex gap-4">
+                <%= link_to 'Entrar', new_user_session_path, class: 'outline_button w-full text-center' %>
+                <%= link_to 'Criar Conta', new_user_registration_path, class:'outline_button w-full text-center' %>
+            </div>
+        </div>
+
+        <div class="">
+            <%= image_tag 'takeout.jpg', class: 'h-full w-full object-cover' %>
+        </div>
     </section>
 <% end %>

@@ -1,23 +1,23 @@
-<%= form_with model: [@restaurant, @dish] do |f| %>
-    <div>
-        <%= f.label :name %>
-        <%= f.text_field :name %>
+<%= form_with model: [@restaurant, @dish], class: 'form' do |f| %>
+    <div class="input_container">
+        <%= f.label :name, class: 'input_label' %>
+        <%= f.text_field :name, class: 'input' %>
     </div>
 
-    <div>
-        <%= f.label :description %>
-        <%= f.text_area :description %>
+    <div class="input_container">
+        <%= f.label :description, class: 'input_label' %>
+        <%= f.text_area :description, class: 'input' %>
     </div>
 
-    <div>
-        <%= f.label :calories, 'Calorias (não obrigatório)' %>
-        <%= f.number_field :calories, min: 0, step: 1 %>
+    <div class="input_container">
+        <%= f.label :calories, 'Calorias (não obrigatório)', class: 'input_label' %>
+        <%= f.number_field :calories, min: 0, step: 1, class: 'input' %>
     </div>
 
-    <div>
-        <%= f.label :picture %>
+    <div class="input_container">
+        <%= f.label :picture, class: 'input_label' %>
         <%= f.file_field :picture %>
     </div>
 
-    <%= f.submit %>
+    <%= f.submit class:'form_button' %>
 <% end %>

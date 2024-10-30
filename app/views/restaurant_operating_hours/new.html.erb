@@ -1,17 +1,27 @@
 <h2>Criar Horário de Funcionamento</h2>
 
-<%= form_with model:[@restaurant, @restaurant_operating_hour]  do | f |  %>
-    <%= f.label :start_time %>
-    <%= f.time_field :start_time %>
+<%= form_with model:[@restaurant, @restaurant_operating_hour], class: 'form'  do | f |  %>
+    <div class="flex gap-4">
+        <div class="flex flex-col w-full">
+            <%= f.label :start_time %>
+            <%= f.time_field :start_time, class: '' %>
+        </div>
 
-    <%= f.label :end_time %>
-    <%= f.time_field :end_time %>
+        <div class="flex flex-col w-full">
+            <%= f.label :end_time %>
+            <%= f.time_field :end_time, class: '' %>
+        </div>
+    </div>
 
-    <%= f.label :status %>
-    <%= f.collection_select :status, RestaurantOperatingHour.statuses.each_pair.map { |key, value| [I18n.t("#{key}"), value] }, :second, :first %>
+    <div class="flex flex-col gap-2">
+        <%= f.label :status %>
+        <%= f.collection_select :status, RestaurantOperatingHour.statuses.each_pair.map { |key, value| [I18n.t("#{key}"), value] }, :second, :first %>
+    </div>
 
-    <%= f.label :weekday %>
-    <%= f.collection_select :weekday, RestaurantOperatingHour.weekdays.each_pair.map { |key, value| [I18n.t("#{key}"), value] }, :second, :first %>
+    <div class="flex flex-col gap-2">
+        <%= f.label :weekday %>
+        <%= f.collection_select :weekday, RestaurantOperatingHour.weekdays.each_pair.map { |key, value| [I18n.t("#{key}"), value] }, :second, :first %>
+    </div>
 
-    <%= f.submit %>
+    <%= f.submit class: 'form_button' %>
 <% end %>

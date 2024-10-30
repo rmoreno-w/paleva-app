@@ -1,15 +1,16 @@
-<h2>Pratos do Meu Restaurante</h2>
+<div class="flex justify-between items-center">
+    <h2>Pratos do Meu Restaurante</h2>
+    <%= link_to '+ Criar Prato', new_restaurant_dish_path(current_user.restaurant), class: 'outline_button' %>
+</div>
 
 <% if @dishes.empty? %>
     <p>Ainda não há pratos cadastrados para o seu restaurante.</p>
 <% else %>
-    <ul>
+    <ul class="mt-10 flex flex-col gap-4 list-disc marker:text-projectPurple">
         <% @dishes.each do |dish| %>
             <%= link_to restaurant_dish_path(@restaurant.id, dish.id) do %>
-                <li><%= dish.name%></li>
+                <li class="hover:cursor-pointer hover:underline hover:decoration-projectPurple  hover:decoration-2 hover:underline-offset-2 transition-transform"><%= dish.name%></li>
             <% end %>
         <% end %>
     </ul>
 <% end %>
-
-<%= link_to 'Criar Prato', new_restaurant_dish_path(current_user.restaurant) %>
