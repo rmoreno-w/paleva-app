@@ -1,21 +1,25 @@
 <h2>Resultados da busca por: <%= @query %></h2>
 
-<ul>
+<ul class="mt-10 flex flex-col gap-8">
     <% if @results.empty? %>
-        <p>Nenhum resultado encontrado na busca por bebidas e pratos com "<%= @query %>"</p>
+        <li>
+            <p>Nenhum resultado encontrado na busca por bebidas e pratos com "<%= @query %>"</p>
+        </li>
     <% else %>
         <% @results.each do |item| %>
-            <li>
-                <p><%= item.name %> - <%= I18n.t(item.status) %></p>
+            <li class="flex items-center gap-4 border-l-2 border-projectGreen pl-4">
+                <p>
+                    <span class="font-bold text-lg"><%= item.name %></span> - <%= I18n.t(item.status) %>
+                </p>
 
                 <% if item.class == Dish %>
-                    <%= link_to 'Ver detalhes', restaurant_dish_path(@restaurant, item) %>
-                    <%= link_to 'Editar', edit_restaurant_dish_path(@restaurant, item) %>
+                    <%= link_to 'Ver detalhes', restaurant_dish_path(@restaurant, item), class: 'outline_button' %>
+                    <%= link_to 'Editar', edit_restaurant_dish_path(@restaurant, item), class: 'outline_button' %>
                 <% else %>
-                    <%= link_to 'Ver detalhes', restaurant_beverage_path(@restaurant, item) %>
-                    <%= link_to 'Editar', edit_restaurant_beverage_path(@restaurant, item) %>
+                    <%= link_to 'Ver detalhes', restaurant_beverage_path(@restaurant, item), class: 'outline_button' %>
+                    <%= link_to 'Editar', edit_restaurant_beverage_path(@restaurant, item), class: 'outline_button' %>
                 <% end %>
             </li>
         <% end %>
     <% end %>
-<ul>
+</ul>

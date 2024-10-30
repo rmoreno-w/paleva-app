@@ -6,12 +6,12 @@
 <% if @beverages.empty? %>
     <p>Ainda não há bebidas cadastradas para o seu restaurante.</p>
 <% else %>
-    <ul class="mt-10 flex flex-col gap-4 list-disc marker:text-projectPurple">
+    <ul class="mt-10 flex flex-col gap-4 list-disc marker:text-projectPurple list-inside">
         <% @beverages.each do |beverage| %>
             <%= link_to restaurant_beverage_path(@restaurant.id, beverage.id) do %>
                 <li class="hover:cursor-pointer hover:underline hover:decoration-projectPurple  hover:decoration-2 hover:underline-offset-2 transition-transform">
                     <span class="font-bold"><%= beverage.name%></span> - <%= I18n.t(beverage.status) %>
-                    </li>
+                </li>
             <% end %>
         <% end %>
     </ul>

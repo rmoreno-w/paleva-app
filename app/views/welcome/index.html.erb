@@ -10,7 +10,7 @@
         </div>
 
         <% if @restaurant.restaurant_operating_hours.present? %>
-            <ul class="list-disc marker:text-projectPurple">
+            <ul class="list-disc marker:text-projectPurple list-inside">
                 <% @restaurant.restaurant_operating_hours.each do |op_hour| %>
                     <li><%=  t(op_hour.weekday) %> - <%=  l(op_hour.start_time, format: :hours) %> às <%=  l(op_hour.end_time, format: :hours) %> - <%=  t(op_hour.status) %></li>
                 <% end %>
