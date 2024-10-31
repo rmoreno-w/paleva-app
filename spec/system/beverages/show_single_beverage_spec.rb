@@ -105,5 +105,24 @@ describe 'User' do
       expect(current_path).to eq restaurant_beverage_path(beverage.restaurant.id, beverage.id)
       expect(page).to have_button 'Ativar Bebida'
     end
+
+    it 'and should see the serving options of a beverage' do
+      beverage = create_beverage
+
+      visit root_path
+      click_on 'Entrar'
+      fill_in 'E-mail', with: 'aloisio@email.com'
+      fill_in 'Senha', with: 'fortissima12'
+      click_on 'Entrar'
+      click_on 'Bebidas'
+      click_on 'Agua de coco Sócoco'
+
+      # Assert
+      expect(current_path).to eq restaurant_beverage_path(beverage.restaurant.id, beverage.id)
+      expect(page).to have_content 'Porções:'
+      expect(page).to have_content "Nenhuma porção cadastrada para #{beverage.name}"
+      # expect(page).to have_link 'Cadastrar Porção'
+      expect(page).to have_content 'Cadastrar Porção'
+    end
   end
 end

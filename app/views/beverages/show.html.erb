@@ -1,37 +1,37 @@
 <h2><%= @beverage.name%></h2>
 
-<section class="my-10 flex justify-between max-w-5xl border-2 border-projectPurpleLighter rounded-xl p-5">
-    <article class="flex flex-col gap-2">
-        <span class="font-bold text-lg text-projectPurple"><%= Beverage.human_attribute_name :is_alcoholic %></span>
-        <p>
-            <% if @beverage.active? %>
-                Ativo 🟢
-            <% else %>
-                Inativo 🔴
-            <% end %>
-        </p>
+<article class="my-10 flex flex-col max-w-5xl border-2 border-projectPurpleLighter rounded-xl p-5 relative overflow-hidden">
+    <section class="flex justify-between">
+        <section class="flex flex-col gap-2">
+            <span class="font-bold text-lg text-projectPurple"><%= Beverage.human_attribute_name :is_alcoholic %></span>
+            <p>
+                <% if @beverage.active? %>
+                    Ativo 🟢
+                <% else %>
+                    Inativo 🔴
+                <% end %>
+            </p>
 
-        <span class="font-bold text-lg text-projectPurple"><%= Beverage.human_attribute_name :description %></span>
-        <p>
-            <%= @beverage.description%>
-        </p>
+            <span class="font-bold text-lg text-projectPurple"><%= Beverage.human_attribute_name :description %></span>
+            <p>
+                <%= @beverage.description%>
+            </p>
 
-        <span class="font-bold text-lg text-projectPurple"><%= Beverage.human_attribute_name :calories %></span>
-        <p>
-            <%= @beverage.calories%>
-        </p>
+            <span class="font-bold text-lg text-projectPurple"><%= Beverage.human_attribute_name :calories %></span>
+            <p>
+                <%= @beverage.calories%>
+            </p>
 
-        <span class="font-bold text-lg text-projectPurple"><%= Beverage.human_attribute_name :is_alcoholic %></span>
-        <p>
-            <% if @beverage.is_alcoholic %>
-                ✅
-            <% else %>
-                ❌
-            <% end %>
-        </p>
-    </article>
+            <span class="font-bold text-lg text-projectPurple"><%= Beverage.human_attribute_name :is_alcoholic %></span>
+            <p>
+                <% if @beverage.is_alcoholic %>
+                    ✅
+                <% else %>
+                    ❌
+                <% end %>
+            </p>
+        </section>
 
-    <div class="flex flex-col items-end">
         <picture>
             <figcaption class="font-bold text-lg text-projectPurple">Foto da Bebida</figcaption>
             <% if @beverage.picture.present? %>
@@ -43,14 +43,38 @@
             <% end %>
         </picture>
 
-        <div class="flex gap-2 justify-end max-w-5xl mt-10">
+        <section class="flex flex-col gap-2 justify-start max-w-5xl items-end">
             <% if @beverage.active? %>
-                <%= button_to 'Desativar Bebida', deactivate_restaurant_beverage_path(@restaurant.id, @beverage.id), method: :post, class: 'outline_button' %>
+                <%= button_to 'Desativar Bebida', deactivate_restaurant_beverage_path(@restaurant.id, @beverage.id), method: :post, class: 'outline_button w-full text-center' %>
             <% else %>
-                <%= button_to 'Ativar Bebida', activate_restaurant_beverage_path(@restaurant.id, @beverage.id), method: :post, class: 'outline_button' %>
+                <%= button_to 'Ativar Bebida', activate_restaurant_beverage_path(@restaurant.id, @beverage.id), method: :post, class: 'outline_button w-full text-center' %>
             <% end %>
-            <%= link_to 'Alterar Bebida', edit_restaurant_beverage_path(@restaurant.id, @beverage.id), class: 'outline_button' %>
-            <%= button_to 'Remover Bebida', restaurant_beverage_path(@restaurant.id, @beverage.id), method: :delete, class: 'outline_button bg-projectRed text-projectWhite border-0' %>
-        </div>
-    </div>
-</section>
+            <%= link_to 'Alterar Bebida', edit_restaurant_beverage_path(@restaurant.id, @beverage.id), class: 'outline_button w-full text-center' %>
+            <%= button_to 'Remover Bebida', restaurant_beverage_path(@restaurant.id, @beverage.id), method: :delete, class: 'outline_button w-full bg-projectRed text-projectWhite border-0', form: { class: 'w-full' } %>
+        </section>
+    </section>
+
+    <hr class="-mx-5 mt-10 border border-projectPurple border-dashed" />
+
+    <section class="flex flex-col bg-[#e4e4e8] py-10 px-5 -mx-5 -mb-5 font-mono">
+        <header class="flex justify-between">
+            <h3 class="font-bold text-[22px] text-projectPurple">Porções:</h3>
+            <p>Cadastrar Porção</p>
+        </header>
+
+        <% if @beverage.servings.empty? %>
+            <p>
+                Nenhuma porção cadastrada para <span class="font-bold text-projectPurple"><%= @beverage.name %></span>
+            </p>
+        <% else %>
+            <% @beverage.servings.each do | serving | %>
+                <span class="font-bold text-lg text-projectPurple">
+                    <%= @serving.description%>
+                </span>
+                <p>
+                    <%= @serving.current_price %>
+                </p>
+            <% end %>
+        <% end %>
+    </section>
+</article>
