@@ -118,8 +118,7 @@ describe 'User' do
       expect(current_path).to eq restaurant_dish_path(dish.restaurant.id, dish.id)
       expect(page).to have_content 'Porções:'
       expect(page).to have_content "Nenhuma porção cadastrada para #{dish.name}"
-      # expect(page).to have_link 'Cadastrar Porção'
-      expect(page).to have_content 'Cadastrar Porção'
+      expect(page).to have_link 'Cadastrar Porção'
     end
   end
 end
