@@ -19,11 +19,13 @@ Rails.application.routes.draw do
     resources :dishes, only: [ :index, :show, :new, :create, :edit, :update, :destroy ] do
       post 'deactivate', on: :member
       post 'activate', on: :member
+      resources :servings, only: [ :new, :create ]
     end
 
     resources :beverages, only: [ :index, :show, :new, :create, :edit, :update, :destroy ] do
       post 'deactivate', on: :member
       post 'activate', on: :member
+      resources :servings, only: [ :new, :create ]
     end
 
     get '/menu_items_search', to: 'menu_search#index'

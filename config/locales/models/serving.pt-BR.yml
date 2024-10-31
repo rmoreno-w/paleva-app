@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      serving:
+        one: Porção
+        other: Porções
+    attributes:
+      serving:
+        description: Descrição
+        current_price: Preço Atual

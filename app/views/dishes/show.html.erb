@@ -52,22 +52,24 @@
     <section class="flex flex-col bg-[#e4e4e8] py-10 px-5 -mx-5 -mb-5 font-mono">
         <header class="flex justify-between">
             <h3 class="font-bold text-[22px] text-projectPurple">Porções:</h3>
-            <p>Cadastrar Porção</p>
+            <%= link_to '+ Cadastrar Porção', new_restaurant_dish_serving_path(@restaurant, @dish), class: 'outline_button' %>
         </header>
 
         <% if @dish.servings.empty? %>
-            <p>
+            <p class="mt-4">
                 Nenhuma porção cadastrada para <span class="font-bold text-projectPurple"><%= @dish.name %></span>
             </p>
         <% else %>
-            <% @dish.servings.each do | serving | %>
-                <span class="font-bold text-lg text-projectPurple">
-                    <%= @serving.description%>
+            <ul class="list-disc list-inside marker:text-projectPurpleLighter mt-4">
+            <% @beverage.servings.each do | serving | %>
+                <li>
+                <span class="font-bold">
+                    <%= serving.description%>
                 </span>
-                <p>
-                    <%= @serving.current_price %>
-                </p>
+                    - <%= serving.current_price %>
+                </li>
             <% end %>
+            </ul>
         <% end %>
     </section>
 </article>
