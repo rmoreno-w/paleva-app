@@ -3,7 +3,7 @@
 <article class="my-10 flex flex-col max-w-5xl border-2 border-projectPurpleLighter rounded-xl p-5 relative overflow-hidden">
     <section class="flex justify-between">
         <section class="flex flex-col gap-2">
-            <span class="font-bold text-lg text-projectPurple"><%= Beverage.human_attribute_name :is_alcoholic %></span>
+            <span class="font-bold text-lg text-projectPurple"><%= Beverage.human_attribute_name :status %></span>
             <p>
                 <% if @beverage.active? %>
                     Ativo 🟢
@@ -72,7 +72,7 @@
                 <li class="w-1/2">
                     <span class="font-bold"><%= serving.description%></span>
                     - <%= number_to_currency(serving.current_price, precision: 2) %>
-                    <%= link_to 'Editar', root_path, class: 'outline_button p-2' %>
+                    <%= link_to 'Editar', edit_restaurant_beverage_serving_path(@restaurant, @beverage, serving), class: 'outline_button p-2' %>
                 </li>
             <% end %>
             </ul>

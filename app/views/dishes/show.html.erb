@@ -65,7 +65,7 @@
                 <li class="w-1/2">
                     <span class="font-bold"><%= serving.description%></span>
                     - <%= number_to_currency(serving.current_price, precision: 2) %>
-                    <%= link_to 'Editar', root_path, class: 'outline_button p-2' %>
+                    <%= link_to 'Editar', edit_restaurant_dish_serving_path(@restaurant, @dish, serving), class: 'outline_button p-2' %>
                 </li>
             <% end %>
             </ul>

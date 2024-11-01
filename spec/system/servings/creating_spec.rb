@@ -26,12 +26,12 @@ describe 'User' do
       click_on 'Pratos'
       click_on 'Petit Gateau de Mousse Insuflado'
       click_on 'Cadastrar Porção'
-      fill_in 'Descrição', with: 'Porção Individual(1 Bolinho e 1 Bola de Sorvete)'
+      fill_in 'Descrição', with: 'Porção Individual (1 Bolinho e 1 Bola de Sorvete)'
       fill_in 'Preço Atual', with: '24.50'
       click_on 'Criar Porção'
 
       expect(current_path).to eq restaurant_dish_path(dish.restaurant, dish)
-      expect(page).to have_content 'Porção Individual(1 Bolinho e 1 Bola de Sorvete) - R$ 24,50'
+      expect(page).to have_content 'Porção Individual (1 Bolinho e 1 Bola de Sorvete) - R$ 24,50'
     end
   end
 

@@ -25,6 +25,28 @@ class ServingsController < UserController
     end
   end
 
+  def edit
+    serving_id = params[:id]
+    @serving = Serving.find(serving_id)
+  end
+
+  def update
+    serving_id = params[:id]
+    found_serving = Serving.find(serving_id)
+    serving_data = get_serving_params
+
+    if found_serving.update(serving_data)
+      if params.has_key?(:dish_id)
+        redirect_to restaurant_dish_path(@restaurant, @dish), notice: 'Porção atualizada com sucesso!'
+      else
+        redirect_to restaurant_beverage_path(@restaurant, @beverage), notice: 'Porção atualizada com sucesso!'
+      end
+    else
+      flash.now[:alert] = 'Erro ao criar Porção'
+      render 'edit', status: :unprocessable_entity
+    end
+  end
+
   private
   def get_item_and_restaurant
     if params.has_key?(:dish_id)
