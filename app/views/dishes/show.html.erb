@@ -61,12 +61,11 @@
             </p>
         <% else %>
             <ul class="list-disc list-inside marker:text-projectPurpleLighter mt-4">
-            <% @beverage.servings.each do | serving | %>
-                <li>
-                <span class="font-bold">
-                    <%= serving.description%>
-                </span>
-                    - <%= serving.current_price %>
+            <% @dish.servings.each do | serving | %>
+                <li class="w-1/2">
+                    <span class="font-bold"><%= serving.description%></span>
+                    - <%= number_to_currency(serving.current_price, precision: 2) %>
+                    <%= link_to 'Editar', root_path, class: 'outline_button p-2' %>
                 </li>
             <% end %>
             </ul>
