@@ -32,6 +32,7 @@ describe 'User' do
 
       expect(current_path).to eq restaurant_dish_path(dish.restaurant, dish)
       expect(page).to have_content 'Porção Individual (1 Bolinho e 1 Bola de Sorvete) - R$ 24,50'
+      expect(page).to have_link 'Histórico'
     end
   end
 
@@ -66,6 +67,7 @@ describe 'User' do
 
       expect(current_path).to eq restaurant_beverage_path(beverage.restaurant, beverage)
       expect(page).to have_content 'Garrafa de 1L - R$ 12,50'
+      expect(page).to have_link 'Histórico'
     end
   end
 end

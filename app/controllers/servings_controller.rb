@@ -47,6 +47,11 @@ class ServingsController < UserController
     end
   end
 
+  def history
+    serving_id = params[:serving_id]
+    @serving = Serving.find(serving_id)
+  end
+
   private
   def get_item_and_restaurant
     if params.has_key?(:dish_id)

@@ -1,0 +1,26 @@
+<h2 class="text-projectBlack">
+    Histórico de Preços para 
+    <span class="text-projectPurple">
+        <%= @serving.servingable.name %>
+    </span>
+        # Porção - 
+    <span class="text-projectPurple">
+        <%= @serving.description %>
+    </span>
+</h2>
+
+<article class="my-10 flex flex-col max-w-5xl border-2 border-projectPurpleLighter rounded-xl overflow-hidden bg-[#e4e4e8] font-mono">
+    <section class="border-b-2 border-projectPurple border-dashed grid grid-cols-2">
+        <p class="p-5 flex-1 text-center text-projectPurple font-bold text-lg border-r-2 border-dashed border-projectPurple">Data de Alteração</p>
+        <p class="p-5 flex-1 text-center text-projectPurple font-bold text-lg">Preço</p>
+    </section>
+
+    <section class="flex flex-col">
+        <% @serving.price_history.each do |history_entry| %>
+            <div class="last:border-b-0 border-b-2 border-projectPurple border-dashed flex">
+                <p class="flex-1 p-5 text-center font-semibold border-r-2 border-projectPurple border-dashed"><%= l(history_entry.change_date, format: :long_date) %></p>
+                <p class="flex-1 p-5 text-center font-semibold"><%= number_to_currency(history_entry.price) %></p>
+            </div>
+        <% end %>
+    </section>
+</article>
