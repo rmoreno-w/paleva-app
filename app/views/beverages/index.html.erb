@@ -4,7 +4,7 @@
 </div>
 
 <% if @beverages.empty? %>
-    <p>Ainda não há bebidas cadastradas para o seu restaurante.</p>
+    <p class="mt-10">Ainda não há bebidas cadastradas para o seu restaurante.</p>
 <% else %>
     <ul class="mt-10 flex flex-col gap-4 list-disc marker:text-projectPurple list-inside">
         <% @beverages.each do |beverage| %>

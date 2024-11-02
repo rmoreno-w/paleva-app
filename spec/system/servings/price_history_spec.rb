@@ -2,6 +2,18 @@ require 'rails_helper'
 
 describe 'User' do
   context 'tries to see the price history of a serving for a dish' do
+    it 'but has to first be logged in' do
+      dish = create_dish
+      serving = Serving.create!(description: '1 Bolinho', current_price: 24.5, servingable: dish)
+
+      visit restaurant_dish_serving_history_path(dish.restaurant, dish, serving)
+
+      expect(current_path).to eq new_user_session_path
+      expect(page).not_to have_content 'Faça seu Login'
+      expect(page).not_to have_content '1 Bolinho'
+      expect(page).not_to have_content '24,50'
+    end
+
     it 'and gets the correct page' do
       dish = create_dish
       serving = Serving.create!(description: 'Porção Individual (1 Bolinho e 1 Bola de Sorvete)', current_price: 24.5, servingable: dish)
@@ -20,14 +32,11 @@ describe 'User' do
       expect(page).to have_content '24,50'
     end
 
-    it 'and succeeds' do
+    it 'and succeeds, seeing the history when there is more than one record' do
       dish = create_dish
       serving = Serving.create!(description: 'Porção Individual (1 Bolinho e 1 Bola de Sorvete)', current_price: 24.5, servingable: dish)
       serving.current_price = 25.5
-      serving.save
-      serving.current_price = 30.92
-      serving.save
-      
+      serving.current_price = 31.98
       login_as dish.restaurant.user
 
       visit root_path
@@ -36,6 +45,7 @@ describe 'User' do
       click_on 'Histórico'
 
       price_history = serving.price_history
+      expect(current_path).to eq restaurant_dish_serving_history_path(dish.restaurant, dish, serving)
       expect(page).to have_content 'Data de Alteração'
       expect(page).to have_content 'Preço'
       price_history.each do |price_record|
@@ -46,6 +56,18 @@ describe 'User' do
   end
 
   context 'tries to see the price history of a serving for a beverage' do
+    it 'but has to first be logged in' do
+      beverage = create_beverage
+      serving = Serving.create!(description: 'Garrafa 1L', current_price: 24.5, servingable: beverage)
+
+      visit restaurant_beverage_serving_history_path(beverage.restaurant, beverage, serving)
+
+      expect(current_path).to eq new_user_session_path
+      expect(page).not_to have_content 'Faça seu Login'
+      expect(page).not_to have_content 'Garrafa 1L'
+      expect(page).not_to have_content '24,50'
+    end
+
     it 'and gets the correct page' do
       beverage = create_beverage
       serving = Serving.create!(description: 'Garrafa Individual', current_price: 2.5, servingable: beverage)
@@ -64,7 +86,7 @@ describe 'User' do
       expect(page).to have_content '2,50'
     end
 
-    it 'and succeeds' do
+    it 'and succeeds, seeing the history when there is more than one record' do
       beverage = create_beverage
       serving = Serving.create!(description: 'Garrafa Individual', current_price: 2.5, servingable: beverage)
       serving.current_price = 3.5
@@ -80,6 +102,7 @@ describe 'User' do
       click_on 'Histórico'
 
       price_history = serving.price_history
+      expect(current_path).to eq restaurant_beverage_serving_history_path(beverage.restaurant, beverage, serving)
       expect(page).to have_content 'Data de Alteração'
       expect(page).to have_content 'Preço'
       price_history.each do |price_record|

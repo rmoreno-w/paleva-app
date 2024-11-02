@@ -60,15 +60,17 @@
                 Nenhuma porção cadastrada para <span class="font-bold text-projectPurple"><%= @dish.name %></span>
             </p>
         <% else %>
-            <ul class="mt-4">
+            <ul class="mt-4 flex flex-col gap-4">
             <% @dish.servings.each do | serving | %>
-                <li class="w-1/2 flex items-center justify-between border-l border-projectPurple">
+                <li class="w-[70%] flex items-center justify-between border-l border-projectPurple">
                     <p class="ml-4">
                         <span class="font-bold"><%= serving.description%></span>
                         - <%= number_to_currency(serving.current_price, precision: 2) %>
                     </p>
-                    <%= link_to 'Editar', edit_restaurant_dish_serving_path(@restaurant, @dish, serving), class: 'outline_button p-2' %>
-                    <%= link_to 'Histórico', restaurant_dish_serving_history_path(@restaurant, @dish, serving), class: 'outline_button p-2' %>
+                    <div class="flex gap-4">
+                        <%= link_to 'Editar', edit_restaurant_dish_serving_path(@restaurant, @dish, serving), class: 'outline_button p-2' %>
+                        <%= link_to 'Histórico', restaurant_dish_serving_history_path(@restaurant, @dish, serving), class: 'outline_button p-2' %>
+                    </div>
                 </li>
             <% end %>
             </ul>
