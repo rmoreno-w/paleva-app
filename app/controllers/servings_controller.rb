@@ -8,8 +8,18 @@ class ServingsController < UserController
     serving_data = get_serving_params
 
     if params.has_key?(:dish_id)
+      dish_id = params[:dish_id]
+      dish = Dish.find(dish_id)
+      verify_servingable_owner(dish)
+      return if performed?
+
       @serving = @dish.servings.build(serving_data)
     else
+      beverage_id = params[:beverage_id]
+      beverage = Beverage.find(beverage_id)
+      verify_servingable_owner(beverage)
+      return if performed?
+
       @serving = @beverage.servings.build(serving_data)
     end
 
@@ -71,5 +81,29 @@ class ServingsController < UserController
 
   def get_serving_params
     params.require(:serving).permit(:description, :current_price)
+  end
+
+  def verify_servingable_owner(found_servingable)
+    if found_servingable.nil? 
+      if found_servingable.class == Dish
+        redirect_to root_path, alert: 'Ops! Prato não encontrado'
+      else
+        redirect_to root_path, alert: 'Ops! Bebida não encontrada'
+      end
+    end
+
+    if found_servingable.restaurant.id != @restaurant.id
+      if found_servingable.class == Dish
+        redirect_to root_path, alert: 'Ops! Prato não encontrado'
+      else
+        redirect_to root_path, alert: 'Ops! Bebida não encontrada'
+      end
+    end
+
+    if found_servingable.class == Dish
+      @dish = found_servingable
+    else
+      @beverage = found_servingable
+    end
   end
 end

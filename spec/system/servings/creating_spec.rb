@@ -2,6 +2,17 @@ require 'rails_helper'
 
 describe 'User' do
   context 'tries to create a serving for a dish' do
+    it 'but has to first be logged in' do
+      dish = create_dish
+
+      visit new_restaurant_dish_serving_path(dish.restaurant, dish)
+
+      expect(current_path).to eq new_user_session_path
+      expect(page).to have_content 'Para continuar, faça login ou registre-se.'
+      expect(page).not_to have_content 'Porção Individual (1 Bolinho e 1 Bola de Sorvete)'
+      expect(page).not_to have_content '24,50'
+    end
+
     it 'and gets the correct page' do
       dish = create_dish
       login_as dish.restaurant.user
@@ -37,6 +48,17 @@ describe 'User' do
   end
 
   context 'tries to create a serving for a beverage' do
+    it 'but has to first be logged in' do
+      beverage = create_beverage
+
+      visit new_restaurant_beverage_serving_path(beverage.restaurant, beverage)
+
+      expect(current_path).to eq new_user_session_path
+      expect(page).to have_content 'Para continuar, faça login ou registre-se.'
+      expect(page).not_to have_content 'Garrafa 1L'
+      expect(page).not_to have_content '24,50'
+    end
+
     it 'and gets the correct page' do
       beverage = create_beverage
       login_as beverage.restaurant.user

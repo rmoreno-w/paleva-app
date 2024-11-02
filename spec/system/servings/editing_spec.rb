@@ -2,6 +2,18 @@ require 'rails_helper'
 
 describe 'User' do
   context 'tries to edit a serving for a dish' do
+    it 'but has to first be logged in' do
+      dish = create_dish
+      serving = Serving.create!(description: 'Porção Individual (1 Bolinho e 1 Bola de Sorvete)', current_price: 24.5, servingable: dish)
+
+      visit edit_restaurant_dish_serving_path(dish.restaurant, dish, serving)
+
+      expect(current_path).to eq new_user_session_path
+      expect(page).not_to have_content 'Faça seu Login'
+      expect(page).not_to have_content 'Porção Individual (1 Bolinho e 1 Bola de Sorvete)'
+      expect(page).not_to have_content '24,50'
+    end
+
     it 'and gets the correct page' do
       dish = create_dish
       serving = Serving.create!(description: 'Porção Individual (1 Bolinho e 1 Bola de Sorvete)', current_price: 24.5, servingable: dish)
@@ -38,6 +50,18 @@ describe 'User' do
   end
 
   context 'tries to edit a serving for a beverage' do
+    it 'but has to first be logged in' do
+      beverage = create_beverage
+      serving = Serving.create!(description: 'Garrafa 1L', current_price: 24.5, servingable: beverage)
+
+      visit edit_restaurant_beverage_serving_path(beverage.restaurant, beverage, serving)
+
+      expect(current_path).to eq new_user_session_path
+      expect(page).not_to have_content 'Faça seu Login'
+      expect(page).not_to have_content 'Garrafa 1L'
+      expect(page).not_to have_content '24,50'
+    end
+
     it 'and gets the correct page' do
       beverage = create_beverage
       serving = Serving.create!(description: 'Garrafa de 1L', current_price: 12.5, servingable: beverage)

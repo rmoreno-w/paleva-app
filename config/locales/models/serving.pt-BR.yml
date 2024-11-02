@@ -8,3 +8,4 @@ pt-BR:
       serving:
         description: Descrição
         current_price: Preço Atual
+        servingable: Prato ou Bebida

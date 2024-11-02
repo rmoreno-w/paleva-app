@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      price_register:
+        one: Histórico de Preço
+        other: Históricos de Preço
+    attributes:
+      price_register:
+        change_date: Data de Alteração
+        Preço: Preço

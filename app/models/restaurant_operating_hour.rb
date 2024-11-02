@@ -12,7 +12,7 @@ class RestaurantOperatingHour < ApplicationRecord
   private
   def is_start_time_earlier_than_end_time
     if self.start_time && self.end_time
-      self.errors.add(:start_time, 'deve ser  menor que horário do fim') if self.start_time >= self.end_time
+      self.errors.add(:start_time, 'deve ser menor que horário do fim') if self.start_time >= self.end_time
     end
   end
 end

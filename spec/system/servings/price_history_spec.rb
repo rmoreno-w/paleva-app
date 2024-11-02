@@ -56,8 +56,8 @@ describe 'User' do
       click_on 'Agua de coco Sócoco'
       click_on 'Histórico'
 
-      expect(current_path).to eq restaurant_dish_serving_history_path(beverage.restaurant, beverage, serving)
-      expect(page).to have_selector 'h2', text: "Histórico de Preços para #{beverage.name} # Garrafa - #{serving.description}"
+      expect(current_path).to eq restaurant_beverage_serving_history_path(beverage.restaurant, beverage, serving)
+      expect(page).to have_selector 'h2', text: "Histórico de Preços para #{beverage.name} # Porção - #{serving.description}"
       expect(page).to have_content 'Data de Alteração'
       expect(page).to have_content 'Preço'
       expect(page).to have_content I18n.l(serving.price_history[0].change_date, format: :long_date)
