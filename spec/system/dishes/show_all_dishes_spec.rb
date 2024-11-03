@@ -91,6 +91,76 @@ describe 'User' do
       expect(page).to have_content I18n.t(first_dish.status)
       expect(page).to have_content I18n.t(second_dish.status)
       expect(page).not_to have_content third_dish.name
+      expect(page).to have_content 'Filtros:'
+      within '#filters' do
+        expect(page).to have_selector 'button', count: restaurant.tags.count
+      end
+    end
+
+    it 'and should see all the tags for dishes from its own restaurant' do
+      restaurant = create_restaurant_and_user
+
+      Tag.create!(name: 'Vegano', restaurant: restaurant)
+      Tag.create!(name: 'Alto em Açúcar', restaurant: restaurant)
+
+      # Act
+      visit root_path
+      click_on 'Entrar'
+      fill_in 'E-mail', with: 'aloisio@email.com'
+      fill_in 'Senha', with: 'fortissima12'
+      click_on 'Entrar'
+      click_on 'Pratos'
+
+      # Assert
+      expect(current_path).to eq restaurant_dishes_path(restaurant.id)
+      expect(page).to have_content 'Filtrar:'
+      within '#filters' do
+        expect(page).to have_selector 'a', count: restaurant.tags.count + 1
+      end
+    end
+
+    it 'and should see only the dishes marked with a tag when clicking on a tag button' do
+      restaurant = create_restaurant_and_user
+
+      tag = Tag.create!(name: 'Vegano', restaurant: restaurant)
+      Tag.create!(name: 'Alto em Açúcar', restaurant: restaurant)
+
+      dish = Dish.create!(
+        name: 'Tapioca de Coco',
+        description: 'Massa de tapioca e recheio de creme de coco',
+        calories: 258,
+        restaurant: restaurant
+      )
+      dish.tags << tag
+
+      Dish.create!(
+        name: 'Bolo Floresta Negra',
+        description: 'Massa de chocolate, cobertura de Chantilly e ganache, e recheio de mousse de chocolate. Cerejas picadas adornando e no recheio',
+        calories: 3650,
+        restaurant: restaurant
+      )
+
+      Dish.create!(
+        name: 'Petit Gateau de Mousse Insuflado',
+        description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+        calories: 580,
+        restaurant: restaurant
+      )
+
+      # Act
+      visit root_path
+      click_on 'Entrar'
+      fill_in 'E-mail', with: 'aloisio@email.com'
+      fill_in 'Senha', with: 'fortissima12'
+      click_on 'Entrar'
+      click_on 'Pratos'
+      click_on 'Vegano'
+
+      # Assert
+      # expect(current_path).to eq restaurant_dishes_path(restaurant.id, filter:  tag.name)
+      expect(page).to have_content 'Tapioca de Coco'
+      expect(page).not_to have_content 'Bolo Floresta Negra'
+      expect(page).not_to have_content 'Petit Gateau de Mousse Insuflado'
     end
   end
 end

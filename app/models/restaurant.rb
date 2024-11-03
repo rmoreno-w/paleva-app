@@ -4,6 +4,7 @@ class Restaurant < ApplicationRecord
   has_many :restaurant_operating_hours, inverse_of: :restaurant
   has_many :dishes, inverse_of: :restaurant
   has_many :beverages, inverse_of: :restaurant
+  has_many :tags, inverse_of: :restaurant
 
   accepts_nested_attributes_for :restaurant_operating_hours
 

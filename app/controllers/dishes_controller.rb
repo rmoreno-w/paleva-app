@@ -1,7 +1,13 @@
 class DishesController < UserController
   before_action :get_restaurant
   def index
+    filter = params[:filter]
+
     @dishes = Dish.where(restaurant: @restaurant)
+
+    if filter
+      @dishes = @dishes.joins(:tags).where(tags: {name: filter})
+    end
   end
 
   def show
