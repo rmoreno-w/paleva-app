@@ -3,14 +3,17 @@
     <%= link_to '+ Criar Prato', new_restaurant_dish_path(current_user.restaurant), class: 'outline_button' %>
 </div>
 
-<section id="filters" class="my-10 flex flex-wrap gap-2 items-center border-y border-projectPurple p-2">
-    <span class="font-bold text-projectPurple">Filtrar:</span>
+<section id="filters" class="my-10 border-y border-projectPurple p-2 flex justify-between items-center">
+    <div id="filters-container" class="flex flex-wrap gap-2 items-center">
+        <span class="font-bold text-projectPurple">Filtrar:</span>
 
-    <%= link_to 'Todos', restaurant_dishes_path(@restaurant, @dish), class: params.has_key?(:filter) ? 'outline_button rounded-3xl p-[6px]' : 'form_button rounded-3xl p-[6px] my-0' %>
+        <%= link_to 'Todos', restaurant_dishes_path(@restaurant, @dish), class: params.has_key?(:filter) ? 'outline_button rounded-3xl p-[6px]' : 'form_button rounded-3xl p-[6px] my-0' %>
 
-    <% @restaurant.tags.each do |tag| %>
-        <%= link_to tag.name, restaurant_dishes_path(@restaurant, @dish, filter: tag.name), class: params[:filter] == tag.name ? 'form_button rounded-3xl p-[6px] mt-0' : 'outline_button rounded-3xl p-[6px]' %>
-    <% end %>
+        <% @restaurant.tags.each do |tag| %>
+            <%= link_to tag.name, restaurant_dishes_path(@restaurant, @dish, filter: tag.name), class: params[:filter] == tag.name ? 'form_button rounded-3xl p-[6px] mt-0' : 'outline_button rounded-3xl p-[6px]' %>
+        <% end %>
+    </div>
+    <%= link_to '+ Cadastrar Tag', new_restaurant_tag_path(@restaurant), class: 'outline_button min-w-fit max-h-fit' %>
 </section>
 
 <% if @dishes.empty? %>
