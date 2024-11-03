@@ -5,8 +5,11 @@ class DishesController < UserController
 
     @dishes = Dish.where(restaurant: @restaurant)
 
-    if filter
-      @dishes = @dishes.joins(:tags).where(tags: {name: filter})
+    filtered_tag = Tag.find_by(name: filter) if filter
+    if filter && filtered_tag
+      @dishes = Tag.find_by(name: filter).dishes
+    elsif filter
+      redirect_to restaurant_dishes_path(@restaurant), alert: 'Ops! :( Tag inválida'
     end
   end
 

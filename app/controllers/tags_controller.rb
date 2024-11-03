@@ -16,6 +16,22 @@ class TagsController < UserController
     end
   end
 
+  def exclude
+    @tags = @restaurant.tags
+  end
+
+  def destroy
+    tag_id = params[:tag_id]
+    @tag = Tag.find(tag_id)
+
+    if @tag.destroy
+      redirect_to restaurant_dishes_path(@restaurant), notice: 'Tag excluída com sucesso!'
+    else
+      flash.now[:alert] = 'Ops! :( Erro ao excluir a Tag'
+      render 'exclude', status: :unprocessable_entity
+    end
+  end
+
   private
   def get_restaurant
     restaurant_id = params[:restaurant_id]

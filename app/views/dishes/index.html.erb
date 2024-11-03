@@ -13,7 +13,11 @@
             <%= link_to tag.name, restaurant_dishes_path(@restaurant, @dish, filter: tag.name), class: params[:filter] == tag.name ? 'form_button rounded-3xl p-[6px] mt-0' : 'outline_button rounded-3xl p-[6px]' %>
         <% end %>
     </div>
-    <%= link_to '+ Cadastrar Tag', new_restaurant_tag_path(@restaurant), class: 'outline_button min-w-fit max-h-fit' %>
+
+    <div id="filters-controls" class="flex gap-2 min-w-fit">
+        <%= link_to '+ Cadastrar Tag', new_restaurant_tag_path(@restaurant), class: 'outline_button min-w-fit max-h-fit' %>
+        <%= link_to 'Remover Tags', restaurant_exclude_tag_path(@restaurant), class: 'outline_button min-w-fit max-h-fit' %>
+    </div>
 </section>
 
 <% if @dishes.empty? %>

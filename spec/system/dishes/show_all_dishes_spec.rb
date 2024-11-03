@@ -91,7 +91,7 @@ describe 'User' do
       expect(page).to have_content I18n.t(first_dish.status)
       expect(page).to have_content I18n.t(second_dish.status)
       expect(page).not_to have_content third_dish.name
-      expect(page).to have_content 'Filtros:'
+      expect(page).to have_content 'Filtrar:'
       within '#filters' do
         expect(page).to have_selector 'button', count: restaurant.tags.count
       end
@@ -114,7 +114,7 @@ describe 'User' do
       # Assert
       expect(current_path).to eq restaurant_dishes_path(restaurant.id)
       expect(page).to have_content 'Filtrar:'
-      within '#filters' do
+      within '#filters-container' do
         expect(page).to have_selector 'a', count: restaurant.tags.count + 1
       end
     end

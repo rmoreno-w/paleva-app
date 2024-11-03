@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   resources :restaurants, only: [ :new, :create ] do
     resources :restaurant_operating_hours, only: [ :new, :create ]
     resources :tags, only: [ :new, :create ]
+    get 'exclude_tag', to: 'tags#exclude'
+    delete 'destroy_tag', to: 'tags#destroy'
 
     resources :dishes, only: [ :index, :show, :new, :create, :edit, :update, :destroy ] do
       post 'deactivate', on: :member

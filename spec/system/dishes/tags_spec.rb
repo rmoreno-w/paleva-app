@@ -70,25 +70,25 @@ describe 'User' do
     end
   end
 
-  # context 'deletes a tag' do
-  #   it 'and succeeds' do
-  #     restaurant = create_restaurant_and_user
+  context 'deletes a tag' do
+    it 'and succeeds' do
+      restaurant = create_restaurant_and_user
+      Tag.create(name: 'Vegano', restaurant: restaurant)
 
-  #     # Act
-  #     visit root_path
-  #     click_on 'Entrar'
-  #     fill_in 'E-mail', with: 'aloisio@email.com'
-  #     fill_in 'Senha', with: 'fortissima12'
-  #     click_on 'Entrar'
-  #     click_on 'Pratos'
-  #     click_on 'Cadastrar Tag'
-  #     fill_in 'Nome', with: 'Vegano'
-  #     click_on 'Criar Tag'
+      # Act
+      visit root_path
+      click_on 'Entrar'
+      fill_in 'E-mail', with: 'aloisio@email.com'
+      fill_in 'Senha', with: 'fortissima12'
+      click_on 'Entrar'
+      click_on 'Pratos'
+      click_on 'Remover Tag'
+      select 'Vegano', from: 'Escolha uma Tag para excluir'
+      click_on 'Excluir Tag'
 
-  #     # Assert
-  #     expect(current_path).to eq restaurant_dishes_path(restaurant.id)
-  #     expect(page).to have_content 'Cadastrar Tag'
-  #     expect(page).to have_link 'Vegano'
-  #   end
-  # end
+      # Assert
+      expect(current_path).to eq restaurant_dishes_path(restaurant.id)
+      expect(page).not_to have_link 'Vegano'
+    end
+  end
 end
