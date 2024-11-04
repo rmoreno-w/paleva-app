@@ -15,7 +15,7 @@ class DishesController < UserController
 
   def show
     dish_id = params[:id]
-    found_dish = Dish.find(dish_id)
+    found_dish = Dish.find_by(id: dish_id)
 
     verify_dish_owner(found_dish)
   end
@@ -37,14 +37,14 @@ class DishesController < UserController
 
   def edit
     dish_id = params[:id]
-    found_dish = Dish.find(dish_id)
+    found_dish = Dish.find_by(id: dish_id)
 
     verify_dish_owner(found_dish)
   end
 
   def update
     dish_id = params[:id]
-    found_dish = Dish.find(dish_id)
+    found_dish = Dish.find_by(id: dish_id)
 
     verify_dish_owner(found_dish)
     return if performed?
@@ -59,7 +59,7 @@ class DishesController < UserController
 
   def destroy
     dish_id = params[:id]
-    found_dish = Dish.find(dish_id)
+    found_dish = Dish.find_by(id: dish_id)
 
     verify_dish_owner(found_dish)
     return if performed?
@@ -74,7 +74,7 @@ class DishesController < UserController
 
   def deactivate
     dish_id = params[:id]
-    found_dish = Dish.find(dish_id)
+    found_dish = Dish.find_by(id: dish_id)
     
     verify_dish_owner(found_dish)
     return if performed?
@@ -90,7 +90,7 @@ class DishesController < UserController
 
   def activate
     dish_id = params[:id]
-    found_dish = Dish.find(dish_id)
+    found_dish = Dish.find_by(id: dish_id)
 
     verify_dish_owner(found_dish)
     return if performed?

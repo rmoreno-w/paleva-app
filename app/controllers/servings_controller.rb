@@ -23,14 +23,14 @@ class ServingsController < UserController
 
   def edit
     serving_id = params[:id]
-    found_serving = Serving.find(serving_id)
+    found_serving = Serving.find_by(id: serving_id)
 
     verify_serving_owner(found_serving)
   end
 
   def update
     serving_id = params[:id]
-    found_serving = Serving.find(serving_id)
+    found_serving = Serving.find_by(id: serving_id)
     serving_data = get_serving_params
 
     verify_serving_owner(found_serving)
@@ -49,7 +49,7 @@ class ServingsController < UserController
 
   def history
     serving_id = params[:serving_id]
-    found_serving = Serving.find(serving_id)
+    found_serving = Serving.find_by(id: serving_id)
 
     verify_serving_owner(found_serving)
   end
@@ -60,14 +60,14 @@ class ServingsController < UserController
       servingable_id = params[:dish_id]
       restaurant_id = params[:restaurant_id]
 
-      @restaurant = Restaurant.find(restaurant_id)
-      @servingable = Dish.find(servingable_id)
+      @restaurant = Restaurant.find_by(id: restaurant_id)
+      @servingable = Dish.find_by(id: servingable_id)
     else
       servingable_id = params[:beverage_id]
       restaurant_id = params[:restaurant_id]
 
-      @restaurant = Restaurant.find(restaurant_id)
-      @servingable = Beverage.find(servingable_id)
+      @restaurant = Restaurant.find_by(id: restaurant_id)
+      @servingable = Beverage.find_by(id: servingable_id)
     end
 
     if @restaurant.id != @servingable.restaurant.id || @restaurant.id != current_user.restaurant.id 

@@ -6,7 +6,7 @@ class BeveragesController < UserController
 
   def show
     beverage_id = params[:id]
-    found_beverage = Beverage.find(beverage_id)
+    found_beverage = Beverage.find_by(id: beverage_id)
 
     verify_beverage_owner(found_beverage)
   end
@@ -28,14 +28,14 @@ class BeveragesController < UserController
 
   def edit
     beverage_id = params[:id]
-    found_beverage = Beverage.find(beverage_id)
+    found_beverage = Beverage.find_by(id: beverage_id)
 
     verify_beverage_owner(found_beverage)
   end
 
   def update
     beverage_id = params[:id]
-    found_beverage = Beverage.find(beverage_id)
+    found_beverage = Beverage.find_by(id: beverage_id)
 
     verify_beverage_owner(found_beverage)
     return if performed?
@@ -50,7 +50,7 @@ class BeveragesController < UserController
 
   def destroy
     beverage_id = params[:id]
-    found_beverage = Beverage.find(beverage_id)
+    found_beverage = Beverage.find_by(id: beverage_id)
 
     verify_beverage_owner(found_beverage)
     return if performed?
@@ -65,7 +65,7 @@ class BeveragesController < UserController
 
   def deactivate
     beverage_id = params[:id]
-    found_beverage = Beverage.find(beverage_id)
+    found_beverage = Beverage.find_by(id: beverage_id)
     
     verify_beverage_owner(found_beverage)
     return if performed?
@@ -81,7 +81,7 @@ class BeveragesController < UserController
 
   def activate
     beverage_id = params[:id]
-    found_beverage = Beverage.find(beverage_id)
+    found_beverage = Beverage.find_by(id: beverage_id)
 
     verify_beverage_owner(found_beverage)
     return if performed?

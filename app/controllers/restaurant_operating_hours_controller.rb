@@ -1,6 +1,6 @@
 class RestaurantOperatingHoursController < UserController
   def new
-    @restaurant = Restaurant.find(params[:restaurant_id])
+    @restaurant = Restaurant.find_by(id: params[:restaurant_id])
     @restaurant_operating_hour = RestaurantOperatingHour.new
     @status_options = RestaurantOperatingHour.statuses
     @weekdays = RestaurantOperatingHour.weekdays
@@ -12,7 +12,7 @@ class RestaurantOperatingHoursController < UserController
     operating_hour_data[:status] = operating_hour_data[:status].to_i
     operating_hour_data[:weekday] = operating_hour_data[:weekday].to_i
 
-    @restaurant = Restaurant.find(restaurant_id)
+    @restaurant = Restaurant.find_by(id: restaurant_id)
     @restaurant_operating_hour =  RestaurantOperatingHour.new(operating_hour_data)
     @restaurant_operating_hour.restaurant = @restaurant
 

@@ -28,7 +28,7 @@ Rails.application.routes.draw do
       get 'new_tag_assignment', to: 'tags#new_assignment'
       post 'assign_tag', to: 'tags#assign'
       get 'remove_tag_assignment', to: 'tags#remove_assignment'
-      post 'unassign_tag', to: 'tags#unassign'
+      delete 'unassign_tag', to: 'tags#unassign'
     end
 
     resources :beverages, only: [ :index, :show, :new, :create, :edit, :update, :destroy ] do

@@ -82,7 +82,7 @@ describe 'User' do
 
     it 'and succeeds' do
       dish = create_dish
-      tag = Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
+      Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
 
       login_as dish.restaurant.user
 
@@ -105,7 +105,7 @@ describe 'User' do
   context 'tries to unassign a tag from a dish' do
     it 'and doesnt find the button to do so on a dish page, if it doesnt have a tag assigned' do
       dish = create_dish
-      tag = Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
+      Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
 
       login_as dish.restaurant.user
 
