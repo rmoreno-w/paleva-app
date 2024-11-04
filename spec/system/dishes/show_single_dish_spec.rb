@@ -20,6 +20,10 @@ describe 'User' do
       expect(page).to have_content 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse'
       expect(page).to have_content '580'
       expect(page).to have_content 'Ativo 🟢'
+      expect(page).to have_content 'Tags'
+      within '#tags-list' do
+        expect(page).to have_selector 'li', count: dish.tags.count
+      end
     end
 
     it 'and should not be able to access a dish from another user' do

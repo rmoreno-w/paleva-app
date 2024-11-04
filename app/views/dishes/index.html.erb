@@ -21,7 +21,11 @@
 </section>
 
 <% if @dishes.empty? %>
-    <p class="">Ainda não há pratos cadastrados para o seu restaurante.</p>
+    <% if params.has_key?(:filter) %>
+        <p class="">Ainda não há pratos cadastrados para este filtro.</p>
+    <% else %>
+        <p class="">Ainda não há pratos cadastrados para o seu restaurante.</p>
+    <% end %>
 <% else %>
     <ul class=" flex flex-col gap-4 list-disc marker:text-projectPurple list-inside	">
         <% @dishes.each do |dish| %>

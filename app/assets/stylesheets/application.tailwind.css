@@ -55,6 +55,10 @@
         @apply hover:cursor-pointer border-2 border-projectPurple p-3 rounded-md transition duration-300 font-bold hover:brightness-90 focus:ring focus:ring-projectPurple/70 focus:ring-offset-2 focus:ring-offset-projectWhite;
     }
 
+    .circle_button {
+        @apply hover:cursor-pointer hover:brightness-90 font-medium flex items-center justify-center text-center p-2 border border-projectPurple rounded-[50%] w-7 h-7;
+    }
+
     .notice_flash {
         @apply my-6 p-5 bg-projectGreen text-projectBlack rounded-3xl font-bold absolute top-[116px] left-20 right-20;
     }

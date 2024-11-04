@@ -32,6 +32,53 @@ class TagsController < UserController
     end
   end
 
+  def new_assignment
+    dish_id = params[:dish_id]
+    @dish = Dish.find(dish_id)
+    restaurant_tags = @restaurant.tags
+    dish_tags = @dish.tags
+
+    @tags = restaurant_tags - dish_tags
+  end
+
+  def assign
+    dish_id = params[:dish_id]
+    tag_id = params[:tag_id]
+    @dish = Dish.find(dish_id)
+    @tag = Tag.find(tag_id)
+    dish_tag = DishTag.new(dish_id: @dish.id, tag_id: @tag.id)
+
+    if dish_tag.save
+      redirect_to restaurant_dish_path(@restaurant, @dish), notice: 'Característica adicionada com sucesso!'
+    else
+      @tags = @restaurant.tags
+      flash.now[:alert] = 'Ops! :( Erro ao adicionar característica. Verifique se o prato já não possui essa característica'
+      render 'new_assignment', status: :unprocessable_entity
+    end
+  end
+
+  def remove_assignment
+    dish_id = params[:dish_id]
+    @dish = Dish.find(dish_id)
+    @tags = @dish.tags
+  end
+
+  def unassign
+    dish_id = params[:dish_id]
+    tag_id = params[:tag_id]
+    @dish = Dish.find(dish_id)
+    @tag = Tag.find(tag_id)
+    dish_tag = DishTag.find_by(dish_id: @dish.id, tag_id: @tag.id)
+
+    if dish_tag.delete
+      redirect_to restaurant_dish_path(@restaurant, @dish), notice: 'Característica removida com sucesso!'
+    else
+      @tags = @dish.tags
+      flash.now[:alert] = 'Ops! :( Erro ao remover característica'
+      render 'remove_assignment', status: :unprocessable_entity
+    end
+  end
+
   private
   def get_restaurant
     restaurant_id = params[:restaurant_id]

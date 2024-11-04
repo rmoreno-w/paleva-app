@@ -25,6 +25,10 @@ Rails.application.routes.draw do
       resources :servings, only: [ :new, :create, :edit, :update ] do 
         get 'history', to: 'servings#history'
       end
+      get 'new_tag_assignment', to: 'tags#new_assignment'
+      post 'assign_tag', to: 'tags#assign'
+      get 'remove_tag_assignment', to: 'tags#remove_assignment'
+      post 'unassign_tag', to: 'tags#unassign'
     end
 
     resources :beverages, only: [ :index, :show, :new, :create, :edit, :update, :destroy ] do

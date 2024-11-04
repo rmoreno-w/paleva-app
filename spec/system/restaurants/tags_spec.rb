@@ -73,7 +73,7 @@ describe 'User' do
   context 'deletes a tag' do
     it 'and succeeds' do
       restaurant = create_restaurant_and_user
-      Tag.create(name: 'Vegano', restaurant: restaurant)
+      tag = Tag.create!(name: 'Vegano', restaurant: restaurant)
 
       # Act
       visit root_path

@@ -3,7 +3,7 @@
 
 <article class="my-10 flex flex-col max-w-5xl border-2 border-projectPurpleLighter rounded-xl p-5 relative overflow-hidden">
     <section class="flex justify-between">
-        <section class="flex flex-col gap-2">
+        <section class="flex flex-col gap-2 w-[33%]">
             <span class="font-bold text-lg text-projectPurple"><%= Dish.human_attribute_name :status %></span>
             <p>
                 <% if @dish.active? %>
@@ -22,6 +22,24 @@
             <p>
                 <%= @dish.calories%>
             </p>
+
+            <div class="flex flex-col gap-2" id="tags">
+                <div class="flex gap-2 items-center">
+                    <span class="font-bold text-lg text-projectPurple">Tags</span>
+                    <%= link_to '+', restaurant_dish_new_tag_assignment_path(@restaurant, @dish), class: 'circle_button' %>
+                    <% if @dish.tags.count > 0 %>
+                        <%= link_to '-', restaurant_dish_remove_tag_assignment_path(@restaurant, @dish), class: 'circle_button' %>
+                    <% end %>
+                </div>
+
+                <ul class="flex flex-wrap gap-2" id="tags-list">
+                    <% @dish.tags.each do | tag |%>
+                        <li class="rounded-3xl p-[6px] border border-projectPurple text-projectPurple w-fit">
+                            <%= tag.name %>
+                        </li>
+                    <% end %>
+                <ul>
+            </div>
         </section>
 
         <picture>

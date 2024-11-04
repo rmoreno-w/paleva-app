@@ -1,0 +1,10 @@
+<h2>Remover Característica</h2>
+
+<%= form_with(url: restaurant_dish_unassign_tag_path(@restaurant, @dish), class: 'form') do |f| %>
+    <div class="input_container">
+        <%= f.label :tag_id, 'Tags Disponíveis', class: 'input_label' %>
+        <%= f.collection_select :tag_id, @tags, :id, :name %>
+    </div>
+
+    <%= f.submit 'Remover', class: 'form_button'%>
+<% end %>
