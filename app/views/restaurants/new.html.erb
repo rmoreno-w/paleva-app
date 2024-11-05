@@ -2,57 +2,61 @@
 
 <h3>O PaLevá é um sistema de gerenciamento de Restaurantes completo e para ter acesso a todas funcionalidades, primeiro você precisa criar seu restaurante</h3>
 
-<%= form_with(model: @restaurant) do | f | %>
-    <div>
-        <%= f.label :brand_name %>
+<%= form_with(model: @restaurant, class: 'form') do | f | %>
+    <div class="input_container">
+        <%= f.label :brand_name, class: 'input_label' %>
         <%= f.text_field :brand_name %>
     </div>
 
-    <div>
-        <%= f.label :corporate_name %>
+    <div class="input_container">
+        <%= f.label :corporate_name, class: 'input_label' %>
         <%= f.text_field :corporate_name %>
     </div>
 
-    <div>
-        <%= f.label :registration_number %>
+    <div class="input_container">
+        <%= f.label :registration_number, class: 'input_label' %>
         <%= f.text_field :registration_number %>
     </div>
 
-    <div>
-        <%= f.label :address %>
+    <div class="input_container">
+        <%= f.label :address, class: 'input_label' %>
         <%= f.text_field :address %>
     </div>
 
-    <div>
-        <%= f.label :phone, 'Telefone (digite apenas os números)' %>
+    <div class="input_container">
+        <%= f.label :phone, 'Telefone (digite apenas os números)', class: 'input_label' %>
         <%= f.text_field :phone %>
     </div>
 
-    <div>
-        <%= f.label :email %>
+    <div class="input_container">
+        <%= f.label :email, class: 'input_label' %>
         <%= f.email_field :email %>
     </div>
 
-    <div id="operating-hours" class="flex flex-col gap-4 max-w-[50%]">
-        <p><%= "#{I18n.t('activerecord.models.restaurant_operating_hour.one')} (Mais horários podem ser adicionados posteriormente)" %></p>
+    <div id="operating-hours" class="input_container">
+        <p class="input_label font-bold"><%= "#{I18n.t('activerecord.models.restaurant_operating_hour.one')} (Mais horários podem ser adicionados posteriormente)" %></p>
         <%= f.fields_for :restaurant_operating_hours do |hour_form| %>
-            <div class="flex flex-col mb-4">
-                <%= hour_form.label :weekday %>
+            <div class="flex flex-col gap-2">
+                <%= hour_form.label :weekday, class: 'input_label' %>
                 <%= hour_form.collection_select :weekday, @weekdays, :second, :first %>
 
-                <div>
-                    <%= hour_form.label :start_time %>
+                <div class="flex gap-4 my-2 items-center">
+                    <div>
+                    <%= hour_form.label :start_time, class: 'input_label' %>
                     <%= hour_form.time_field :start_time %>
+                    </div>
 
-                    <%= hour_form.label :end_time %>
+                    <div>
+                    <%= hour_form.label :end_time, class: 'input_label' %>
                     <%= hour_form.time_field :end_time %>
+                    </div>
                 </div>
 
-                <%= hour_form.label :status %>
+                <%= hour_form.label :status, class: 'input_label' %>
                 <%= hour_form.collection_select :status, @statuses, :second, :first %>
             </div>
         <% end %>
-    <div>
+    </div>
 
-    <%= f.submit %>
+    <%= f.submit class:'form_button' %>
 <% end %>

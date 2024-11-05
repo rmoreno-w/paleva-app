@@ -1,0 +1,10 @@
+<h2>Novo Cardápio</h2>
+
+<%= form_with(model: [@restaurant, @item_option_set], class: 'form') do |f| %>
+    <div class="input_container">
+        <%= f.label :name, class: 'input_label' %>
+        <%= f.text_field :name, class: 'input' %>
+    </div>
+
+    <%= f.submit class: 'form_button'%>
+<% end %>

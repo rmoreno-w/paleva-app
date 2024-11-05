@@ -41,6 +41,8 @@
                         <%= link_to 'Pratos', restaurant_dishes_path(current_user.restaurant), class: controller_name == 'dishes' ? 'nav_link_active' : 'nav_link_inactive' %>
                         <span class="link_separator"></span>
                         <%= link_to 'Bebidas', restaurant_beverages_path(current_user.restaurant), class: controller_name == 'beverages' ? 'nav_link_active' : 'nav_link_inactive' %>
+                        <span class="link_separator"></span>
+                        <%= link_to 'Cardápios', restaurant_item_option_sets_path(current_user.restaurant), class: controller_name == 'item_option_sets' ? 'nav_link_active' : 'nav_link_inactive' %>
                     </nav>
                 <% end %>
 

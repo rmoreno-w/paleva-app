@@ -40,5 +40,7 @@ Rails.application.routes.draw do
     end
 
     get '/menu_items_search', to: 'menu_search#index'
+
+    resources :item_option_sets, only: [ :index, :new, :create ]
   end
 end

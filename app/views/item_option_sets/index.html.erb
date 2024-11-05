@@ -1,0 +1,13 @@
+<div class="flex justify-between items-center">
+    <h2>Cardápios</h2>
+    <%= link_to '+ Criar Cardápio', new_restaurant_item_option_set_path, class: 'outline_button' %>
+</div>
+
+
+<% if @item_option_sets.empty? %>
+    <p class="mt-10">Ainda não há Cardápios cadastrados para o seu restaurante.</p>
+<% else %>
+    <% @item_option_sets.each do |option_set| %>
+        <p><%= option_set.name %></p>
+    <% end %>
+<% end %>

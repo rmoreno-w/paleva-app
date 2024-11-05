@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+      item_option_set:
+        one: Cardápio
+        other: Cardápios
+    attributes:
+      item_option_set:
+        name: Nome
