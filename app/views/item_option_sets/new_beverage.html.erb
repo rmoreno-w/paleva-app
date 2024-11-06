@@ -1,0 +1,14 @@
+<h2>Adicionar Bebida a <%= @item_option_set.name %></h2>
+
+<% if @available_beverages.empty? %>
+    <p class="mt-10">Não há Bebidas disponíveis ou todas Bebidas já foram assignadas a este Cardápio</p>
+<% else %>
+    <%= form_with(url: restaurant_item_option_set_add_beverage_path(@restaurant, @item_option_set), method: :post, class:'form') do |f| %>
+        <div class="input_container">
+            <%= f.label :beverage_id, 'Bebidas Disponíveis', class: 'input_label' %>
+            <%= f.collection_select :beverage_id, @available_beverages, :id, :name %>
+        </div>
+
+        <%= f.submit 'Adicionar', class: 'form_button'%>
+    <% end %>
+<% end %>

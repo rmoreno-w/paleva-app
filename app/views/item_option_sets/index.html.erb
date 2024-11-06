@@ -7,7 +7,13 @@
 <% if @item_option_sets.empty? %>
     <p class="mt-10">Ainda não há Cardápios cadastrados para o seu restaurante.</p>
 <% else %>
+    <ul class="mt-10 flex flex-wrap gap-4">
     <% @item_option_sets.each do |option_set| %>
-        <p><%= option_set.name %></p>
+        <%= link_to restaurant_item_option_set_path(@restaurant, option_set) do %>
+            <li class="border border-projectPurple p-8 rounded-xl hover:bg-projectPurple hover:text-projectWhite transition-all">
+                <p ><%= option_set.name %></p>
+            </li>
+        <% end %>
     <% end %>
+    </ul>
 <% end %>

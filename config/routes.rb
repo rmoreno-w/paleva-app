@@ -41,6 +41,13 @@ Rails.application.routes.draw do
 
     get '/menu_items_search', to: 'menu_search#index'
 
-    resources :item_option_sets, only: [ :index, :new, :create ]
+    resources :item_option_sets, only: [ :index, :show, :new, :create ] do
+      get 'new_dish', to: 'item_option_sets#new_dish'
+      post 'add_dish', to: 'item_option_sets#add_dish'
+      get 'new_beverage', to: 'item_option_sets#new_beverage'
+      post 'add_beverage', to: 'item_option_sets#add_beverage'
+      get 'remove_item', to: 'item_option_sets#remove_item'
+      delete 'delete_item', to: 'item_option_sets#delete_item'
+    end
   end
 end

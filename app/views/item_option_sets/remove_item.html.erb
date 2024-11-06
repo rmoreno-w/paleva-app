@@ -1,0 +1,14 @@
+<h2>Remover Item de <%= @item_option_set.name %></h2>
+
+<% if @available_items.empty? %>
+    <p class="mt-10">Não há Pratos/Bebidas neste Cardápio.</p>
+<% else %>
+    <%= form_with(url: restaurant_item_option_set_delete_item_path(@restaurant, @item_option_set), method: :delete, class:'form') do |f| %>
+        <div class="input_container">
+            <%= f.label :item_id, 'Itens Disponíveis', class: 'input_label' %>
+            <%= f.collection_select :item_id, @available_items, :id, :item_name %>
+        </div>
+
+        <%= f.submit 'Remover', class: 'form_button'%>
+    <% end %>
+<% end %>

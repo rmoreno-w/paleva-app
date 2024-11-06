@@ -1,0 +1,14 @@
+<h2>Adicionar Prato a <%= @item_option_set.name %></h2>
+
+<% if @available_dishes.empty? %>
+    <p class="mt-10">Não há Pratos disponíveis ou todos Pratos já foram assignados a este Cardápio</p>
+<% else %>
+    <%= form_with(url: restaurant_item_option_set_add_dish_path(@restaurant, @item_option_set), method: :post, class:'form') do |f| %>
+        <div class="input_container">
+            <%= f.label :dish_id, 'Pratos Disponíveis', class: 'input_label' %>
+            <%= f.collection_select :dish_id, @available_dishes, :id, :name %>
+        </div>
+
+        <%= f.submit 'Adicionar', class: 'form_button'%>
+    <% end %>
+<% end %>

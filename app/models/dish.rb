@@ -4,6 +4,7 @@ class Dish < ApplicationRecord
   has_many :servings, as: :servingable
   has_many :dish_tags
   has_many :tags, through: :dish_tags
+  has_many :item_option_entries, as: :itemable
 
   validates :name, :description, presence: true
 
