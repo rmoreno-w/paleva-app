@@ -3,11 +3,13 @@
     <h2>Cardápio - <%= @item_option_set.name %></h2>
     <%= link_to 'Adicionar Prato ao Cardápio', restaurant_item_option_set_new_dish_path(@restaurant, @item_option_set), class: 'outline_button' %>
     <%= link_to 'Adicionar Bebida ao Cardápio', restaurant_item_option_set_new_beverage_path(@restaurant, @item_option_set), class: 'outline_button' %>
-    <%= link_to 'Remover Prato/Bebida do Cardápio', restaurant_item_option_set_remove_item_path(@restaurant, @item_option_set), class: 'outline_button' %>
+    <% if !@item_option_entries.empty? %>
+        <%= link_to 'Remover Prato/Bebida do Cardápio', restaurant_item_option_set_remove_item_path(@restaurant, @item_option_set), class: 'outline_button' %>
+    <% end %>
 </div>
 
 <section class="mt-10 flex flex-col">
-    <% if @item_option_set.item_option_entries.empty? %>
+    <% if @item_option_entries.empty? %>
         <p>Ainda não há nenhum prato ou bebida cadastrados neste Cardápio.</p>
     <% else %>
         <h3 class="text-projectPurple mb-5">Opções:</h3>

@@ -16,13 +16,14 @@ describe 'User' do
     it 'and should land in the correct page if it has a restaurant and is logged in' do
       restaurant = create_restaurant_and_user
       option_set = ItemOptionSet.create(name: 'Almoço', restaurant: restaurant)
-      Beverage.create!(
+      beverage = Beverage.create!(
         name: 'Agua de coco Sócoco',
         description: 'Extraída de coco à vacuo, pasteurizada',
         calories: 150,
         is_alcoholic: false,
         restaurant: restaurant
       )
+      option_set.item_option_entries.create(itemable: beverage)
       login_as restaurant.user
 
       # Act
@@ -34,6 +35,21 @@ describe 'User' do
       # Assert
       expect(current_path).to eq restaurant_item_option_set_remove_item_path(restaurant, option_set)
       expect(page).to have_selector 'h2', text: "Remover Item de #{option_set.name}"
+    end
+
+    it 'and should only see the button to remove items if there is already an item in the item set' do
+      restaurant = create_restaurant_and_user
+      login_as restaurant.user
+      item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
+
+      # Act
+      visit root_path
+      click_on 'Cardápios'
+      click_on 'Café da Tarde'
+
+      # Assert
+      expect(current_path).to eq restaurant_item_option_set_path(restaurant.id, item_set.id)
+      expect(page).not_to have_link 'Remover Prato/Bebida'
     end
 
     it 'and removes a dish with success' do

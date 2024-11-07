@@ -26,11 +26,17 @@ class ItemOptionSetsController < UserController
   def show
     set_id = params[:id]
     @item_option_set = ItemOptionSet.find(set_id)
+
+    verify_item_set_ownership
+
+    @item_option_entries = @item_option_set.item_option_entries
   end
 
   def new_dish
     set_id = params[:item_option_set_id]
     @item_option_set = ItemOptionSet.find(set_id)
+
+    verify_item_set_ownership
 
     restaurant_dishes = @restaurant.dishes.active
     set_dishes_ids = @item_option_set.dish_ids
@@ -42,13 +48,18 @@ class ItemOptionSetsController < UserController
     item_set_params = params[:item_option_set_id]
     dish_id = params[:dish_id]
 
-    dish_to_add = Dish.find(dish_id)
+    @dish = Dish.find(dish_id)
+
+    verify_dish_ownership
 
     @item_option_set = ItemOptionSet.find(item_set_params)
-    @item_option_set.item_option_entries.build(itemable: dish_to_add)
+    @item_option_set.item_option_entries.build(itemable: @dish)
+
+    verify_item_set_ownership
+    return if performed?
 
     if @item_option_set.save
-      redirect_to restaurant_item_option_set_path(@restaurant, @item_option_set), notice: "Prato #{dish_to_add.name} adicionado ao Cardápio com sucesso!"
+      redirect_to restaurant_item_option_set_path(@restaurant, @item_option_set), notice: "Prato #{@dish.name} adicionado ao Cardápio com sucesso!"
     else
       restaurant_dishes = @restaurant.dishes.active
       set_dishes_ids = @item_option_set.dish_ids
@@ -63,6 +74,9 @@ class ItemOptionSetsController < UserController
     set_id = params[:item_option_set_id]
     @item_option_set = ItemOptionSet.find(set_id)
 
+    verify_item_set_ownership
+    return if performed?
+
     restaurant_beverages = @restaurant.beverages.active
     set_beverages_ids = @item_option_set.beverage_ids
 
@@ -73,13 +87,18 @@ class ItemOptionSetsController < UserController
     item_set_params = params[:item_option_set_id]
     beverage_id = params[:beverage_id]
 
-    beverage_to_add = Beverage.find(beverage_id)
+    @beverage = Beverage.find(beverage_id)
+    verify_beverage_ownership
+    return if performed?
 
     @item_option_set = ItemOptionSet.find(item_set_params)
-    @item_option_set.item_option_entries.build(itemable: beverage_to_add)
+    @item_option_set.item_option_entries.build(itemable: @beverage)
+
+    verify_item_set_ownership
+    return if performed?
 
     if @item_option_set.save
-      redirect_to restaurant_item_option_set_path(@restaurant, @item_option_set), notice: "Bebida #{beverage_to_add.name} adicionada ao Cardápio com sucesso!"
+      redirect_to restaurant_item_option_set_path(@restaurant, @item_option_set), notice: "Bebida #{@beverage.name} adicionada ao Cardápio com sucesso!"
     else
       restaurant_beverages = @restaurant.beverages.active
       set_beverages_ids = @item_option_set.beverage_ids
@@ -94,6 +113,9 @@ class ItemOptionSetsController < UserController
     set_id = params[:item_option_set_id]
     @item_option_set = ItemOptionSet.find(set_id)
 
+    verify_item_set_ownership
+    return if performed?
+
     @available_items = @item_option_set.item_option_entries
   end
 
@@ -102,8 +124,12 @@ class ItemOptionSetsController < UserController
     item_id = params[:item_id]
 
     @item_option_set = ItemOptionSet.find(set_id)
-    @item_to_remove = ItemOptionEntry.find(item_id)
+    verify_item_set_ownership
+    return if performed?
 
+    @item_to_remove = ItemOptionEntry.find(item_id)
+    verify_item_entry_ownership
+    return if performed?
 
     if @item_to_remove.delete
       redirect_to restaurant_item_option_set_path(@restaurant, @item_option_set), notice: "Item #{@item_to_remove.item_name} removido do Cardápio com sucesso!"
@@ -120,5 +146,21 @@ class ItemOptionSetsController < UserController
     @restaurant = Restaurant.find(restaurant_id)
 
     redirect_to root_path, alert: 'Você não tem acesso aos cardápios deste restaurante' if @restaurant.id != current_user.restaurant.id
+  end
+
+  def verify_item_set_ownership
+    redirect_to root_path, alert: "Voce não tem acesso a este Cardápio" if @item_option_set.restaurant.id != current_user.restaurant.id
+  end
+
+  def verify_dish_ownership
+    redirect_to root_path, alert: "Voce não tem acesso ao Prato informado" if @dish.restaurant.id != current_user.restaurant.id
+  end
+
+  def verify_beverage_ownership
+    redirect_to root_path, alert: "Voce não tem acesso a Bebida informada" if @beverage.restaurant.id != current_user.restaurant.id
+  end
+
+  def verify_item_entry_ownership
+    redirect_to root_path, alert: "Voce não tem acesso ao Prato/Bebida informado(a)" if @item_to_remove.itemable.restaurant.id != current_user.restaurant.id
   end
 end
