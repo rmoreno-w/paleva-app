@@ -38,11 +38,13 @@
                     <% end %>
 
                     <nav class="flex justify-center">
+                        <%= link_to 'Horários', restaurant_restaurant_operating_hours_path(current_user.restaurant), class: controller_name == 'restaurant_operating_hours' ? 'nav_link_active' : 'nav_link_inactive' %>
+                        <span class="link_separator"></span>
                         <%= link_to 'Pratos', restaurant_dishes_path(current_user.restaurant), class: controller_name == 'dishes' ? 'nav_link_active' : 'nav_link_inactive' %>
                         <span class="link_separator"></span>
                         <%= link_to 'Bebidas', restaurant_beverages_path(current_user.restaurant), class: controller_name == 'beverages' ? 'nav_link_active' : 'nav_link_inactive' %>
                         <span class="link_separator"></span>
-                        <%= link_to 'Cardápios', restaurant_item_option_sets_path(current_user.restaurant), class: controller_name == 'item_option_sets' ? 'nav_link_active' : 'nav_link_inactive' %>
+                        <%= link_to 'Cardápios', root_path, class: controller_name == 'item_option_sets' || controller_name == 'welcome' ? 'nav_link_active' : 'nav_link_inactive' %>
                     </nav>
                 <% end %>
 

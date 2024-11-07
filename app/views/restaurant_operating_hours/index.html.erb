@@ -1,0 +1,21 @@
+<section class="flex flex-col gap-10">
+    <h2>
+        <%= current_user.restaurant.brand_name%>
+    </h2>
+
+    <div class="flex items-center gap-10">
+        <h3><%= Restaurant.human_attribute_name :restaurant_operating_hours %></h3>
+        <%= link_to '+ Criar Horário', new_restaurant_restaurant_operating_hour_path(current_user.restaurant), class: 'outline_button' %>
+    </div>
+
+    <% if @restaurant.restaurant_operating_hours.present? %>
+        <ul class="list-disc marker:text-projectPurple list-inside">
+            <% @restaurant.restaurant_operating_hours.each do |op_hour| %>
+                <li><%=  t(op_hour.weekday) %> - <%=  l(op_hour.start_time, format: :hours) %> às <%=  l(op_hour.end_time, format: :hours) %> - <%=  t(op_hour.status) %></li>
+            <% end %>
+        </ul>
+    <% else %>
+        <p>Ainda não há horários cadastrados.</p>
+    <% end %>
+
+</section>

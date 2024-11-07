@@ -20,7 +20,6 @@ describe 'User' do
 
       # Act
       visit root_path
-      click_on 'Cardápios'
       click_on 'Almoço'
       click_on 'Adicionar Prato'
 
@@ -65,7 +64,6 @@ describe 'User' do
 
       # Act
       visit root_path
-      click_on 'Cardápios'
       click_on 'Café da Tarde'
       click_on 'Adicionar Prato ao Cardápio'
       select 'Tortinha de Maçã', from: 'Pratos Disponíveis'
@@ -116,7 +114,6 @@ describe 'User' do
 
       # Act
       visit root_path
-      click_on 'Cardápios'
       click_on 'Café da Tarde'
       click_on 'Adicionar Prato ao Cardápio'
 
@@ -148,7 +145,6 @@ describe 'User' do
 
       # Act
       visit root_path
-      click_on 'Cardápios'
       click_on 'Almoço'
       click_on 'Adicionar Bebida'
 
@@ -194,7 +190,6 @@ describe 'User' do
 
       # Act
       visit root_path
-      click_on 'Cardápios'
       click_on 'Café da Tarde'
       click_on 'Adicionar Bebida ao Cardápio'
       select 'Coca Cola', from: 'Bebidas Disponíveis'
@@ -245,7 +240,6 @@ describe 'User' do
 
       # Act
       visit root_path
-      click_on 'Cardápios'
       click_on 'Café da Tarde'
       click_on 'Adicionar Bebida ao Cardápio'
 

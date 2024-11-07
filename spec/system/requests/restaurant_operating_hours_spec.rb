@@ -36,7 +36,7 @@ describe 'User' do
       }
     )
 
-    expect(response).to redirect_to root_path
+    expect(response).to redirect_to restaurant_restaurant_operating_hours_path(restaurant)
   end
 
   it 'fails to creates a restaurant operating hour with invalid data' do

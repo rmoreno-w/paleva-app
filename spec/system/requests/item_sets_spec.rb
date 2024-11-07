@@ -7,36 +7,11 @@ describe 'User' do
       ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
 
       # Act
-      get restaurant_item_option_sets_path(restaurant)
+      get root_path
 
       # Assert
-      expect(response).to redirect_to new_user_session_path
-    end
-
-    it 'but fails to get to the page for providing an id for a restaurant that they dont own' do
-      restaurant = create_restaurant_and_user
-      ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
-      second_user = User.create!(
-        name: 'Jacquin',
-        family_name: 'DuFrance',
-        registration_number: CPF.generate,
-        email: 'ajc@cquin.com',
-        password: 'fortissima12'
-      )
-      second_restaurant = Restaurant.create!(
-        brand_name: 'Boulangerie JQ',
-        corporate_name: 'JQ Pães e Bolos Artesanais S.A.',
-        registration_number: CNPJ.generate,
-        address: 'Rua Paris Elysees, 50. Bairro Dumont. CEP: 55.001-002. Vinhedo - SP',
-        phone: '12988774532',
-        email: 'atendimento@bjq.com.br',
-        user: second_user
-      )
-      login_as restaurant.user
-
-      get(restaurant_item_option_sets_path(second_restaurant))
-
-      expect(response.status).to redirect_to root_path
+      expect(response.body).to have_content 'Entrar'
+      expect(response.body).to have_content 'Criar Conta'
     end
 
     it 'and succeeds' do
@@ -45,9 +20,10 @@ describe 'User' do
 
       login_as restaurant.user
 
-      get(restaurant_item_option_sets_path(restaurant))
+      get(root_path)
 
       expect(response).to have_http_status 200
+      expect(response.body).to have_content "#{restaurant.brand_name} - Cardápios"
     end
   end
 
@@ -222,7 +198,7 @@ describe 'User' do
         item_option_set: { name: 'Café da Tarde'}
       })
 
-      expect(response).to redirect_to restaurant_item_option_sets_path
+      expect(response).to redirect_to root_path
     end
   end
 

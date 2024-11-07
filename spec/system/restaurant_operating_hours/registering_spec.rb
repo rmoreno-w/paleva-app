@@ -10,6 +10,7 @@ describe 'User' do
       fill_in 'E-mail', with: 'aloisio@email.com'
       fill_in 'Senha', with: 'fortissima12'
       click_on 'Entrar'
+      click_on 'Horários'
       click_on 'Criar Horário'
       
 
@@ -27,6 +28,7 @@ describe 'User' do
       fill_in 'E-mail', with: 'aloisio@email.com'
       fill_in 'Senha', with: 'fortissima12'
       click_on 'Entrar'
+      click_on 'Horários'
       click_on 'Criar Horário'
       
       select 'Terça-feira', from: 'Dia da Semana'
@@ -50,6 +52,7 @@ describe 'User' do
       fill_in 'E-mail', with: 'aloisio@email.com'
       fill_in 'Senha', with: 'fortissima12'
       click_on 'Entrar'
+      click_on 'Horários'
       click_on 'Criar Horário'
       
       select 'Terça-feira', from: 'Dia da Semana'

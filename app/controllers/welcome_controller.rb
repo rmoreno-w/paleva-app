@@ -5,6 +5,7 @@ class WelcomeController < ApplicationController
       
     elsif user_signed_in?
       @restaurant = current_user.restaurant
+      @item_option_sets = @restaurant.item_option_sets
     end
   end
 end

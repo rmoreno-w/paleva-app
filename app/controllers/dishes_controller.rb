@@ -106,7 +106,9 @@ class DishesController < UserController
 
   private
   def get_restaurant
-    @restaurant = current_user.restaurant
+    restaurant_id = params[:restaurant_id]
+    @restaurant = Restaurant.find_by(id: restaurant_id)
+    return redirect_to root_path, alert: 'Você não tem acesso a este restaurante' if @restaurant.id != current_user.restaurant.id
   end
 
   def get_dish_params

@@ -30,7 +30,7 @@ RSpec.describe ItemOptionSet, type: :model do
       it 'may have the same name when creating for different restaurants' do
         restaurant = create_restaurant_and_user
         ItemOptionSet.create!(name: 'Almoço', restaurant: restaurant)
-          second_user = User.create!(
+        second_user = User.create!(
           name: 'Jacquin',
           family_name: 'DuFrance',
           registration_number: CPF.generate,

@@ -67,7 +67,7 @@ describe 'User' do
 
       # Assert
       expect(current_path).to eq root_path
-      expect(page).to have_content 'Ops! Você não tem acesso a bebidas que não são do seu restaurante'
+      expect(page).to have_content 'Você não tem acesso a este restaurante'
       expect(page).not_to have_content first_beverage.name
     end
 

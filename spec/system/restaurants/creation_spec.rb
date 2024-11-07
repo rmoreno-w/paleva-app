@@ -72,15 +72,13 @@ describe 'User' do
     expect(current_path).to eq root_path
   end
 
-  it 'sees the restaurants detail page if logged in and has a restaurant' do
-    user = create_user
-    r = new_restaurant
-    r.user = user
-    r.save
-    login_as user
+  it 'sees the restaurant item sets page if logged in and has a restaurant' do
+    restaurant = create_restaurant_and_user
+
+    login_as restaurant.user
 
     visit root_path
-    expect(page).to have_content 'Pizzaria Campus du Codi'
+    expect(page).to have_content "#{restaurant.brand_name} - Cardápios"
     expect(current_path).to eq root_path
   end
 
@@ -144,7 +142,30 @@ describe 'User' do
       restaurant: restaurant
     )
 
-    pages = list_pages(beverage: beverage, restaurant: restaurant, dish: dish)
+    dish_serving = Serving.create!(
+      description: 'Pequena',
+      current_price: 35.5,
+      servingable: dish
+    )
+
+    beverage_serving = Serving.create!(
+      description: 'Grande',
+      current_price: 35.5,
+      servingable: beverage
+    )
+
+    tag = Tag.create(name: 'Vegano', restaurant: restaurant)
+    item_set = ItemOptionSet.create(name: 'Almoço', restaurant: restaurant)
+
+    pages = list_pages(
+      beverage: beverage,
+      restaurant: restaurant,
+      dish: dish,
+      dish_serving: dish_serving,
+      beverage_serving: beverage_serving,
+      tag: tag,
+      item_set: item_set
+    )
 
     pages.each do |page_url|
       visit page_url

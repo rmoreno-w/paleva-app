@@ -28,7 +28,6 @@ describe 'User' do
 
       # Act
       visit root_path
-      click_on 'Cardápios'
       click_on 'Almoço'
       click_on 'Remover Prato/Bebida'
 
@@ -44,7 +43,6 @@ describe 'User' do
 
       # Act
       visit root_path
-      click_on 'Cardápios'
       click_on 'Café da Tarde'
 
       # Assert
@@ -89,7 +87,6 @@ describe 'User' do
 
       # Act
       visit root_path
-      click_on 'Cardápios'
       click_on 'Café da Tarde'
       click_on 'Remover Prato/Bebida do Cardápio'
       select 'Tortinha de Maçã', from: 'Itens Disponíveis'
@@ -145,7 +142,6 @@ describe 'User' do
 
       # Act
       visit root_path
-      click_on 'Cardápios'
       click_on 'Café da Tarde'
       click_on 'Remover Prato/Bebida do Cardápio'
       select 'Coca Cola', from: 'Itens Disponíveis'
@@ -199,7 +195,6 @@ describe 'User' do
 
       # Act
       visit root_path
-      click_on 'Cardápios'
       click_on 'Café da Tarde'
       click_on 'Remover Prato/Bebida do Cardápio'
 

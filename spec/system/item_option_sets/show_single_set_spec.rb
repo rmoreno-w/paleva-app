@@ -24,8 +24,8 @@ describe 'User' do
       # Assert
       expect(current_path).to eq restaurant_item_option_set_path(restaurant, item_set)
       expect(page).to have_selector 'h2', text: 'Cardápio - Almoço'
-      # expect(page).to have_link 'Adicionar Prato'
-      # expect(page).to have_link 'Adicionar Bebida'
+      expect(page).to have_link 'Adicionar Prato'
+      expect(page).to have_link 'Adicionar Bebida'
     end
 
     it 'and should show the dishes, beverages, and servings linked to that Option Set' do
@@ -156,7 +156,6 @@ describe 'User' do
 
       # Act
       visit root_path
-      click_on 'Cardápios'
       click_on 'Café da Tarde'
 
 

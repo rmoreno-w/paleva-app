@@ -13,7 +13,7 @@ describe 'User' do
     end
 
     it 'and should land in the correct page if it has a restaurant and is logged in' do
-      restaurant = create_restaurant_and_user
+      create_restaurant_and_user
 
       # Act
       visit root_path
@@ -21,10 +21,9 @@ describe 'User' do
       fill_in 'E-mail', with: 'aloisio@email.com'
       fill_in 'Senha', with: 'fortissima12'
       click_on 'Entrar'
-      click_on 'Cardápios'
 
       # Assert
-      expect(current_path).to eq restaurant_item_option_sets_path(restaurant.id)
+      expect(current_path).to eq root_path
       expect(page).to have_link 'Criar Cardápio'
     end
   end
@@ -36,13 +35,12 @@ describe 'User' do
 
       # Act
       visit root_path
-      click_on 'Cardápios'
       click_on 'Criar Cardápio'
       fill_in 'Nome', with: 'Almoço'
       click_on 'Criar Cardápio'
 
       # Assert
-      expect(current_path).to eq restaurant_item_option_sets_path(dish.restaurant.id)
+      expect(current_path).to eq root_path
       expect(page).to have_content 'Cardápio criado com sucesso'
       expect(page).to have_content 'Almoço'
     end

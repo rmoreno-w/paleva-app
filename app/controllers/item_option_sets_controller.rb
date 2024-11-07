@@ -2,7 +2,7 @@ class ItemOptionSetsController < UserController
   before_action :get_restaurant
 
   def index
-    @item_option_sets = @restaurant.item_option_sets
+    # @item_option_sets = @restaurant.item_option_sets
   end
   
   def new
@@ -16,7 +16,7 @@ class ItemOptionSetsController < UserController
     @item_option_set.assign_attributes(item_option_set_params)
 
     if @item_option_set.save
-      redirect_to restaurant_item_option_sets_path, notice: 'Cardápio criado com sucesso!'
+      redirect_to root_path, notice: 'Cardápio criado com sucesso!'
     else
       flash.now[:alert] = 'Ops! :( Erro ao criar o Cardápio'
       render 'new', status: :unprocessable_entity
@@ -143,7 +143,7 @@ class ItemOptionSetsController < UserController
   private
   def get_restaurant
     restaurant_id = params[:restaurant_id]
-    @restaurant = Restaurant.find(restaurant_id)
+    @restaurant = restaurant_id ? Restaurant.find(restaurant_id) : current_user.restaurant
 
     redirect_to root_path, alert: 'Você não tem acesso aos cardápios deste restaurante' if @restaurant.id != current_user.restaurant.id
   end

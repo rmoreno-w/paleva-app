@@ -251,6 +251,7 @@ describe 'User' do
     it 'and is able to find the search field in the navigation bar in any page thath needs login and a restaurant - If it already has a restaurant' do
       restaurant = create_restaurant_and_user
       login_as restaurant.user
+
       beverage = Beverage.create!(
         name: 'Agua de coco Sócoco',
         description: 'Caixa de 1L. Já vem gelada',
@@ -266,7 +267,30 @@ describe 'User' do
         restaurant: restaurant
       )
 
-      pages = list_pages(beverage: beverage, restaurant: restaurant, dish: dish)
+      dish_serving = Serving.create!(
+        description: 'Pequena',
+        current_price: 35.5,
+        servingable: dish
+      )
+
+      beverage_serving = Serving.create!(
+        description: 'Grande',
+        current_price: 35.5,
+        servingable: beverage
+      )
+
+      tag = Tag.create(name: 'Vegano', restaurant: restaurant)
+      item_set = ItemOptionSet.create(name: 'Almoço', restaurant: restaurant)
+
+      pages = list_pages(
+        beverage: beverage,
+        restaurant: restaurant,
+        dish: dish,
+        dish_serving: dish_serving,
+        beverage_serving: beverage_serving,
+        tag: tag,
+        item_set: item_set
+      )
 
       pages.each do |page_url|
         visit page_url

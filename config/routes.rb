@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   root "welcome#index"
 
   resources :restaurants, only: [ :new, :create ] do
-    resources :restaurant_operating_hours, only: [ :new, :create ]
+    resources :restaurant_operating_hours, only: [ :index, :new, :create ]
     resources :tags, only: [ :new, :create ]
     get 'exclude_tag', to: 'tags#exclude'
     delete 'destroy_tag', to: 'tags#destroy'
@@ -41,7 +41,7 @@ Rails.application.routes.draw do
 
     get '/menu_items_search', to: 'menu_search#index'
 
-    resources :item_option_sets, only: [ :index, :show, :new, :create ] do
+    resources :item_option_sets, only: [ :show, :new, :create ] do
       get 'new_dish', to: 'item_option_sets#new_dish'
       post 'add_dish', to: 'item_option_sets#add_dish'
       get 'new_beverage', to: 'item_option_sets#new_beverage'

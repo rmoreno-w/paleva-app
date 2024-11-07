@@ -1,4 +1,8 @@
 class RestaurantOperatingHoursController < UserController
+  def index
+    @restaurant = current_user.restaurant
+  end
+
   def new
     @restaurant = Restaurant.find_by(id: params[:restaurant_id])
     @restaurant_operating_hour = RestaurantOperatingHour.new
@@ -17,7 +21,7 @@ class RestaurantOperatingHoursController < UserController
     @restaurant_operating_hour.restaurant = @restaurant
 
     if @restaurant_operating_hour.save
-      redirect_to root_path, notice: "Novo horário salvo com sucesso"
+      redirect_to restaurant_restaurant_operating_hours_path, notice: "Novo horário salvo com sucesso"
     else
       flash.now[:alert] = "Erro ao criar o horário de funcionamento do restaurante, #{@restaurant_operating_hour.errors.full_messages.to_a.to_s}"
       @status_options = RestaurantOperatingHour.statuses
