@@ -1,12 +1,12 @@
 class Restaurant < ApplicationRecord
   belongs_to :user
   
-  has_many :restaurant_operating_hours, inverse_of: :restaurant
-  has_many :dishes, inverse_of: :restaurant
-  has_many :beverages, inverse_of: :restaurant
-  has_many :tags, inverse_of: :restaurant
-  has_many :item_option_sets, inverse_of: :restaurant
-  has_many :orders, inverse_of: :restaurant
+  has_many :restaurant_operating_hours
+  has_many :dishes
+  has_many :beverages
+  has_many :tags
+  has_many :item_option_sets
+  has_many :orders
 
   accepts_nested_attributes_for :restaurant_operating_hours
 

@@ -3,7 +3,8 @@
 <section class="flex flex-col gap-6 my-10">
     <h3 class="text-projectPurple">Pedido Aberto</h3>
     <% if session[:order] %>
-        <%= link_to 'Finalizar Pedido Aberto', restaurant_new_order_path(@restaurant), id: 'open-order-details', class: 'outline_button max-w-fit' %>
+        <p>Há itens adicionados em um Pedido aberto, clique no botão para Finalizar</p>
+        <%= link_to 'Finalizar Pedido Aberto', restaurant_new_order_path(@restaurant), id: 'open-order-details', class: 'form_button m-0 max-w-fit' %>
     <% else %>
         <p>Não há itens adicionados em um Pedido aberto</p>
     <% end %>
@@ -11,7 +12,7 @@
 
 <section class="flex flex-col gap-6" id="order-history">
     <h3 class="text-projectPurple">Últimos pedidos</h3>
-    <ul>
+    <ul class="flex flex-wrap gap-6">
         <% if @orders.empty? %>
             <li>Ainda não há Pedidos registrados</li>
         <% else %>

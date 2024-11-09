@@ -4,16 +4,16 @@
 <% if @number_of_items == 1 %>
     <p class="mt-10 mb-4">
         <span class="text-projectPurple font-bold"><%= @number_of_items %></span>
-            Item no pedido:
+            Item no Pedido:
     </p>
 <% else %>
     <p class="mt-10 mb-4">
         <span class="text-projectPurple font-bold"><%= @number_of_items %></span>
-            Itens no pedido:</p>
+            Itens no Pedido:</p>
 <% end %>
 
 <ul class="flex flex-col gap-2 border-2 border-projectPurple rounded-md p-2 bg-projectPaperWhite">
-    <li class="grid grid-cols-5 border-b border-projectPurple pb-2">
+    <li class="grid grid-cols-5 border-b border-projectPurple pb-2 -mx-2">
         <span class="text-center font-bold text-projectPurple">Nome do Item</span>
         <span class="text-center font-bold text-projectPurple">Observações do Cliente</span>
         <span class="text-center font-bold text-projectPurple">Descrição da Porção</span>
@@ -21,7 +21,7 @@
         <span class="text-center font-bold text-projectPurple">Sub-Total</span>
     </li>
     <% @order.order_items.each_with_index do |item, index| %>
-        <li class="grid grid-cols-5 border-b last:border-0 border-projectPurple border-dashed py-2 <%= 'brightness-50' if index % 2 == 0%>">
+        <li class="grid grid-cols-5 border-b last:border-0 border-projectPurple border-dashed py-2">
             <span class="text-center font-mono"><%= item.item_name %></span>
             <span class="text-center font-mono"><%= item.customer_notes %></span>
             <span class="text-center font-mono"><%= item.serving_description %></span>

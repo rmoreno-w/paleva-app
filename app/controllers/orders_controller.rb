@@ -10,6 +10,10 @@ class OrdersController < UserController
   def show
     order_id = params[:id]
     @order = Order.find_by(id: order_id)
+
+    verify_order_ownership
+    return if performed?
+
     @number_of_items = @order.order_items.count
   end
 
@@ -23,7 +27,10 @@ class OrdersController < UserController
 
     @item = Serving.find_by(id: item_id)
     @item_option_set = ItemOptionSet.find_by(id: item_set_id)
-    
+
+    verify_item_and_item_set_ownership
+    return if performed?
+
     if session[:order].has_key? item_id
       session[:order][item_id] += 1
     else
@@ -66,18 +73,22 @@ class OrdersController < UserController
       )
     end
 
-    @order.transaction do
-      @order.save!
-      @order_items.each do |item|
-        item.save!
+    begin 
+      @order.transaction do
+        @order.save!
+        @order_items.each do |item|
+          item.save!
+        end
+
+        session.delete :order
+        session.delete :total
+        return redirect_to restaurant_orders_path(@restaurant), notice: 'Pedido realizado com Sucesso!'
       end
 
-      session.delete :order
-      session.delete :total
-      return redirect_to restaurant_orders_path(@restaurant), notice: 'Pedido realizado com Sucesso!'
+    rescue
+      flash.now[:alert] =  'Ops! Erro ao realizar o Pedido'
+      render 'new', status: :unprocessable_entity
     end
-    flash.now[:alert] =  'Erro ao realizar o Pedido'
-    render 'show', status: :unprocessable_entity
   end
 
   private
@@ -85,6 +96,7 @@ class OrdersController < UserController
     restaurant_id = params[:restaurant_id]
 
     @restaurant = Restaurant.find_by(id: restaurant_id)
+    redirect_to root_path, alert: 'Voce não tem acesso a pedidos desse restaurante' if @restaurant != current_user.restaurant
   end
 
   def set_order_hash
@@ -100,5 +112,15 @@ class OrdersController < UserController
   def calculate_total
     per_serving_cost = @servings.map { |serving, quantity| serving.current_price * quantity  }
     @total = per_serving_cost.sum
+  end
+
+  def verify_order_ownership
+    redirect_to root_path, alert: 'Voce não tem acesso a este Pedido' if @order.restaurant != current_user.restaurant
+  end
+
+  def verify_item_and_item_set_ownership
+    if @item.servingable.restaurant != current_user.restaurant || @item_option_set.restaurant != current_user.restaurant
+      redirect_to root_path, alert: 'Voce não tem acesso a este Pedido' 
+    end
   end
 end

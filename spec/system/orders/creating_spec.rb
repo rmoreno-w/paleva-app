@@ -2,6 +2,21 @@ require 'rails_helper'
 
 describe 'User' do
   context 'tries to access the page to register an order' do
+    it 'but  has to be logged in' do
+      dish = create_dish
+      dish.servings.create!(description: '1 Bolinho e 1 Bola de Sorvete', current_price: 24.50)
+      item_set = ItemOptionSet.create!(name: 'Almoço', restaurant: dish.restaurant)
+      item_set.item_option_entries.create(itemable: dish)
+
+      # Act
+      visit restaurant_item_option_set_path(dish.restaurant, item_set)
+      expect(current_path).to eq new_user_session_path
+      expect(page).not_to have_content 'Almoço'
+      expect(page).not_to have_content 'Petit Gateau de Mousse Insuflado'
+      expect(page).not_to have_content '1 Bolinho e 1 Bola de Sorvete'
+      expect(page).not_to have_content 'R$ 24,50'
+    end
+
     it 'but first, adds an item from an item set with success' do
       dish = create_dish
       serving = dish.servings.create!(description: '1 Bolinho e 1 Bola de Sorvete', current_price: 24.50)
@@ -35,7 +50,6 @@ describe 'User' do
       find("#serving_#{serving.id}").click
       find("#serving_#{serving.id}").click
       click_on "Pedidos"
-      #click_on "Detalhes"
       find('#open-order-details').click
 
       fill_in 'Nome do Cliente', with: 'Aloisio Fonseca'
