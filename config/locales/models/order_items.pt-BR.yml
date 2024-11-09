@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      order_item:
+        one: Item do Pedido
+        other: Itens do Pedido
+    attributes:
+      order_item:
+        item_name: Nome do Prato
+        serving_description: Descrição da Porção
+        serving_price: Preço da Porção
+        number_of_servings: Quantidade de Porções
+        customer_notes: Observações do Cliente

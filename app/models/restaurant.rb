@@ -6,6 +6,7 @@ class Restaurant < ApplicationRecord
   has_many :beverages, inverse_of: :restaurant
   has_many :tags, inverse_of: :restaurant
   has_many :item_option_sets, inverse_of: :restaurant
+  has_many :orders, inverse_of: :restaurant
 
   accepts_nested_attributes_for :restaurant_operating_hours
 

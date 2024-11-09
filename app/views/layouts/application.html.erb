@@ -20,24 +20,23 @@
   </head>
 
   <body class="relative bg-gradient-to-b from-[#F5F5F9] to-[#E6E6F4] min-h-screen text-projectBlack font-sans">
-    <header class="site-header">
+    <header class="site-header gap-4">
         <%= link_to root_path do %>
-            <h1><%= image_tag "PaLeva_Logo" %></h1>
+            <h1 class="w-20 lg:w-auto"><%= image_tag "PaLeva_Logo"%></h1>
         <% end %>
 
         <% if user_signed_in? %>
-            <div class= "flex items-center gap-10">
+            <div class= "flex items-center justify-end flex-1 gap-4">
                 <% if current_user.has_restaurant? %>
-                    <%= form_with url: restaurant_menu_items_search_path(current_user), class: 'flex flex-col', method: :get do | f | %>
+                    <%= form_with url: restaurant_menu_items_search_path(current_user), class: 'flex flex-col items-center flex-wrap gap-2', method: :get do | f | %>
                         <%= f.label :query, 'Procurar no Menu', class: 'input_label text-center' %>
-                        <div id="menu-search">
-                            <%= f.search_field :query, placeholder: 'Ex: Pizza, Caipirinha...', class: 'input' %>
-                            <%= f.submit 'Buscar', class: 'form_button' %>
+                        <div id="menu-search" class="flex items-center justify-center flex-wrap gap-4">
+                            <%= f.search_field :query, placeholder: 'Ex: Pizza, Caipirinha...', class: 'input w-52 lg:w-auto' %>
+                            <%= f.submit 'Buscar', class: 'form_button mt-0' %>
                         </div>
-
                     <% end %>
 
-                    <nav class="flex justify-center">
+                    <nav class="flex justify-cente flex-wrap">
                         <%= link_to 'Horários', restaurant_restaurant_operating_hours_path(current_user.restaurant), class: controller_name == 'restaurant_operating_hours' ? 'nav_link_active' : 'nav_link_inactive' %>
                         <span class="link_separator"></span>
                         <%= link_to 'Pratos', restaurant_dishes_path(current_user.restaurant), class: controller_name == 'dishes' ? 'nav_link_active' : 'nav_link_inactive' %>
@@ -45,10 +44,12 @@
                         <%= link_to 'Bebidas', restaurant_beverages_path(current_user.restaurant), class: controller_name == 'beverages' ? 'nav_link_active' : 'nav_link_inactive' %>
                         <span class="link_separator"></span>
                         <%= link_to 'Cardápios', root_path, class: controller_name == 'item_option_sets' || controller_name == 'welcome' ? 'nav_link_active' : 'nav_link_inactive' %>
+                        <span class="link_separator"></span>
+                        <%= link_to 'Pedidos', restaurant_orders_path(@restaurant), class: controller_name == 'orders' ? 'nav_link_active' : 'nav_link_inactive' %>
                     </nav>
                 <% end %>
 
-                <div>
+                <div class="min-w-fit">
                     <p class="text-right">Olá, <span class="font-bold text-projectPurple"><%= current_user.name %></span></p>
                     <div class="flex w-full justify-end">
                         <%= button_to 'Sair', destroy_user_session_path, method: :delete, class:'hover:cursor-pointer hover:underline hover:decoration-projectPurple hover:decoration-2 hover:underline-offset-2 transition-transform' %>

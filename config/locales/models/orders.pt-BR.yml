@@ -1,0 +1,19 @@
+pt-BR:
+  waiting_kitchen_approval: Aguardando confirmação da cozinha
+  preparing: Em preparação
+  canceled: Cancelado
+  ready: Pronto
+  delivered: Entregue
+  activerecord:
+    models:
+      order:
+        one: Pedido
+        other: Pedidos
+    attributes:
+      order:
+        customer_name: Nome do Cliente
+        customer_phone: Telefone do Cliente
+        customer_email: E-mail do Cliente
+        customer_registration_number: CPF do Cliente (Opcional)
+        code: Código
+        status: Status

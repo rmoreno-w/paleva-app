@@ -1,0 +1,47 @@
+<h2>Pedidos</h2>
+
+<section class="flex flex-col gap-6 my-10">
+    <h3 class="text-projectPurple">Pedido Aberto</h3>
+    <% if session[:order] %>
+        <%= link_to 'Finalizar Pedido Aberto', restaurant_new_order_path(@restaurant), id: 'open-order-details', class: 'outline_button max-w-fit' %>
+    <% else %>
+        <p>Não há itens adicionados em um Pedido aberto</p>
+    <% end %>
+</section>
+
+<section class="flex flex-col gap-6" id="order-history">
+    <h3 class="text-projectPurple">Últimos pedidos</h3>
+    <ul>
+        <% if @orders.empty? %>
+            <li>Ainda não há Pedidos registrados</li>
+        <% else %>
+            <% @orders.each do |order| %>
+                <%= link_to restaurant_order_path(@restaurant, order) do %>
+                    <li class="p-4 border-2 border-projectPurple rounded-lg max-w-fit">
+                        <p class="font-bold text-lg mb-4">
+                            <span class="mr-1">Pedido</span>
+                            <span class="text-projectGreen"> #</span><span class="text-projectPurple"><%= order.code %></span>
+                        </p>
+
+                        <p>
+                            <span class="font-bold mr-1">Status:</span> <%= t(order.status) %>
+                        </p>
+
+                        <p>
+                            <span class="font-bold mr-1">Itens no Pedido:</span> <%= order.item_count %>
+                        </p>
+
+                        <p>
+                            <span class="font-bold mr-1">Total do Pedido:</span> <%= number_to_currency(order.total) %>
+                        </p>
+
+                        <p>
+                            <span class="font-bold mr-1">Nome do Cliente:</span> <%= order.customer_name %>
+                        </p>
+
+                    </li>
+                <% end %>
+            <% end %>
+        <% end %>
+    </ul>
+</section>

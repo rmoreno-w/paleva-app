@@ -1,0 +1,62 @@
+<h2>Novo Pedido</h2>
+
+<%= form_with(url: restaurant_orders_path(@restaurant), method: :post, class: 'form') do |f| %>
+    <% if session[:total] == 1%>
+        <h3 class="">
+            <span class="text-projectPurple font-bold"><%= session[:total]%></span>
+                Item no pedido:</h3>
+    <% else %>
+        <h3 class="">
+            <span class="text-projectPurple font-bold"><%= session[:total]%></span>
+                Itens no pedido:</h3>
+    <% end %>
+
+    <ul class="flex flex-col gap-4">
+        <% @servings.each do |serving, quantity| %>
+            <li class="border-l-2 pl-4 border-projectPurple flex flex-col gap-2">
+                <p class="font-bold text-projectPurple text-lg"><%= serving.servingable.name %></p>
+                <p class="ml-4">
+                    <span class="font-bold">Porção: </span><%= serving.description %></p>
+                <p class="ml-4">
+                    <span class="font-bold">Número de Porções: </span><%= quantity %></p>
+                <p class="ml-4">
+                    <span class="font-bold">Preço da Porção: </span><%= number_to_currency(serving.current_price) %></p>
+                <p class="ml-4">
+                    <span class="font-bold">Subtotal: </span><%= number_to_currency(serving.current_price * quantity.to_i) %></p>
+                <div class="input_container">
+                    <%= f.label "[customer_notes][#{serving.id}]", "Observação", class: 'input_label' %>
+                    <%= f.text_field "[customer_notes][#{serving.id}]", class: 'input', id: dom_id(serving) %>
+                </div>
+            </li>
+        <% end %>
+    </ul>
+
+    <p class="font-bold text-lg mt-4">Total do Pedido: <span class="text-projectPurple"><%= number_to_currency(@total) %></span></p>
+
+    <hr class="my-10 border border-projectPurple border-dashed" />
+
+    <h3>Dados do Cliente</h3>
+
+    <div class="input_container">
+        <%= f.label :customer_name, Order.human_attribute_name(:customer_name), class: 'input_label' %>
+        <%= f.text_field :customer_name, class: 'input' %>
+    </div>
+
+    <div class="input_container">
+        <%= f.label :customer_phone, Order.human_attribute_name(:customer_phone), class: 'input_label' %>
+        <%= f.text_field :customer_phone, class: 'input' %>
+    </div>
+
+
+    <div class="input_container">
+        <%= f.label :customer_email, Order.human_attribute_name(:customer_email), class: 'input_label' %>
+        <%= f.email_field :customer_email, class: 'input' %>
+    </div>
+
+    <div class="input_container">
+        <%= f.label :customer_registration_number, Order.human_attribute_name(:customer_registration_number), class: 'input_label' %>
+        <%= f.text_field :customer_registration_number, class: 'input' %>
+    </div>
+
+    <%= f.submit 'Realizar Pedido', class: 'form_button' %>
+<% end %>

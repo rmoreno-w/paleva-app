@@ -13,16 +13,17 @@
         <p>Ainda não há nenhum prato ou bebida cadastrados neste Cardápio.</p>
     <% else %>
         <h3 class="text-projectPurple mb-5">Opções:</h3>
-        <ul class="flex flex-col gap-4 bg-[#e4e4e8] rounded-sm max-w-[60%] p-4 border border-projectPurple">
+        <ul class="flex flex-col gap-4 bg-projectPaperWhite rounded-sm xl:max-w-[60%] p-4 border border-projectPurple">
             <% @item_option_set.item_option_entries.each do |item_option| %>
                 <!-- <p><%= item_option.inspect %></p> -->
-                <li class="font-mono">
+                <li class="font-mono flex flex-col gap-2">
                     <p class="font-bold text-projectPurple text-lg"><%= item_option.itemable.name %></p>
                     <% item_option.itemable.servings.each do |serving| %>
-                        <div class="ml-6 flex items-baseline">
-                            <p ><%= serving.description %></p>
-                            <span class="flex-1 border-b-2 border-projectPurple border-dotted"></span>
-                            <p ><%= number_to_currency(serving.current_price) %></p>
+                        <div class="flex items-baseline">
+                            <span class="ml-6"><%= serving.description %></span>
+                            <span class="flex-1 border-b-2 border-projectPurple border-dotted block h-full"></span>
+                            <span class="mr-6"><%= number_to_currency(serving.current_price) %></span>
+                            <%= button_to 'Adicionar ao Pedido', restaurant_order_add_item_path(@restaurant, item_set_id: @item_option_set.id, item_id: serving.id), method: :post, id: dom_id(serving), class: 'outline_button p-2'%>
                         </div>
                     <% end %>
                 </li>

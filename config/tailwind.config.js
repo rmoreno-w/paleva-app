@@ -27,6 +27,7 @@ module.exports = {
                 projectPurpleLighter: '#ae54de',
                 projectGreen: '#3ddd78',
                 projectWhite: '#f5f5fa',
+                projectPaperWhite: '#e4e4e8',
                 projectBlack: '#343434',
                 projectRed: '#cc2936',
             },

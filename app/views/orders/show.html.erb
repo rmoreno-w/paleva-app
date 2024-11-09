@@ -1,0 +1,64 @@
+<h2>Pedido <span class="text-projectGreen"> #</span><%= @order.code %></h2>
+<h3 class="mt-4">Status: <span class="text-projectPurple"><%= t(@order.status) %></span></h3>
+
+<% if @number_of_items == 1 %>
+    <p class="mt-10 mb-4">
+        <span class="text-projectPurple font-bold"><%= @number_of_items %></span>
+            Item no pedido:
+    </p>
+<% else %>
+    <p class="mt-10 mb-4">
+        <span class="text-projectPurple font-bold"><%= @number_of_items %></span>
+            Itens no pedido:</p>
+<% end %>
+
+<ul class="flex flex-col gap-2 border-2 border-projectPurple rounded-md p-2 bg-projectPaperWhite">
+    <li class="grid grid-cols-5 border-b border-projectPurple pb-2">
+        <span class="text-center font-bold text-projectPurple">Nome do Item</span>
+        <span class="text-center font-bold text-projectPurple">Observações do Cliente</span>
+        <span class="text-center font-bold text-projectPurple">Descrição da Porção</span>
+        <span class="text-center font-bold text-projectPurple">Número de Porções</span>
+        <span class="text-center font-bold text-projectPurple">Sub-Total</span>
+    </li>
+    <% @order.order_items.each_with_index do |item, index| %>
+        <li class="grid grid-cols-5 border-b last:border-0 border-projectPurple border-dashed py-2 <%= 'brightness-50' if index % 2 == 0%>">
+            <span class="text-center font-mono"><%= item.item_name %></span>
+            <span class="text-center font-mono"><%= item.customer_notes %></span>
+            <span class="text-center font-mono"><%= item.serving_description %></span>
+            <span class="text-center font-mono"><%= item.number_of_servings %></span>
+            <span class="text-center font-mono"><%= number_to_currency(item.subtotal) %></span>
+        </li>
+    <% end %>
+</ul>
+
+<div class="grid grid-cols-5 px-2 pt-4">
+    <div class="col-start-5 px-2">
+        <p class="font-bold text-lg text-center">Total do Pedido:</p>
+        <p class="font-bold text-lg text-center text-projectPurple"><%= number_to_currency(@order.total) %></p>
+    </div>
+</div>
+
+<hr class="my-10 border border-projectPurple border-dashed" />
+
+<section class="flex flex-col gap-2 text-lg">
+    <h3 class="text-projectPurple">Dados do Cliente</h3>
+    <p>
+        <span class="font-bold">Nome: </span>
+        <%= @order.customer_name %>
+    </p>
+
+    <p>
+        <span class="font-bold">Telefone: </span>
+        <%= @order.customer_phone %>
+    </p>
+
+    <p>
+        <span class="font-bold">E-mail: </span>
+        <%= @order.customer_email %>
+    </p>
+
+    <p>
+        <span class="font-bold">CPF: </span>
+        <%= CPF.new(@order.customer_registration_number).formatted %>
+    </p>
+</section>
