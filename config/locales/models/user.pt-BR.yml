@@ -6,3 +6,5 @@ pt-BR:
         family_name: Sobrenome
         registration_number: CPF
         name: Nome
+        restaurant: Restaurante
+        restaurant_id: Restaurante

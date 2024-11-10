@@ -338,7 +338,7 @@ RSpec.describe Restaurant, type: :model do
     end
   end
 
-  describe 'code generation' do
+  describe '#code generation' do
     it "should happen automatically before a restaurant is registered" do
       u = User.create!(
             name: 'Aloisio',
@@ -363,6 +363,33 @@ RSpec.describe Restaurant, type: :model do
         expect(is_restaurant_valid).to be true
         expect(code).not_to be ''
         expect(code.length).to eq 6
+    end
+  end
+
+  describe '#user attribution' do
+    it "should add the restaurant id to the user when registering them as an owner" do
+      u = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '11.957.634/0977-26',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '9876543210',
+        email: 'campus@ducodi.com',
+        user: u
+      )
+
+      has_user_a_restaurant = u.restaurant.present?
+      is_user_restaurant_the_newly_created_restaurant = u.restaurant == restaurant
+
+      expect(has_user_a_restaurant).to be true
+      expect(is_user_restaurant_the_newly_created_restaurant).to be true
     end
   end
 end

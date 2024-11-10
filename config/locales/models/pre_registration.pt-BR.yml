@@ -1,0 +1,6 @@
+pt-BR:
+  activerecord:
+    attributes:
+      pre_registration:
+        email: E-mail
+        registration_number: CPF

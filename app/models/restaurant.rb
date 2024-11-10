@@ -1,12 +1,14 @@
 class Restaurant < ApplicationRecord
   belongs_to :user
   
+  has_many :users
   has_many :restaurant_operating_hours
   has_many :dishes
   has_many :beverages
   has_many :tags
   has_many :item_option_sets
   has_many :orders
+  has_many :pre_registrations
 
   accepts_nested_attributes_for :restaurant_operating_hours
 
@@ -19,6 +21,7 @@ class Restaurant < ApplicationRecord
   validate :validate_registration_number_format
 
   before_validation :ensure_restaurant_has_code, on: :create
+  after_create :assign_to_user
 
   private
   def validate_registration_number_format
@@ -29,5 +32,9 @@ class Restaurant < ApplicationRecord
 
   def ensure_restaurant_has_code
     self.code = SecureRandom.alphanumeric(6).upcase
+  end
+
+  def assign_to_user
+    self.user.update!(restaurant_id: self.id)
   end
 end

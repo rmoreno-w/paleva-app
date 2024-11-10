@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_08_050932) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_10_064529) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -114,6 +114,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_08_050932) do
     t.index ["restaurant_id"], name: "index_orders_on_restaurant_id"
   end
 
+  create_table "pre_registrations", force: :cascade do |t|
+    t.string "email"
+    t.string "registration_number"
+    t.integer "status"
+    t.integer "restaurant_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["restaurant_id"], name: "index_pre_registrations_on_restaurant_id"
+  end
+
   create_table "price_records", force: :cascade do |t|
     t.decimal "price"
     t.datetime "change_date"
@@ -177,8 +187,11 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_08_050932) do
     t.string "registration_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "role", default: 1
+    t.integer "restaurant_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["restaurant_id"], name: "index_users_on_restaurant_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -191,8 +204,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_08_050932) do
   add_foreign_key "item_option_sets", "restaurants"
   add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "restaurants"
+  add_foreign_key "pre_registrations", "restaurants"
   add_foreign_key "price_records", "servings"
   add_foreign_key "restaurant_operating_hours", "restaurants"
   add_foreign_key "restaurants", "users"
   add_foreign_key "tags", "restaurants"
+  add_foreign_key "users", "restaurants"
 end

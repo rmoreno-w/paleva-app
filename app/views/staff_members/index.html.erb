@@ -1,0 +1,17 @@
+<section class="flex justify-between">
+    <h2>Funcionários</h2>
+    <%= link_to '+ Realizar Pré-Cadastro', new_restaurant_staff_member_path(@restaurant), class: 'outline_button' %>
+</section>
+
+<ul class="mt-10">
+    <% if @pre_registrations.empty? %>
+        <p>Ainda não há Funcionários cadastrados e/ou pré-cadastrados</p>
+    <% else %>
+        <li>
+            <% @pre_registrations.each do |pre_register| %>
+                <p><%= pre_register.email %></p>
+                <p><%= pre_register.registration_number %></p>
+            <% end %>
+        </li>
+    <% end %>
+</ul>

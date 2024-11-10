@@ -133,6 +133,31 @@ RSpec.describe User, type: :model do
         expect(is_user_valid).to be false
         expect(has_user_errors_on_registration_number).to be true
       end
+
+      it 'email should be unique' do
+        # Arrange
+        User.create!(
+          name: 'Aloisio',
+          family_name: 'Silveira',
+          registration_number: '08000661110',
+          email: 'aloisio@email.com',
+          password: 'fortissima12'
+        )
+
+        user = User.new(
+          name: 'Luan',
+          family_name: 'Carvalho',
+          registration_number: '08000661110',
+          email: 'aloisio@email.com',
+          password: 'fortissima23'
+        )
+
+        is_user_valid = user.valid?
+        has_user_errors_on_email = user.errors.include? :email
+
+        expect(is_user_valid).to be false
+        expect(has_user_errors_on_email).to be true
+      end
     end
 
     context '#registration number validity' do
@@ -150,6 +175,44 @@ RSpec.describe User, type: :model do
 
         expect(is_user_valid).to be false
         expect(has_user_errors_on_registration_number).to be true
+      end
+    end
+
+    context '#restaurant ownership' do
+      it 'each restaurant must have one and at most one user with role owner tied to it' do
+        user = User.create!(
+          name: 'Luan',
+          family_name: 'Carvalho',
+          registration_number: CPF.generate,
+          email: 'luan@email.com',
+          password: 'fortissima12',
+          role: :owner
+        )
+        restaurant = Restaurant.create!(
+          brand_name: 'Pizzaria Campus du Codi',
+          corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+          registration_number: '30.883.175/2481-06',
+          address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+          phone: '12987654321',
+          email: 'campus@ducodi.com.br',
+          user: user
+        )
+
+        second_user = User.new(
+          name: 'Rafael',
+          family_name: 'de Souza',
+          registration_number: CPF.generate,
+          email: 'rafael@email.com',
+          password: 'fortissima12',
+          role: :owner,
+          restaurant: restaurant
+        )
+
+        is_user_valid = second_user.valid?
+        has_user_errors_on_restaurant_id = second_user.errors.include? :restaurant_id
+
+        expect(is_user_valid).to be false
+        expect(has_user_errors_on_restaurant_id).to be true
       end
     end
   end
