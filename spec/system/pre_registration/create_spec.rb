@@ -13,12 +13,12 @@ describe 'User' do
       fill_in 'CPF', with: CPF.generate
       click_on 'Cadastrar'
 
-      pre_regiter = PreRegistration.last
+      pre_registration = PreRegistration.last
       expect(current_path).to eq restaurant_staff_members_path(restaurant)
       expect(page).to have_content 'Funcionários'
       # expect(page).to have_content 'Aqui você faz um pré-registro de seu funcionário, informando alguns dados. Assim que ele se cadastrar na plataforma, nosso sistema reconhece automaticamente e o associa a seu Restaurante! :)'
       expect(page).to have_content 'valente@email.com'
-      expect(page).to have_content "#{pre_regiter.registration_number}"
+      expect(page).to have_content "#{pre_registration.registration_number}"
     end
   end
 end

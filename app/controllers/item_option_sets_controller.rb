@@ -29,7 +29,7 @@ class ItemOptionSetsController < UserController
 
     verify_item_set_ownership
 
-    @item_option_entries = @item_option_set.item_option_entries
+    @item_option_entries = @item_option_set.active_item_option_entries
   end
 
   def new_dish

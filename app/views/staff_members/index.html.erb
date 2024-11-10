@@ -3,15 +3,21 @@
     <%= link_to '+ Realizar Pré-Cadastro', new_restaurant_staff_member_path(@restaurant), class: 'outline_button' %>
 </section>
 
-<ul class="mt-10">
+<ul class="mt-10 p-4 border-2 border-projectPurple rounded-xl">
     <% if @pre_registrations.empty? %>
         <p>Ainda não há Funcionários cadastrados e/ou pré-cadastrados</p>
     <% else %>
-        <li>
-            <% @pre_registrations.each do |pre_register| %>
-                <p><%= pre_register.email %></p>
-                <p><%= pre_register.registration_number %></p>
-            <% end %>
+        <li class="grid grid-cols-3 border-b border-projectPurple pb-2">
+                <p class="font-bold text-projectPurple text-lg text-center"><%= PreRegistration.human_attribute_name :email %></p>
+                <p class="font-bold text-projectPurple text-lg text-center"><%= PreRegistration.human_attribute_name :registration_number %></p>
+                <p class="font-bold text-projectPurple text-lg text-center"><%= PreRegistration.human_attribute_name :status %></p>
         </li>
+        <% @pre_registrations.each do |pre_register| %>
+            <li class="grid grid-cols-3 p-4 border-b border-projectPurple border-dashed last:border-0">
+                <p class="text-center"><%= pre_register.email %></p>
+                <p class="text-center"><%= CPF.new(pre_register.registration_number).formatted %></p>
+                <p class="text-center font-bold <%= pre_register.status == 'pending' ? 'text-projectOrange' : 'text-projectGreenDark' %>"><%= t(pre_register.status) %> <%= pre_register.status == 'pending' ?  '🟠'  : '✅' %></p>
+            </li>
+        <% end %>
     <% end %>
 </ul>

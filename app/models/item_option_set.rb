@@ -7,4 +7,8 @@ class ItemOptionSet < ApplicationRecord
 
   validates :name, presence: true
   validates :name, uniqueness: { scope: :restaurant_id, message: "deve ser único para o restaurante"  }
+
+  def active_item_option_entries
+    self.item_option_entries.filter { |item_entry| item_entry.itemable.active? }
+  end
 end

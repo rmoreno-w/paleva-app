@@ -33,6 +33,49 @@ describe 'User' do
       expect(page).not_to have_content 'Entrar'
     end
 
+    it 'and suceeds. If there is a pre-registration with their email and registation number, they get already assigned to a restaurant' do
+      restaurant_owner = User.create!(
+        name: 'Adeilson',
+        family_name: 'Souza',
+        registration_number: CPF.generate,
+        email: 'adeilson@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: restaurant_owner
+      )
+      restaurant.pre_registrations.create!(email: 'aloisio@email.com', registration_number: '08000661110')
+
+      # Act
+      visit root_path
+      click_on 'Criar Conta'
+      fill_in 'CPF', with: '08000661110'
+      fill_in 'Nome', with: 'Aloisio'
+      fill_in 'Sobrenome', with: 'Silveira'
+      fill_in 'E-mail', with: 'aloisio@email.com'
+      fill_in 'Senha', with: 'fortissima12'
+      fill_in 'Confirme sua senha', with: 'fortissima12'
+      click_on 'Cadastrar'
+
+      # Assert
+      staff_member = User.last
+      pre_registration = PreRegistration.last
+      expect(page).to have_content 'Boas vindas! Sua conta foi criada com sucesso.'
+      expect(page).to have_content 'Olá, Aloisio'
+      expect(staff_member.staff?).to eq true
+      expect(staff_member.restaurant).to eq restaurant
+      expect(pre_registration.registered?).to eq true
+
+      expect(page).not_to have_content 'Criar meu restaurante'
+      expect(page).to have_content 'Cardápios'
+    end
+
     it 'and fails when informing invalid data' do
       visit root_path
       click_on 'Criar Conta'

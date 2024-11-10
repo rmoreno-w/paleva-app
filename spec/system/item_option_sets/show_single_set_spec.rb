@@ -66,7 +66,7 @@ describe 'User' do
       expect(page).to have_content '1 Bolinho + 1 Bola de Sorvete'
     end
 
-    it 'and should show the dishes, beverages, and servings linked to that Option Set' do
+    it 'and should show only the active dishes, beverages, and servings linked to that Option Set' do
       restaurant = create_restaurant_and_user
       item_set = ItemOptionSet.create!(name: 'Almoço', restaurant: restaurant)
       beverage = Beverage.create!(
@@ -87,6 +87,7 @@ describe 'User' do
       )
       Serving.create!(description: '1 Bolinho + 1 Bola de Sorvete', current_price: 18.9, servingable: dish)
       item_set.item_option_entries << ItemOptionEntry.new(itemable: dish)
+      dish.inactive!
 
       dish_that_is_not_in_the_set = Dish.create!(
         name: 'Tortinha de Maçã',
@@ -108,9 +109,9 @@ describe 'User' do
       expect(page).to have_selector 'h2', text: 'Cardápio - Almoço'
       expect(page).to have_content 'Agua de coco Sócoco'
       expect(page).to have_content 'Garrafa 750ml'
-      expect(page).to have_content 'Petit Gateau de Mousse Insuflado'
-      expect(page).to have_content '1 Bolinho + 1 Bola de Sorvete'
-
+      
+      expect(page).not_to have_content 'Petit Gateau de Mousse Insuflado'
+      expect(page).not_to have_content '1 Bolinho + 1 Bola de Sorvete'
       expect(page).not_to have_content 'Tortinha de massa folhada com recheio de Geléia de Maçã e Canela'
       expect(page).not_to have_content 'Pequena - 20x20cm'
     end

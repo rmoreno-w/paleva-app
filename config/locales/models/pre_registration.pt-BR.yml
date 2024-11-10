@@ -1,4 +1,6 @@
 pt-BR:
+  pending: Pendente
+  registered: Registrado
   activerecord:
     attributes:
       pre_registration:
