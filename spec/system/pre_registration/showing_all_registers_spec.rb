@@ -2,6 +2,16 @@ require 'rails_helper'
 
 describe 'User' do
   context 'tries to access the listing of users (employees) they pre registered for their restaurant' do
+    it 'but first needs to be authenticated' do
+      restaurant = create_restaurant_and_user
+
+      visit restaurant_staff_members_path(restaurant)
+
+      expect(current_path).to eq new_user_session_path
+      expect(page).not_to have_content 'Funcionários'
+      expect(page).not_to have_link '+ Realizar Pré-Cadastro'
+    end
+
     it 'and gets to the correct page' do
       restaurant = create_restaurant_and_user
       login_as restaurant.user
@@ -18,9 +28,7 @@ describe 'User' do
       restaurant = create_restaurant_and_user
       login_as restaurant.user
       PreRegistration.create!(email: 'ken@errero.com', registration_number: CPF.generate, restaurant: restaurant)
-      allow(CPF).to receive(:valid?).and_return(true)
-      pre_registration_to_confirm = PreRegistration.create!(email: 'valente@email.com', registration_number: '01234567890', restaurant: restaurant)
-      allow(CPF).to receive(:valid?).and_return(true)
+      pre_registration_to_confirm = PreRegistration.create!(email: 'valente@email.com', registration_number: CPF.generate, restaurant: restaurant)
       User.create!(
         name: 'Valente',
         family_name: 'Santos',
@@ -41,10 +49,10 @@ describe 'User' do
     it 'and doesnt see pre registrations from other restaurants' do
       restaurant = create_restaurant_and_user
       login_as restaurant.user
+
       PreRegistration.create!(email: 'ken@errero.com', registration_number: CPF.generate, restaurant: restaurant)
-      allow(CPF).to receive(:valid?).and_return(true)
-      pre_registration_to_confirm = PreRegistration.create!(email: 'valente@email.com', registration_number: '01234567890', restaurant: restaurant)
-      allow(CPF).to receive(:valid?).and_return(true)
+      pre_registration_to_confirm = PreRegistration.create!(email: 'valente@email.com', registration_number: CPF.generate, restaurant: restaurant)
+
       User.create!(
         name: 'Valente',
         family_name: 'Santos',
@@ -52,7 +60,6 @@ describe 'User' do
         email: pre_registration_to_confirm.email,
         password: 'fortissima12'
       )
-      allow(CPF).to receive(:valid?).and_return(true)
       second_user = User.create!(
         name: 'Jacquin',
         family_name: 'Boulevard',
@@ -69,7 +76,7 @@ describe 'User' do
           email: 'atendimento@bjq.com.br',
           user: second_user
         )
-      pre_registration_to_confirm = PreRegistration.create!(email: 'sobrinho_do_jacquin@email.com', registration_number: CPF.generate, restaurant: second_restaurant)
+      PreRegistration.create!(email: 'sobrinho_do_jacquin@email.com', registration_number: CPF.generate, restaurant: second_restaurant)
 
       visit restaurant_staff_members_path(restaurant)
 

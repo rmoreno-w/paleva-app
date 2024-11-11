@@ -1,6 +1,9 @@
 <div class="flex justify-between items-center">
     <h2><%= @restaurant.brand_name%> - Cardápios</h2>
-    <%= link_to '+ Criar Cardápio', new_restaurant_item_option_set_path(@restaurant), class: 'outline_button' %>
+
+    <% if current_user.owner? %>
+        <%= link_to '+ Criar Cardápio', new_restaurant_item_option_set_path(@restaurant), class: 'outline_button' %>
+    <% end %>
 </div>
 
 

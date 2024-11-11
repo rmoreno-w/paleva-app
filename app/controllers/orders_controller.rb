@@ -82,7 +82,11 @@ class OrdersController < UserController
 
         session.delete :order
         session.delete :total
-        return redirect_to restaurant_orders_path(@restaurant), notice: 'Pedido realizado com Sucesso!'
+        if current_user.owner?
+          return redirect_to restaurant_orders_path(@restaurant), notice: 'Pedido realizado com Sucesso!'
+        elsif current_user.staff?
+          return redirect_to root_path, notice: 'Pedido realizado com Sucesso!'
+        end
       end
 
     rescue

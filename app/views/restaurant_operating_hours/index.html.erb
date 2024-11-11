@@ -5,7 +5,10 @@
 
     <div class="flex items-center gap-10">
         <h3><%= Restaurant.human_attribute_name :restaurant_operating_hours %></h3>
-        <%= link_to '+ Criar Horário', new_restaurant_restaurant_operating_hour_path(current_user.restaurant), class: 'outline_button' %>
+
+        <% if current_user.owner? %>
+            <%= link_to '+ Criar Horário', new_restaurant_restaurant_operating_hour_path(current_user.restaurant), class: 'outline_button' %>
+        <% end %>
     </div>
 
     <% if @restaurant.restaurant_operating_hours.present? %>

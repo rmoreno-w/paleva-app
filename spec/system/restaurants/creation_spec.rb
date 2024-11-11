@@ -157,6 +157,23 @@ describe 'User' do
     tag = Tag.create(name: 'Vegano', restaurant: restaurant)
     item_set = ItemOptionSet.create(name: 'Almoço', restaurant: restaurant)
 
+    order = Order.create!(
+      customer_name: 'Adeilson',
+      customer_phone: '35999222299',
+      customer_email: 'adeilson@email.com',
+      customer_registration_number: CPF.generate,
+      restaurant: restaurant
+    )
+    OrderItem.create!(
+      item_name: dish_serving.servingable.name,
+      serving_description: dish_serving.description,
+      serving_price: dish_serving.current_price,
+      number_of_servings: 2,
+      customer_notes: 'Nota do consumidor',
+      order: order
+    )
+
+
     pages = list_pages(
       beverage: beverage,
       restaurant: restaurant,
@@ -164,7 +181,8 @@ describe 'User' do
       dish_serving: dish_serving,
       beverage_serving: beverage_serving,
       tag: tag,
-      item_set: item_set
+      item_set: item_set,
+      order: order
     )
 
     pages.each do |page_url|

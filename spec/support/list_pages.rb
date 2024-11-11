@@ -1,4 +1,4 @@
-def list_pages(restaurant:, beverage:, dish:, dish_serving:, beverage_serving:, tag:, item_set: )
+def list_pages(restaurant:, beverage:, dish:, dish_serving:, beverage_serving:, tag:, item_set:, order: )
   [
     root_path,
 
@@ -35,5 +35,12 @@ def list_pages(restaurant:, beverage:, dish:, dish_serving:, beverage_serving:, 
     restaurant_item_option_set_remove_item_path(restaurant.id, item_set.id),
     restaurant_item_option_set_new_beverage_path(restaurant.id, item_set.id),
     restaurant_item_option_set_new_dish_path(restaurant.id, item_set.id),
+
+    restaurant_staff_members_path(restaurant.id),
+    new_restaurant_staff_member_path(restaurant.id),
+
+    restaurant_new_order_path(restaurant.id),
+    restaurant_orders_path(restaurant.id),
+    restaurant_order_path(restaurant.id, order.id),
   ]
 end

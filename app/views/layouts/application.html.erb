@@ -36,19 +36,7 @@
                         </div>
                     <% end %>
 
-                    <nav class="flex justify-center flex-wrap">
-                        <%= link_to 'Horários', restaurant_restaurant_operating_hours_path(current_user.restaurant), class: controller_name == 'restaurant_operating_hours' ? 'nav_link_active' : 'nav_link_inactive' %>
-                        <span class="link_separator"></span>
-                        <%= link_to 'Pratos', restaurant_dishes_path(current_user.restaurant), class: controller_name == 'dishes' ? 'nav_link_active' : 'nav_link_inactive' %>
-                        <span class="link_separator"></span>
-                        <%= link_to 'Bebidas', restaurant_beverages_path(current_user.restaurant), class: controller_name == 'beverages' ? 'nav_link_active' : 'nav_link_inactive' %>
-                        <span class="link_separator"></span>
-                        <%= link_to 'Cardápios', root_path, class: controller_name == 'item_option_sets' || controller_name == 'welcome' ? 'nav_link_active' : 'nav_link_inactive' %>
-                        <span class="link_separator"></span>
-                        <%= link_to 'Pedidos', restaurant_orders_path(@restaurant), class: controller_name == 'orders' ? 'nav_link_active' : 'nav_link_inactive' %>
-                        <span class="link_separator"></span>
-                        <%= link_to 'Funcionários', restaurant_staff_members_path(@restaurant), class: controller_name == 'staff_members' ? 'nav_link_active' : 'nav_link_inactive' %>
-                    </nav>
+                    <%= render 'layouts/user_links' %>
                 <% end %>
 
                 <div class="min-w-fit">

@@ -56,9 +56,9 @@
         <section class="flex flex-col gap-2 justify-start max-w-5xl items-end">
             <span class="font-bold text-lg text-projectPurple">Opções</span>
             <% if @dish.active? %>
-                <%= button_to 'Desativar Prato', deactivate_restaurant_dish_path(@restaurant.id, @dish.id), method: :post, class: 'outline_button w-full text-center' %>
+                <%= button_to 'Desativar Prato', deactivate_restaurant_dish_path(@restaurant.id, @dish.id), method: :post, class: 'outline_button text-center w-full', form: { class: 'w-full' } %>
             <% else %>
-                <%= button_to 'Ativar Prato', activate_restaurant_dish_path(@restaurant.id, @dish.id), method: :post, class: 'outline_button w-full text-center' %>
+                <%= button_to 'Ativar Prato', activate_restaurant_dish_path(@restaurant.id, @dish.id), method: :post, class: 'outline_button text-center w-full', form: { class: 'w-full' } %>
             <% end %>
             <%= link_to 'Alterar Prato', edit_restaurant_dish_path(@restaurant.id, @dish.id), class: 'outline_button w-full text-center' %>
             <%= button_to 'Remover Prato', restaurant_dish_path(@restaurant.id, @dish.id), method: :delete, class: 'outline_button w-full bg-projectRed text-projectWhite border-0', form: { class: 'w-full' } %>

@@ -72,5 +72,44 @@ describe 'User' do
         expect(page).to have_content "Nome do Cliente: Aloisio Fonseca"
       end
     end
+
+    it 'and succeeds, as a staff member' do
+      dish = create_dish
+      serving = dish.servings.create!(description: '1 Bolinho e 1 Bola de Sorvete', current_price: 24.50)
+      item_set = ItemOptionSet.create!(name: 'Almoço', restaurant: dish.restaurant)
+      item_set.item_option_entries.create(itemable: dish)
+
+      second_user = User.create!(
+        name: 'Jacquin',
+        family_name: 'DuFrance',
+        registration_number: CPF.generate,
+        email: 'ajc@cquin.com',
+        password: 'fortissima12',
+        role: :staff,
+        restaurant: dish.restaurant
+      )
+      login_as second_user
+
+      # Act
+      visit root_path
+      click_on 'Almoço'
+      # save_page
+      find("#serving_#{serving.id}").click
+      find("#serving_#{serving.id}").click
+      click_on "Pedidos"
+
+      fill_in 'Nome do Cliente', with: 'Aloisio Fonseca'
+      fill_in 'E-mail do Cliente', with: 'aloisio_teste@email.com'
+      fill_in 'Telefone do Cliente', with: '12999116633'
+      fill_in 'CPF do Cliente (Opcional)', with: CPF.generate
+      find("#serving_#{serving.id}").set 'Sem Glúten'
+      click_on "Realizar Pedido"
+
+      # Assert
+      order = Order.last
+      expect(current_path).to eq root_path
+      expect(page).to have_content 'Pedido realizado com Sucesso!'
+      expect(order.order_items.count).to eq 1
+    end
   end
 end

@@ -1,10 +1,13 @@
 
 <div class="flex justify-between items-center">
     <h2>Cardápio - <%= @item_option_set.name %></h2>
-    <%= link_to 'Adicionar Prato ao Cardápio', restaurant_item_option_set_new_dish_path(@restaurant, @item_option_set), class: 'outline_button' %>
-    <%= link_to 'Adicionar Bebida ao Cardápio', restaurant_item_option_set_new_beverage_path(@restaurant, @item_option_set), class: 'outline_button' %>
-    <% if !@item_option_entries.empty? %>
-        <%= link_to 'Remover Prato/Bebida do Cardápio', restaurant_item_option_set_remove_item_path(@restaurant, @item_option_set), class: 'outline_button' %>
+
+    <% if current_user.owner? %>
+        <%= link_to 'Adicionar Prato ao Cardápio', restaurant_item_option_set_new_dish_path(@restaurant, @item_option_set), class: 'outline_button' %>
+        <%= link_to 'Adicionar Bebida ao Cardápio', restaurant_item_option_set_new_beverage_path(@restaurant, @item_option_set), class: 'outline_button' %>
+        <% if !@item_option_entries.empty? %>
+            <%= link_to 'Remover Prato/Bebida do Cardápio', restaurant_item_option_set_remove_item_path(@restaurant, @item_option_set), class: 'outline_button' %>
+        <% end %>
     <% end %>
 </div>
 
@@ -15,7 +18,6 @@
         <h3 class="text-projectPurple mb-5">Opções:</h3>
         <ul class="flex flex-col gap-4 bg-projectPaperWhite rounded-sm xl:max-w-[60%] p-4 border border-projectPurple">
             <% @item_option_entries.each do |item_option| %>
-                <!-- <p><%= item_option.inspect %></p> -->
                 <li class="font-mono flex flex-col gap-2">
                     <p class="font-bold text-projectPurple text-lg"><%= item_option.itemable.name %></p>
                     <% item_option.itemable.servings.each do |serving| %>

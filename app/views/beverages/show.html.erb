@@ -45,9 +45,9 @@
 
         <section class="flex flex-col gap-2 justify-start max-w-5xl items-end">
             <% if @beverage.active? %>
-                <%= button_to 'Desativar Bebida', deactivate_restaurant_beverage_path(@restaurant.id, @beverage.id), method: :post, class: 'outline_button w-full text-center' %>
+                <%= button_to 'Desativar Bebida', deactivate_restaurant_beverage_path(@restaurant.id, @beverage.id), method: :post, class: 'outline_button w-full text-center', form: { class: 'w-full' } %>
             <% else %>
-                <%= button_to 'Ativar Bebida', activate_restaurant_beverage_path(@restaurant.id, @beverage.id), method: :post, class: 'outline_button w-full text-center' %>
+                <%= button_to 'Ativar Bebida', activate_restaurant_beverage_path(@restaurant.id, @beverage.id), method: :post, class: 'outline_button w-full text-center', form: { class: 'w-full' } %>
             <% end %>
             <%= link_to 'Alterar Bebida', edit_restaurant_beverage_path(@restaurant.id, @beverage.id), class: 'outline_button w-full text-center' %>
             <%= button_to 'Remover Bebida', restaurant_beverage_path(@restaurant.id, @beverage.id), method: :delete, class: 'outline_button w-full bg-projectRed text-projectWhite border-0', form: { class: 'w-full' } %>
