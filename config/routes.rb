@@ -58,4 +58,10 @@ Rails.application.routes.draw do
     get 'orders', to: 'orders#index'
     resources :orders, only: [ :show ]
   end
+
+  namespace :api, :defaults => { :format => 'json' } do
+    namespace :v1 do
+      resources :orders, only: [ :index ]
+    end
+  end
 end
