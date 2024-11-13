@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Orders API' do
-  context 'POST /api/v1/order/prepare' do
+  context 'POST /api/v1/order/mark_ready' do
     context 'fails when' do
       it 'informing the code of a restaurant that does not exist' do
         user = User.create!(
@@ -22,7 +22,7 @@ describe 'Orders API' do
         )
 
 
-        post '/api/v1/order/prepare', params: { restaurant_code: 'XDB13200', order_code: 'AS8LOP42' }
+        post '/api/v1/order/mark_ready', params: { restaurant_code: 'XDB13200', order_code: 'AS8LOP42' }
 
 
         expect(response).to have_http_status :not_found
@@ -48,7 +48,7 @@ describe 'Orders API' do
         )
 
 
-        post '/api/v1/order/prepare', params: { restaurant_code: restaurant.code, order_code: 'AS8LOP42' }
+        post '/api/v1/order/mark_ready', params: { restaurant_code: restaurant.code, order_code: 'AS8LOP42' }
 
 
         expect(response).to have_http_status :not_found
@@ -104,7 +104,7 @@ describe 'Orders API' do
         )
 
 
-        post '/api/v1/order/prepare', params: { restaurant_code: restaurant.code, order_code: second_user_order.code }
+        post '/api/v1/order/mark_ready', params: { restaurant_code: restaurant.code, order_code: second_user_order.code }
 
 
         expect(response).to have_http_status :forbidden
@@ -130,7 +130,7 @@ describe 'Orders API' do
         )
 
         allow(Restaurant).to receive(:find_by).and_raise(StandardError)
-        post '/api/v1/order/prepare', params: { restaurant_code: 'XDB13200', order_code: 'AS8LOP42'}
+        post '/api/v1/order/mark_ready', params: { restaurant_code: 'XDB13200', order_code: 'AS8LOP42'}
 
 
         expect(response).to have_http_status :internal_server_error
@@ -139,7 +139,7 @@ describe 'Orders API' do
     end
 
     context 'succeeds' do
-      it 'and changes the status of an order to "preparing"' do
+      it 'and changes the status of an order to "ready"' do
         user = User.create!(
           name: 'Aloisio',
           family_name: 'Silveira',
@@ -165,7 +165,7 @@ describe 'Orders API' do
         )
 
 
-        post '/api/v1/order/prepare', params: { restaurant_code: restaurant.code, order_code: order.code }
+        post '/api/v1/order/mark_ready', params: { restaurant_code: restaurant.code, order_code: order.code }
 
 
         expect(response).to have_http_status :ok
@@ -173,7 +173,7 @@ describe 'Orders API' do
         json_data = JSON.parse(response.body)
         order = json_data['order']
 
-        expect(order['status']).to eq 'preparing'
+        expect(order['status']).to eq 'ready'
       end
     end
   end

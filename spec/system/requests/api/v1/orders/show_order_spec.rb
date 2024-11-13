@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Orders API' do
-  context 'GET /api/v1/orders' do
+  context 'GET /api/v1/order' do
     context 'fails when' do
       it 'informing the code of a restaurant that does not exist' do
         user = User.create!(
