@@ -2,7 +2,29 @@ require 'rails_helper'
 
 describe 'User' do
   it 'creates a beverage but is not authenticated' do
-    beverage = create_beverage
+    user = User.create!(
+      name: 'Aloisio',
+      family_name: 'Silveira',
+      registration_number: '08000661110',
+      email: 'aloisio@email.com',
+      password: 'fortissima12'
+    )
+    restaurant = Restaurant.create!(
+      brand_name: 'Pizzaria Campus du Codi',
+      corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+      registration_number: '30.883.175/2481-06',
+      address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+      phone: '12987654321',
+      email: 'campus@ducodi.com.br',
+      user: user
+    )
+    beverage = Beverage.create!(
+      name: 'Agua de coco Sócoco',
+      description: 'Caixa de 1L. Já vem gelada',
+      calories: 150,
+      is_alcoholic: false,
+      restaurant: restaurant
+    )
 
     post(
       restaurant_beverages_path(beverage.restaurant), 
@@ -93,7 +115,29 @@ describe 'User' do
   end
 
   it 'deletes a beverage but is not authenticated' do
-    beverage = create_beverage
+    user = User.create!(
+      name: 'Aloisio',
+      family_name: 'Silveira',
+      registration_number: '08000661110',
+      email: 'aloisio@email.com',
+      password: 'fortissima12'
+    )
+    restaurant = Restaurant.create!(
+      brand_name: 'Pizzaria Campus du Codi',
+      corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+      registration_number: '30.883.175/2481-06',
+      address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+      phone: '12987654321',
+      email: 'campus@ducodi.com.br',
+      user: user
+    )
+    beverage = Beverage.create!(
+      name: 'Agua de coco Sócoco',
+      description: 'Caixa de 1L. Já vem gelada',
+      calories: 150,
+      is_alcoholic: false,
+      restaurant: restaurant
+    )
 
     delete(restaurant_beverage_path(beverage.restaurant, beverage.id))
 
@@ -101,7 +145,29 @@ describe 'User' do
   end
 
   it 'edits a beverage but is not authenticated' do
-    beverage = create_beverage
+    user = User.create!(
+      name: 'Aloisio',
+      family_name: 'Silveira',
+      registration_number: '08000661110',
+      email: 'aloisio@email.com',
+      password: 'fortissima12'
+    )
+    restaurant = Restaurant.create!(
+      brand_name: 'Pizzaria Campus du Codi',
+      corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+      registration_number: '30.883.175/2481-06',
+      address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+      phone: '12987654321',
+      email: 'campus@ducodi.com.br',
+      user: user
+    )
+    beverage = Beverage.create!(
+      name: 'Agua de coco Sócoco',
+      description: 'Caixa de 1L. Já vem gelada',
+      calories: 150,
+      is_alcoholic: false,
+      restaurant: restaurant
+    )
 
     patch(
       restaurant_beverage_path(beverage.restaurant.id, beverage.id), 
@@ -119,7 +185,29 @@ describe 'User' do
   end
 
   it 'edits a beverage with success' do
-    beverage = create_beverage
+    user = User.create!(
+      name: 'Aloisio',
+      family_name: 'Silveira',
+      registration_number: '08000661110',
+      email: 'aloisio@email.com',
+      password: 'fortissima12'
+    )
+    restaurant = Restaurant.create!(
+      brand_name: 'Pizzaria Campus du Codi',
+      corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+      registration_number: '30.883.175/2481-06',
+      address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+      phone: '12987654321',
+      email: 'campus@ducodi.com.br',
+      user: user
+    )
+    beverage = Beverage.create!(
+      name: 'Agua de coco Sócoco',
+      description: 'Caixa de 1L. Já vem gelada',
+      calories: 150,
+      is_alcoholic: false,
+      restaurant: restaurant
+    )
 
     login_as beverage.restaurant.user
 
@@ -139,7 +227,29 @@ describe 'User' do
   end
 
   it 'fails to edit a beverage with invalid data' do
-    beverage = create_beverage
+    user = User.create!(
+      name: 'Aloisio',
+      family_name: 'Silveira',
+      registration_number: '08000661110',
+      email: 'aloisio@email.com',
+      password: 'fortissima12'
+    )
+    restaurant = Restaurant.create!(
+      brand_name: 'Pizzaria Campus du Codi',
+      corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+      registration_number: '30.883.175/2481-06',
+      address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+      phone: '12987654321',
+      email: 'campus@ducodi.com.br',
+      user: user
+    )
+    beverage = Beverage.create!(
+      name: 'Agua de coco Sócoco',
+      description: 'Caixa de 1L. Já vem gelada',
+      calories: 150,
+      is_alcoholic: false,
+      restaurant: restaurant
+    )
 
     login_as beverage.restaurant.user
 
@@ -159,7 +269,29 @@ describe 'User' do
   end
 
   it 'inactivates a beverage but is not authenticated' do
-    beverage = create_beverage
+    user = User.create!(
+      name: 'Aloisio',
+      family_name: 'Silveira',
+      registration_number: '08000661110',
+      email: 'aloisio@email.com',
+      password: 'fortissima12'
+    )
+    restaurant = Restaurant.create!(
+      brand_name: 'Pizzaria Campus du Codi',
+      corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+      registration_number: '30.883.175/2481-06',
+      address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+      phone: '12987654321',
+      email: 'campus@ducodi.com.br',
+      user: user
+    )
+    beverage = Beverage.create!(
+      name: 'Agua de coco Sócoco',
+      description: 'Caixa de 1L. Já vem gelada',
+      calories: 150,
+      is_alcoholic: false,
+      restaurant: restaurant
+    )
 
     post(deactivate_restaurant_beverage_path(beverage.restaurant.id, beverage.id))
 
@@ -167,7 +299,29 @@ describe 'User' do
   end
 
   it 'inactivates a beverage with success' do
-    beverage = create_beverage
+    user = User.create!(
+      name: 'Aloisio',
+      family_name: 'Silveira',
+      registration_number: '08000661110',
+      email: 'aloisio@email.com',
+      password: 'fortissima12'
+    )
+    restaurant = Restaurant.create!(
+      brand_name: 'Pizzaria Campus du Codi',
+      corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+      registration_number: '30.883.175/2481-06',
+      address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+      phone: '12987654321',
+      email: 'campus@ducodi.com.br',
+      user: user
+    )
+    beverage = Beverage.create!(
+      name: 'Agua de coco Sócoco',
+      description: 'Caixa de 1L. Já vem gelada',
+      calories: 150,
+      is_alcoholic: false,
+      restaurant: restaurant
+    )
     login_as beverage.restaurant.user
 
     post(deactivate_restaurant_beverage_path(beverage.restaurant.id, beverage.id))
@@ -176,7 +330,29 @@ describe 'User' do
   end
 
   it 'fails to inactivate a beverage with invalid data' do
-    beverage = create_beverage
+    user = User.create!(
+      name: 'Aloisio',
+      family_name: 'Silveira',
+      registration_number: '08000661110',
+      email: 'aloisio@email.com',
+      password: 'fortissima12'
+    )
+    restaurant = Restaurant.create!(
+      brand_name: 'Pizzaria Campus du Codi',
+      corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+      registration_number: '30.883.175/2481-06',
+      address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+      phone: '12987654321',
+      email: 'campus@ducodi.com.br',
+      user: user
+    )
+    beverage = Beverage.create!(
+      name: 'Agua de coco Sócoco',
+      description: 'Caixa de 1L. Já vem gelada',
+      calories: 150,
+      is_alcoholic: false,
+      restaurant: restaurant
+    )
     login_as beverage.restaurant.user
     second_user = User.create!(
       name: 'Jacquin',
@@ -210,7 +386,29 @@ describe 'User' do
   end
 
   it 'activates a beverage but is not authenticated' do
-    beverage = create_beverage
+    user = User.create!(
+      name: 'Aloisio',
+      family_name: 'Silveira',
+      registration_number: '08000661110',
+      email: 'aloisio@email.com',
+      password: 'fortissima12'
+    )
+    restaurant = Restaurant.create!(
+      brand_name: 'Pizzaria Campus du Codi',
+      corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+      registration_number: '30.883.175/2481-06',
+      address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+      phone: '12987654321',
+      email: 'campus@ducodi.com.br',
+      user: user
+    )
+    beverage = Beverage.create!(
+      name: 'Agua de coco Sócoco',
+      description: 'Caixa de 1L. Já vem gelada',
+      calories: 150,
+      is_alcoholic: false,
+      restaurant: restaurant
+    )
 
     post(activate_restaurant_beverage_path(beverage.restaurant.id, beverage.id))
 
@@ -218,7 +416,29 @@ describe 'User' do
   end
 
   it 'activates a beverage with success' do
-    beverage = create_beverage
+    user = User.create!(
+      name: 'Aloisio',
+      family_name: 'Silveira',
+      registration_number: '08000661110',
+      email: 'aloisio@email.com',
+      password: 'fortissima12'
+    )
+    restaurant = Restaurant.create!(
+      brand_name: 'Pizzaria Campus du Codi',
+      corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+      registration_number: '30.883.175/2481-06',
+      address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+      phone: '12987654321',
+      email: 'campus@ducodi.com.br',
+      user: user
+    )
+    beverage = Beverage.create!(
+      name: 'Agua de coco Sócoco',
+      description: 'Caixa de 1L. Já vem gelada',
+      calories: 150,
+      is_alcoholic: false,
+      restaurant: restaurant
+    )
     beverage.inactive!
     login_as beverage.restaurant.user
 
@@ -228,7 +448,29 @@ describe 'User' do
   end
 
   it 'fails to activate a beverage with invalid data' do
-    beverage = create_beverage
+    user = User.create!(
+      name: 'Aloisio',
+      family_name: 'Silveira',
+      registration_number: '08000661110',
+      email: 'aloisio@email.com',
+      password: 'fortissima12'
+    )
+    restaurant = Restaurant.create!(
+      brand_name: 'Pizzaria Campus du Codi',
+      corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+      registration_number: '30.883.175/2481-06',
+      address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+      phone: '12987654321',
+      email: 'campus@ducodi.com.br',
+      user: user
+    )
+    beverage = Beverage.create!(
+      name: 'Agua de coco Sócoco',
+      description: 'Caixa de 1L. Já vem gelada',
+      calories: 150,
+      is_alcoholic: false,
+      restaurant: restaurant
+    )
     beverage.inactive!
     login_as beverage.restaurant.user
     second_user = User.create!(

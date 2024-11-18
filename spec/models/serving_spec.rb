@@ -71,7 +71,29 @@ RSpec.describe Serving, type: :model do
 
       context 'when creating for a Beverage' do
         it 'should have a description' do
-          beverage = create_beverage
+          user = User.create!(
+            name: 'Aloisio',
+            family_name: 'Silveira',
+            registration_number: '08000661110',
+            email: 'aloisio@email.com',
+            password: 'fortissima12'
+          )
+          restaurant = Restaurant.create!(
+            brand_name: 'Pizzaria Campus du Codi',
+            corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+            registration_number: '30.883.175/2481-06',
+            address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+            phone: '12987654321',
+            email: 'campus@ducodi.com.br',
+            user: user
+          )
+          beverage = Beverage.create!(
+            name: 'Agua de coco Sócoco',
+            description: 'Caixa de 1L. Já vem gelada',
+            calories: 150,
+            is_alcoholic: false,
+            restaurant: restaurant
+          )
           serving = Serving.new(description: '', current_price: 25.5, servingable: beverage)
 
           is_serving_valid = serving.valid?
@@ -82,7 +104,29 @@ RSpec.describe Serving, type: :model do
         end
 
         it 'should have a current price' do
-          beverage = create_beverage
+          user = User.create!(
+            name: 'Aloisio',
+            family_name: 'Silveira',
+            registration_number: '08000661110',
+            email: 'aloisio@email.com',
+            password: 'fortissima12'
+          )
+          restaurant = Restaurant.create!(
+            brand_name: 'Pizzaria Campus du Codi',
+            corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+            registration_number: '30.883.175/2481-06',
+            address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+            phone: '12987654321',
+            email: 'campus@ducodi.com.br',
+            user: user
+          )
+          beverage = Beverage.create!(
+            name: 'Agua de coco Sócoco',
+            description: 'Caixa de 1L. Já vem gelada',
+            calories: 150,
+            is_alcoholic: false,
+            restaurant: restaurant
+          )
           serving = Serving.new(description: 'Garrafa de 750ml', current_price: nil, servingable: beverage)
 
           is_serving_valid = serving.valid?
@@ -176,7 +220,29 @@ RSpec.describe Serving, type: :model do
 
       context 'for a Beverage' do
         it 'should be greater than 0 when creating a Serving' do
-          beverage = create_beverage
+          user = User.create!(
+            name: 'Aloisio',
+            family_name: 'Silveira',
+            registration_number: '08000661110',
+            email: 'aloisio@email.com',
+            password: 'fortissima12'
+          )
+          restaurant = Restaurant.create!(
+            brand_name: 'Pizzaria Campus du Codi',
+            corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+            registration_number: '30.883.175/2481-06',
+            address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+            phone: '12987654321',
+            email: 'campus@ducodi.com.br',
+            user: user
+          )
+          beverage = Beverage.create!(
+            name: 'Agua de coco Sócoco',
+            description: 'Caixa de 1L. Já vem gelada',
+            calories: 150,
+            is_alcoholic: false,
+            restaurant: restaurant
+          )
           serving = Serving.new(description: 'Garrafa 750ml', current_price: -25.5, servingable: beverage)
 
           is_serving_valid = serving.valid?
@@ -187,7 +253,29 @@ RSpec.describe Serving, type: :model do
         end
 
         it 'should be greater than 0 when updating a Serving' do
-          beverage = create_beverage
+          user = User.create!(
+            name: 'Aloisio',
+            family_name: 'Silveira',
+            registration_number: '08000661110',
+            email: 'aloisio@email.com',
+            password: 'fortissima12'
+          )
+          restaurant = Restaurant.create!(
+            brand_name: 'Pizzaria Campus du Codi',
+            corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+            registration_number: '30.883.175/2481-06',
+            address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+            phone: '12987654321',
+            email: 'campus@ducodi.com.br',
+            user: user
+          )
+          beverage = Beverage.create!(
+            name: 'Agua de coco Sócoco',
+            description: 'Caixa de 1L. Já vem gelada',
+            calories: 150,
+            is_alcoholic: false,
+            restaurant: restaurant
+          )
           serving = Serving.create!(description: 'Garrafa 750ml', current_price: 5.5, servingable: beverage)
           serving.current_price = -35.6
 
@@ -239,7 +327,29 @@ RSpec.describe Serving, type: :model do
     end
 
     it 'should generate an initial price registry when creating a serving for a Beverage' do
-      beverage = create_beverage
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      beverage = Beverage.create!(
+        name: 'Agua de coco Sócoco',
+        description: 'Caixa de 1L. Já vem gelada',
+        calories: 150,
+        is_alcoholic: false,
+        restaurant: restaurant
+      )
       serving = Serving.create!(description: 'Garrafa 750ml', current_price: 25.5, servingable: beverage)
 
       is_serving_valid = serving.valid?
@@ -290,7 +400,29 @@ RSpec.describe Serving, type: :model do
     end
 
     it 'should generate a price registry automatically when updating the price of a serving for a Beverage' do
-      beverage = create_beverage
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      beverage = Beverage.create!(
+        name: 'Agua de coco Sócoco',
+        description: 'Caixa de 1L. Já vem gelada',
+        calories: 150,
+        is_alcoholic: false,
+        restaurant: restaurant
+      )
       serving = Serving.create!(description: 'Garrafa 750ml', current_price: 12.5, servingable: beverage)
       serving.current_price = 14.90
       serving.save
@@ -341,7 +473,29 @@ RSpec.describe Serving, type: :model do
     end
 
     it 'should not generate a price registry automatically when updating the description of a serving for a Beverage' do
-      beverage = create_beverage
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      beverage = Beverage.create!(
+        name: 'Agua de coco Sócoco',
+        description: 'Caixa de 1L. Já vem gelada',
+        calories: 150,
+        is_alcoholic: false,
+        restaurant: restaurant
+      )
       serving = Serving.create!(description: 'Garrafa 750ml', current_price: 12.5, servingable: beverage)
       serving.description = 'Garrafa 1L'
       serving.save
