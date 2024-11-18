@@ -13,6 +13,7 @@ elsif @orders.count > 0 && @status_filter.empty? || !@is_status_valid
           json.status order.status
           json.code order.code
           json.date order.created_at
+          json.total order.total
         end  
       end
     end
@@ -27,5 +28,6 @@ else
     json.status order.status
     json.code order.code
     json.date order.created_at
+    json.total order.total
   end
 end
