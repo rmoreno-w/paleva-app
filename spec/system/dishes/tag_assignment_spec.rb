@@ -66,8 +66,8 @@ describe 'User' do
         calories: 580,
         restaurant: restaurant
       )
-      dish.tags << Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
-      dish.tags << Tag.create!(name: 'Sem Açucar', restaurant: dish.restaurant)
+      dish.tags << Tag.create!(name: 'Vegano', restaurant: restaurant)
+      dish.tags << Tag.create!(name: 'Sem Açucar', restaurant: restaurant)
       second_user = User.create!(
         name: 'Jacquin',
         family_name: 'DuFrance',
@@ -86,7 +86,7 @@ describe 'User' do
       )
       Tag.create!(name: 'Sobremesa', restaurant: second_restaurant)
 
-      login_as dish.restaurant.user
+      login_as user
 
       # Act
       visit root_path
@@ -127,9 +127,9 @@ describe 'User' do
         calories: 580,
         restaurant: restaurant
       )
-      dish.tags << Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
+      dish.tags << Tag.create!(name: 'Vegano', restaurant: restaurant)
 
-      login_as dish.restaurant.user
+      login_as user
 
       # Act
       visit root_path
@@ -166,9 +166,9 @@ describe 'User' do
         calories: 580,
         restaurant: restaurant
       )
-      Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
+      Tag.create!(name: 'Vegano', restaurant: restaurant)
 
-      login_as dish.restaurant.user
+      login_as user
 
       # Act
       visit root_path
@@ -210,9 +210,9 @@ describe 'User' do
         calories: 580,
         restaurant: restaurant
       )
-      Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
+      Tag.create!(name: 'Vegano', restaurant: restaurant)
 
-      login_as dish.restaurant.user
+      login_as user
 
       # Act
       visit root_path
@@ -249,8 +249,8 @@ describe 'User' do
         calories: 580,
         restaurant: restaurant
       )
-      dish.tags << Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
-      login_as dish.restaurant.user
+      dish.tags << Tag.create!(name: 'Vegano', restaurant: restaurant)
+      login_as user
 
       # Act
       visit root_path
@@ -286,8 +286,8 @@ describe 'User' do
         calories: 580,
         restaurant: restaurant
       )
-      dish.tags << Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
-      Tag.create!(name: 'Sem Açucar', restaurant: dish.restaurant)
+      dish.tags << Tag.create!(name: 'Vegano', restaurant: restaurant)
+      Tag.create!(name: 'Sem Açucar', restaurant: restaurant)
       second_user = User.create!(
         name: 'Jacquin',
         family_name: 'DuFrance',
@@ -305,7 +305,7 @@ describe 'User' do
         user: second_user
       )
       Tag.create!(name: 'Sobremesa', restaurant: second_restaurant)
-      login_as dish.restaurant.user
+      login_as user
 
       # Act
       visit root_path
@@ -345,9 +345,9 @@ describe 'User' do
         calories: 580,
         restaurant: restaurant
       )
-      dish.tags << Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
-      dish.tags << Tag.create!(name: 'Sem Açucar', restaurant: dish.restaurant)
-      login_as dish.restaurant.user
+      dish.tags << Tag.create!(name: 'Vegano', restaurant: restaurant)
+      dish.tags << Tag.create!(name: 'Sem Açucar', restaurant: restaurant)
+      login_as user
 
       # Act
       visit root_path

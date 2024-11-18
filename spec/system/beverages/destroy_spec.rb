@@ -37,7 +37,7 @@ describe 'User' do
       click_on 'Agua de coco Sócoco'
 
       # Assert
-      expect(current_path).to eq restaurant_beverage_path(beverage.restaurant.id, beverage.id)
+      expect(current_path).to eq restaurant_beverage_path(restaurant.id, beverage.id)
       expect(page).to have_button 'Remover Bebida'
       expect(page).to have_content beverage.name
     end
@@ -61,7 +61,7 @@ describe 'User' do
         email: 'campus@ducodi.com.br',
         user: user
       )
-      beverage = Beverage.create!(
+      Beverage.create!(
         name: 'Agua de coco Sócoco',
         description: 'Caixa de 1L. Já vem gelada',
         calories: 150,
@@ -80,7 +80,7 @@ describe 'User' do
       click_on 'Remover Bebida'
 
       # Assert
-      expect(current_path).to eq restaurant_beverages_path(beverage.restaurant.id)
+      expect(current_path).to eq restaurant_beverages_path(restaurant.id)
       expect(page).to have_content 'Bebida deletada com sucesso'
     end
   end

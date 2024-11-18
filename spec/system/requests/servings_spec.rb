@@ -80,7 +80,7 @@ describe 'User' do
           email: 'atendimento@bjq.com.br',
           user: second_user
         )
-        login_as dish.restaurant.user
+        login_as user
 
         get(new_restaurant_dish_serving_path(second_restaurant, dish))
 
@@ -157,7 +157,7 @@ describe 'User' do
           restaurant: restaurant
         )
         serving = Serving.new(description: '1 Bolinho', current_price: 24.5, servingable: dish)
-        login_as dish.restaurant.user
+        login_as user
 
         post(
           restaurant_dish_servings_path(dish.restaurant, dish), 
@@ -213,7 +213,7 @@ describe 'User' do
           email: 'atendimento@bjq.com.br',
           user: second_user
         )
-        login_as dish.restaurant.user
+        login_as user
 
         post(
           restaurant_dish_servings_path(second_restaurant, dish), 
@@ -308,7 +308,7 @@ describe 'User' do
           restaurant: restaurant
         )
         serving = Serving.new(description: '', current_price: 24.5, servingable: dish)
-        login_as dish.restaurant.user
+        login_as user
 
         post(
           restaurant_dish_servings_path(dish.restaurant, dish), 
@@ -404,7 +404,7 @@ describe 'User' do
           email: 'atendimento@bjq.com.br',
           user: second_user
         )
-        login_as beverage.restaurant.user
+        login_as user
 
         get(new_restaurant_beverage_serving_path(second_restaurant, beverage))
 
@@ -483,7 +483,7 @@ describe 'User' do
           restaurant: restaurant
         )
         serving = Serving.new(description: 'Garrafa 1L', current_price: 24.5, servingable: beverage)
-        login_as beverage.restaurant.user
+        login_as user
 
         post(
           restaurant_beverage_servings_path(beverage.restaurant, beverage), 
@@ -524,7 +524,7 @@ describe 'User' do
           restaurant: restaurant
         )
         serving = Serving.new(description: '', current_price: 24.5, servingable: beverage)
-        login_as beverage.restaurant.user
+        login_as user
 
         post(
           restaurant_beverage_servings_path(beverage.restaurant, beverage), 
@@ -621,7 +621,7 @@ describe 'User' do
           email: 'atendimento@bjq.com.br',
           user: second_user
         )
-        login_as dish.restaurant.user
+        login_as user
 
         get(edit_restaurant_dish_serving_path(second_restaurant, dish, serving))
 
@@ -674,7 +674,7 @@ describe 'User' do
           calories: 387,
           restaurant: second_restaurant
         )
-        login_as dish.restaurant.user
+        login_as user
 
         get(edit_restaurant_dish_serving_path(dish.restaurant, second_dish, serving))
 
@@ -759,7 +759,7 @@ describe 'User' do
           restaurant: restaurant
         )
         serving = Serving.create!(description: '1 Bolinho', current_price: 24.5, servingable: dish)
-        login_as dish.restaurant.user
+        login_as user
 
         patch(
           restaurant_dish_serving_path(dish.restaurant, dish, serving), 
@@ -798,7 +798,7 @@ describe 'User' do
           restaurant: restaurant
         )
         serving = Serving.create!(description: '1 Bolinho', current_price: 24.5, servingable: dish)
-        login_as dish.restaurant.user
+        login_as user
 
         patch(
           restaurant_dish_serving_path(dish.restaurant, dish, serving), 
@@ -895,7 +895,7 @@ describe 'User' do
           email: 'atendimento@bjq.com.br',
           user: second_user
         )
-        login_as beverage.restaurant.user
+        login_as user
 
         get(edit_restaurant_beverage_serving_path(second_restaurant, beverage, serving))
 
@@ -950,7 +950,7 @@ describe 'User' do
           is_alcoholic: false,
           restaurant: second_restaurant
         )
-        login_as beverage.restaurant.user
+        login_as user
 
         get(edit_restaurant_beverage_serving_path(beverage.restaurant, second_beverage, serving))
 
@@ -1038,7 +1038,7 @@ describe 'User' do
           restaurant: restaurant
         )
         serving = Serving.create!(description: 'Garrafa 750ml', current_price: 24.5, servingable: beverage)
-        login_as beverage.restaurant.user
+        login_as user
 
         patch(
           restaurant_beverage_serving_path(beverage.restaurant, beverage, serving), 
@@ -1078,7 +1078,7 @@ describe 'User' do
           restaurant: restaurant
         )
         serving = Serving.create!(description: 'Garrafa 750ml', current_price: 24.5, servingable: beverage)
-        login_as beverage.restaurant.user
+        login_as user
 
         patch(
           restaurant_beverage_serving_path(beverage.restaurant, beverage, serving), 

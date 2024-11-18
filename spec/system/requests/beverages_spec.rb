@@ -58,9 +58,14 @@ describe 'User' do
       email: 'campus@ducodi.com.br',
       user: user
     )
-    beverage = new_beverage
+    beverage = Beverage.new(
+      name: 'Agua de coco Sócoco',
+      description: 'Caixa de 1L. Já vem gelada',
+      calories: 150,
+      is_alcoholic: false,
+    )
 
-    login_as restaurant.user
+    login_as user
 
     post(
       restaurant_beverages_path(restaurant), 
@@ -95,9 +100,14 @@ describe 'User' do
       email: 'campus@ducodi.com.br',
       user: user
     )
-    beverage = new_beverage
+    beverage = Beverage.new(
+      name: 'Agua de coco Sócoco',
+      description: 'Caixa de 1L. Já vem gelada',
+      calories: 150,
+      is_alcoholic: false,
+    )
 
-    login_as restaurant.user
+    login_as user
 
     post(
       restaurant_beverages_path(restaurant), 
@@ -170,7 +180,7 @@ describe 'User' do
     )
 
     patch(
-      restaurant_beverage_path(beverage.restaurant.id, beverage.id), 
+      restaurant_beverage_path(restaurant.id, beverage.id), 
       params: { 
         beverage: { 
           name: "Novo #{beverage.name}",
@@ -209,7 +219,7 @@ describe 'User' do
       restaurant: restaurant
     )
 
-    login_as beverage.restaurant.user
+    login_as user
 
     patch(
       restaurant_beverage_path(beverage.restaurant, beverage), 
@@ -251,7 +261,7 @@ describe 'User' do
       restaurant: restaurant
     )
 
-    login_as beverage.restaurant.user
+    login_as user
 
     patch(
       restaurant_beverage_path(beverage.restaurant, beverage), 
@@ -293,7 +303,7 @@ describe 'User' do
       restaurant: restaurant
     )
 
-    post(deactivate_restaurant_beverage_path(beverage.restaurant.id, beverage.id))
+    post(deactivate_restaurant_beverage_path(restaurant.id, beverage.id))
 
     expect(response).to redirect_to new_user_session_path
   end
@@ -322,9 +332,9 @@ describe 'User' do
       is_alcoholic: false,
       restaurant: restaurant
     )
-    login_as beverage.restaurant.user
+    login_as user
 
-    post(deactivate_restaurant_beverage_path(beverage.restaurant.id, beverage.id))
+    post(deactivate_restaurant_beverage_path(restaurant.id, beverage.id))
 
     expect(response.status).to redirect_to restaurant_beverage_path(beverage.restaurant, beverage)
   end
@@ -346,14 +356,14 @@ describe 'User' do
       email: 'campus@ducodi.com.br',
       user: user
     )
-    beverage = Beverage.create!(
+    Beverage.create!(
       name: 'Agua de coco Sócoco',
       description: 'Caixa de 1L. Já vem gelada',
       calories: 150,
       is_alcoholic: false,
       restaurant: restaurant
     )
-    login_as beverage.restaurant.user
+    login_as user
     second_user = User.create!(
       name: 'Jacquin',
       family_name: 'DuFrance',
@@ -380,7 +390,7 @@ describe 'User' do
       restaurant: second_restaurant
     )
 
-    post(deactivate_restaurant_beverage_path(beverage.restaurant.id, second_beverage.id))
+    post(deactivate_restaurant_beverage_path(restaurant.id, second_beverage.id))
 
     expect(response).to redirect_to root_path
   end
@@ -410,7 +420,7 @@ describe 'User' do
       restaurant: restaurant
     )
 
-    post(activate_restaurant_beverage_path(beverage.restaurant.id, beverage.id))
+    post(activate_restaurant_beverage_path(restaurant.id, beverage.id))
 
     expect(response).to redirect_to new_user_session_path
   end
@@ -440,9 +450,9 @@ describe 'User' do
       restaurant: restaurant
     )
     beverage.inactive!
-    login_as beverage.restaurant.user
+    login_as user
 
-    post(activate_restaurant_beverage_path(beverage.restaurant.id, beverage.id))
+    post(activate_restaurant_beverage_path(restaurant.id, beverage.id))
 
     expect(response.status).to redirect_to restaurant_beverage_path(beverage.restaurant, beverage)
   end
@@ -472,7 +482,7 @@ describe 'User' do
       restaurant: restaurant
     )
     beverage.inactive!
-    login_as beverage.restaurant.user
+    login_as user
     second_user = User.create!(
       name: 'Jacquin',
       family_name: 'DuFrance',
@@ -499,7 +509,7 @@ describe 'User' do
       restaurant: second_restaurant
     )
 
-    post(activate_restaurant_beverage_path(beverage.restaurant.id, second_beverage.id))
+    post(activate_restaurant_beverage_path(restaurant.id, second_beverage.id))
 
     expect(response).to redirect_to root_path
   end

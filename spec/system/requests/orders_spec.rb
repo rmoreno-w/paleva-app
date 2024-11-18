@@ -35,7 +35,7 @@ describe 'User' do
         email: 'aloisio@email.com',
         password: 'fortissima12'
       )
-      restaurant = Restaurant.create!(
+      Restaurant.create!(
         brand_name: 'Pizzaria Campus du Codi',
         corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
         registration_number: '30.883.175/2481-06',
@@ -44,7 +44,7 @@ describe 'User' do
         email: 'campus@ducodi.com.br',
         user: user
       )
-      login_as restaurant.user
+      login_as user
       second_user = User.create!(
         name: 'Jacquin',
         family_name: 'DuFrance',
@@ -86,7 +86,7 @@ describe 'User' do
         email: 'campus@ducodi.com.br',
         user: user
       )
-      login_as restaurant.user
+      login_as user
 
       # Act
       get restaurant_new_order_path(restaurant)
@@ -153,7 +153,7 @@ describe 'User' do
         customer_registration_number: CPF.generate,
         restaurant: restaurant
       )
-      login_as restaurant.user
+      login_as user
       second_user = User.create!(
         name: 'Jacquin',
         family_name: 'DuFrance',
@@ -202,7 +202,7 @@ describe 'User' do
         customer_registration_number: CPF.generate,
         restaurant: restaurant
       )
-      login_as restaurant.user
+      login_as user
       second_user = User.create!(
         name: 'Jacquin',
         family_name: 'DuFrance',
@@ -258,7 +258,7 @@ describe 'User' do
         customer_registration_number: CPF.generate,
         restaurant: restaurant
       )
-      login_as restaurant.user
+      login_as user
 
       # Act
       get restaurant_order_path(restaurant, order)
@@ -325,7 +325,7 @@ describe 'User' do
         customer_registration_number: CPF.generate,
         restaurant: restaurant
       )
-      login_as restaurant.user
+      login_as user
       second_user = User.create!(
         name: 'Jacquin',
         family_name: 'DuFrance',
@@ -374,7 +374,7 @@ describe 'User' do
         customer_registration_number: CPF.generate,
         restaurant: restaurant
       )
-      login_as restaurant.user
+      login_as user
 
       # Act
       get restaurant_orders_path(restaurant)
@@ -460,7 +460,7 @@ describe 'User' do
       )
       item_set = ItemOptionSet.create!(name: 'Café Frances', restaurant: restaurant)
       item_set.item_option_entries.create!(itemable: dish)
-      login_as restaurant.user
+      login_as user
 
       second_user = User.create!(
         name: 'Jacquin',
@@ -523,7 +523,7 @@ describe 'User' do
       )
       item_set = ItemOptionSet.create!(name: 'Café Frances', restaurant: restaurant)
       item_set.item_option_entries.create!(itemable: dish)
-      login_as restaurant.user
+      login_as user
 
       second_user = User.create!(
         name: 'Jacquin',
@@ -600,7 +600,7 @@ describe 'User' do
       )
       item_set = ItemOptionSet.create!(name: 'Café Frances', restaurant: restaurant)
       item_set.item_option_entries.create!(itemable: dish)
-      login_as restaurant.user
+      login_as user
 
       second_user = User.create!(
         name: 'Jacquin',
@@ -677,7 +677,7 @@ describe 'User' do
       )
       item_set = ItemOptionSet.create!(name: 'Café Frances', restaurant: restaurant)
       item_set.item_option_entries.create!(itemable: dish)
-      login_as restaurant.user
+      login_as user
 
       # Act
       post restaurant_order_add_item_path(
@@ -801,7 +801,7 @@ describe 'User' do
       )
       item_set = ItemOptionSet.create!(name: 'Café Frances', restaurant: restaurant)
       item_set.item_option_entries.create!(itemable: dish)
-      login_as restaurant.user
+      login_as user
 
       second_user = User.create!(
         name: 'Jacquin',
@@ -882,7 +882,7 @@ describe 'User' do
       )
       item_set = ItemOptionSet.create!(name: 'Café Frances', restaurant: restaurant)
       item_set.item_option_entries.create!(itemable: dish)
-      login_as restaurant.user
+      login_as user
 
 
       # Act

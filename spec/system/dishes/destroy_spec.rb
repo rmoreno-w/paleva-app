@@ -36,7 +36,7 @@ describe 'User' do
       click_on 'Petit Gateau de Mousse Insuflado'
 
       # Assert
-      expect(current_path).to eq restaurant_dish_path(dish.restaurant.id, dish.id)
+      expect(current_path).to eq restaurant_dish_path(restaurant.id, dish.id)
       expect(page).to have_button 'Remover Prato'
       expect(page).to have_content dish.name
     end
@@ -60,7 +60,7 @@ describe 'User' do
         email: 'campus@ducodi.com.br',
         user: user
       )
-      dish = Dish.create!(
+      Dish.create!(
         name: 'Petit Gateau de Mousse Insuflado',
         description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
         calories: 580,
@@ -78,7 +78,7 @@ describe 'User' do
       click_on 'Remover Prato'
 
       # Assert
-      expect(current_path).to eq restaurant_dishes_path(dish.restaurant.id)
+      expect(current_path).to eq restaurant_dishes_path(restaurant.id)
       expect(page).to have_content 'Prato deletado com sucesso'
     end
   end

@@ -40,10 +40,30 @@ describe 'User' do
   end
 
   it 'creates a dish with success' do
-    restaurant = create_restaurant_and_user
-    dish = new_dish
+    user = User.create!(
+      name: 'Aloisio',
+      family_name: 'Silveira',
+      registration_number: '08000661110',
+      email: 'aloisio@email.com',
+      password: 'fortissima12'
+    )
+    restaurant = Restaurant.create!(
+      brand_name: 'Pizzaria Campus du Codi',
+      corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+      registration_number: '30.883.175/2481-06',
+      address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+      phone: '12987654321',
+      email: 'campus@ducodi.com.br',
+      user: user
+    )
 
-    login_as restaurant.user
+    dish = Dish.new(
+      name: 'Petit Gateau de Mousse Insuflado',
+      description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+      calories: 580,
+    )
+
+    login_as user
 
     post(
       restaurant_dishes_path(restaurant), 
@@ -77,9 +97,13 @@ describe 'User' do
       email: 'campus@ducodi.com.br',
       user: user
     )
-    dish = new_dish
+    dish = Dish.new(
+      name: 'Petit Gateau de Mousse Insuflado',
+      description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+      calories: 580,
+    )
 
-    login_as restaurant.user
+    login_as user
 
     post(
       restaurant_dishes_path(restaurant), 
@@ -149,7 +173,7 @@ describe 'User' do
     )
 
     patch(
-      restaurant_dish_path(dish.restaurant.id, dish.id), 
+      restaurant_dish_path(restaurant.id, dish.id), 
       params: { 
         dish: { 
           name: "Novo #{dish.name}",
@@ -186,7 +210,7 @@ describe 'User' do
       restaurant: restaurant
     )
 
-    login_as dish.restaurant.user
+    login_as user
 
     patch(
       restaurant_dish_path(dish.restaurant, dish), 
@@ -226,7 +250,7 @@ describe 'User' do
       restaurant: restaurant
     )
 
-    login_as dish.restaurant.user
+    login_as user
 
     patch(
       restaurant_dish_path(dish.restaurant, dish), 
@@ -266,7 +290,7 @@ describe 'User' do
       restaurant: restaurant
     )
 
-    post(deactivate_restaurant_dish_path(dish.restaurant.id, dish.id))
+    post(deactivate_restaurant_dish_path(restaurant.id, dish.id))
 
     expect(response).to redirect_to new_user_session_path
   end
@@ -294,9 +318,9 @@ describe 'User' do
       calories: 580,
       restaurant: restaurant
     )
-    login_as dish.restaurant.user
+    login_as user
 
-    post(deactivate_restaurant_dish_path(dish.restaurant.id, dish.id))
+    post(deactivate_restaurant_dish_path(restaurant.id, dish.id))
 
     expect(response.status).to redirect_to restaurant_dish_path(dish.restaurant, dish)
   end
@@ -318,13 +342,13 @@ describe 'User' do
       email: 'campus@ducodi.com.br',
       user: user
     )
-    dish = Dish.create!(
+    Dish.create!(
       name: 'Petit Gateau de Mousse Insuflado',
       description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
       calories: 580,
       restaurant: restaurant
     )
-    login_as dish.restaurant.user
+    login_as user
     second_user = User.create!(
       name: 'Jacquin',
       family_name: 'DuFrance',
@@ -351,7 +375,7 @@ describe 'User' do
     )
 
 
-    post(deactivate_restaurant_dish_path(dish.restaurant.id, second_dish.id))
+    post(deactivate_restaurant_dish_path(restaurant.id, second_dish.id))
 
 
     expect(response).to redirect_to root_path
@@ -381,7 +405,7 @@ describe 'User' do
       restaurant: restaurant
     )
 
-    post(activate_restaurant_dish_path(dish.restaurant.id, dish.id))
+    post(activate_restaurant_dish_path(restaurant.id, dish.id))
 
     expect(response).to redirect_to new_user_session_path
   end
@@ -410,9 +434,9 @@ describe 'User' do
       restaurant: restaurant
     )
     dish.inactive!
-    login_as dish.restaurant.user
+    login_as user
 
-    post(activate_restaurant_dish_path(dish.restaurant.id, dish.id))
+    post(activate_restaurant_dish_path(restaurant.id, dish.id))
 
     expect(response.status).to redirect_to restaurant_dish_path(dish.restaurant, dish)
   end
@@ -441,7 +465,7 @@ describe 'User' do
       restaurant: restaurant
     )
     dish.inactive!
-    login_as dish.restaurant.user
+    login_as user
     second_user = User.create!(
       name: 'Jacquin',
       family_name: 'DuFrance',
@@ -468,7 +492,7 @@ describe 'User' do
     )
 
 
-    post(activate_restaurant_dish_path(dish.restaurant.id, second_dish.id))
+    post(activate_restaurant_dish_path(restaurant.id, second_dish.id))
 
 
     expect(response).to redirect_to root_path

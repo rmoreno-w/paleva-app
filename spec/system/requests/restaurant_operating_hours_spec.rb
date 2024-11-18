@@ -52,7 +52,7 @@ describe 'User' do
       user: user
     )
 
-    login_as restaurant.user
+    login_as user
 
     post(
       restaurant_restaurant_operating_hours_path(restaurant), 
@@ -87,7 +87,7 @@ describe 'User' do
       user: user
     )
 
-    login_as restaurant.user
+    login_as user
 
     post(
       restaurant_restaurant_operating_hours_path(restaurant), 

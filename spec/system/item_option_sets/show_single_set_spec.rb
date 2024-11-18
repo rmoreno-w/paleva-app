@@ -46,7 +46,7 @@ describe 'User' do
         user: user
       )
       item_set = ItemOptionSet.create!(name: 'Almoço', restaurant: restaurant)
-      login_as restaurant.user
+      login_as user
 
       # Act
       visit restaurant_item_option_set_path(restaurant, item_set)
@@ -95,7 +95,7 @@ describe 'User' do
 
       item_set.item_option_entries << ItemOptionEntry.new(itemable: dish)
       item_set.item_option_entries.create(itemable: beverage)
-      login_as restaurant.user
+      login_as user
 
 
       # Act
@@ -157,7 +157,7 @@ describe 'User' do
       )
       dish_that_is_not_in_the_set.servings.create(description: 'Pequena - 20x20cm', current_price: 8.9)
 
-      login_as restaurant.user
+      login_as user
 
 
       # Act
@@ -203,7 +203,7 @@ describe 'User' do
       )
       Serving.create!(description: 'Garrafa 750ml', current_price: 12.5, servingable: beverage)
       item_set.item_option_entries.create!(itemable: beverage)
-      login_as restaurant.user
+      login_as user
       second_user = User.create!(
         name: 'Jacquin',
         family_name: 'DuFrance',

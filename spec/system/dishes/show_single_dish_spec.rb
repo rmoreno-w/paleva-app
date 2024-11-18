@@ -36,7 +36,7 @@ describe 'User' do
       click_on 'Petit Gateau de Mousse Insuflado'
 
       # Assert
-      expect(current_path).to eq restaurant_dish_path(dish.restaurant.id, dish.id)
+      expect(current_path).to eq restaurant_dish_path(restaurant.id, dish.id)
       expect(page).to have_content 'Petit Gateau de Mousse Insuflado'
       expect(page).to have_content 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse'
       expect(page).to have_content '580'
@@ -142,7 +142,7 @@ describe 'User' do
       click_on 'Petit Gateau de Mousse Insuflado'
 
       # Assert
-      expect(current_path).to eq restaurant_dish_path(dish.restaurant.id, dish.id)
+      expect(current_path).to eq restaurant_dish_path(restaurant.id, dish.id)
       expect(page).to have_button 'Desativar Prato'
     end
 
@@ -181,7 +181,7 @@ describe 'User' do
       click_on 'Petit Gateau de Mousse Insuflado'
 
       # Assert
-      expect(current_path).to eq restaurant_dish_path(dish.restaurant.id, dish.id)
+      expect(current_path).to eq restaurant_dish_path(restaurant.id, dish.id)
       expect(page).to have_button 'Ativar Prato'
     end
 
@@ -218,7 +218,7 @@ describe 'User' do
       click_on 'Petit Gateau de Mousse Insuflado'
 
       # Assert
-      expect(current_path).to eq restaurant_dish_path(dish.restaurant.id, dish.id)
+      expect(current_path).to eq restaurant_dish_path(restaurant.id, dish.id)
       expect(page).to have_content 'Porções:'
       expect(page).to have_content "Nenhuma porção cadastrada para #{dish.name}"
       expect(page).to have_link 'Cadastrar Porção'

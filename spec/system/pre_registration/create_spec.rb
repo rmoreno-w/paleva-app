@@ -43,7 +43,7 @@ describe 'User' do
         email: 'campus@ducodi.com.br',
         user: user
       )
-      login_as restaurant.user
+      login_as user
 
       visit root_path
       click_on 'Funcionários'
@@ -72,7 +72,7 @@ describe 'User' do
         email: 'campus@ducodi.com.br',
         user: user
       )
-      login_as restaurant.user
+      login_as user
 
       visit root_path
       click_on 'Funcionários'
@@ -84,7 +84,6 @@ describe 'User' do
       pre_registration = PreRegistration.last
       expect(current_path).to eq restaurant_staff_members_path(restaurant)
       expect(page).to have_content 'Funcionários'
-      # expect(page).to have_content 'Aqui você faz um pré-registro de seu funcionário, informando alguns dados. Assim que ele se cadastrar na plataforma, nosso sistema reconhece automaticamente e o associa a seu Restaurante! :)'
       expect(page).to have_content 'valente@email.com'
       expect(page).to have_content "#{CPF.new(pre_registration.registration_number).formatted}"
     end

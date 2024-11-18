@@ -36,7 +36,7 @@ describe 'User' do
       click_on 'Agua de coco Sócoco'
       click_on 'Desativar Bebida'
 
-      expect(current_path).to eq restaurant_beverage_path(beverage.restaurant.id, beverage.id)
+      expect(current_path).to eq restaurant_beverage_path(restaurant.id, beverage.id)
       expect(page).to have_content 'Inativo 🔴'
       expect(page).to have_content 'Sucesso! Bebida desativada'
       expect(page).to have_button 'Ativar Bebida'
@@ -79,7 +79,7 @@ describe 'User' do
       click_on 'Agua de coco Sócoco'
       click_on 'Ativar Bebida'
 
-      expect(current_path).to eq restaurant_beverage_path(beverage.restaurant.id, beverage.id)
+      expect(current_path).to eq restaurant_beverage_path(restaurant.id, beverage.id)
       expect(page).to have_content 'Ativo 🟢'
       expect(page).to have_content 'Sucesso! Bebida ativada'
       expect(page).to have_button 'Desativar Bebida'

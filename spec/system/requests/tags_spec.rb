@@ -63,7 +63,7 @@ describe 'User' do
         email: 'aloisio@email.com',
         password: 'fortissima12'
       )
-      restaurant = Restaurant.create!(
+      Restaurant.create!(
         brand_name: 'Pizzaria Campus du Codi',
         corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
         registration_number: '30.883.175/2481-06',
@@ -89,7 +89,7 @@ describe 'User' do
         user: second_user
       )
 
-      login_as restaurant.user
+      login_as user
 
       get(new_restaurant_tag_path(second_restaurant))
 
@@ -104,7 +104,7 @@ describe 'User' do
         email: 'aloisio@email.com',
         password: 'fortissima12'
       )
-      restaurant = Restaurant.create!(
+      Restaurant.create!(
         brand_name: 'Pizzaria Campus du Codi',
         corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
         registration_number: '30.883.175/2481-06',
@@ -130,7 +130,7 @@ describe 'User' do
         user: second_user
       )
 
-      login_as restaurant.user
+      login_as user
 
 
       post(restaurant_tags_path(second_restaurant),
@@ -163,7 +163,7 @@ describe 'User' do
         user: user
       )
 
-      login_as restaurant.user
+      login_as user
 
       post(restaurant_tags_path(restaurant),
         params: {
@@ -194,7 +194,7 @@ describe 'User' do
         user: user
       )
 
-      login_as restaurant.user
+      login_as user
 
 
       post(restaurant_tags_path(restaurant),
@@ -298,7 +298,7 @@ describe 'User' do
         user: second_user
       )
 
-      login_as restaurant.user
+      login_as user
 
 
       delete(restaurant_destroy_tag_path(second_restaurant),
@@ -346,7 +346,7 @@ describe 'User' do
         user: second_user
       )
 
-      login_as restaurant.user
+      login_as user
 
 
       delete(restaurant_destroy_tag_path(second_restaurant),
@@ -378,7 +378,7 @@ describe 'User' do
       )
       tag = Tag.create!(name: 'Vegano', restaurant: restaurant)
 
-      login_as restaurant.user
+      login_as user
 
 
       delete(restaurant_destroy_tag_path(restaurant),
@@ -416,7 +416,7 @@ describe 'User' do
         calories: 580,
         restaurant: restaurant
       )
-      Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
+      Tag.create!(name: 'Vegano', restaurant: restaurant)
 
       get(restaurant_dish_new_tag_assignment_path(dish.restaurant, dish))
 
@@ -446,7 +446,7 @@ describe 'User' do
         calories: 580,
         restaurant: restaurant
       )
-      tag = Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
+      tag = Tag.create!(name: 'Vegano', restaurant: restaurant)
 
       post(restaurant_dish_assign_tag_path(dish.restaurant, dish),
         params: {
@@ -480,7 +480,7 @@ describe 'User' do
         calories: 580,
         restaurant: restaurant
       )
-      Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
+      Tag.create!(name: 'Vegano', restaurant: restaurant)
       second_user = User.create!(
         name: 'Jacquin',
         family_name: 'DuFrance',
@@ -498,7 +498,7 @@ describe 'User' do
         user: second_user
       )
 
-      login_as dish.restaurant.user
+      login_as user
 
       get(restaurant_dish_new_tag_assignment_path(second_restaurant, dish))
 
@@ -528,7 +528,7 @@ describe 'User' do
         calories: 580,
         restaurant: restaurant
       )
-      tag = Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
+      tag = Tag.create!(name: 'Vegano', restaurant: restaurant)
       second_user = User.create!(
         name: 'Jacquin',
         family_name: 'DuFrance',
@@ -546,7 +546,7 @@ describe 'User' do
         user: second_user
       )
 
-      login_as dish.restaurant.user
+      login_as user
 
       post(restaurant_dish_assign_tag_path(second_restaurant, dish),
         params: {
@@ -580,7 +580,7 @@ describe 'User' do
         calories: 580,
         restaurant: restaurant
       )
-      Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
+      Tag.create!(name: 'Vegano', restaurant: restaurant)
       second_user = User.create!(
         name: 'Jacquin',
         family_name: 'DuFrance',
@@ -605,7 +605,7 @@ describe 'User' do
       )
       tag = Tag.create!(name: 'Sobremesa', restaurant: second_restaurant)
 
-      login_as dish.restaurant.user
+      login_as user
 
       post(restaurant_dish_assign_tag_path(dish.restaurant, second_dish),
         params: {
@@ -639,7 +639,7 @@ describe 'User' do
         calories: 580,
         restaurant: restaurant
       )
-      Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
+      Tag.create!(name: 'Vegano', restaurant: restaurant)
       second_user = User.create!(
         name: 'Jacquin',
         family_name: 'DuFrance',
@@ -658,7 +658,7 @@ describe 'User' do
       )
       tag = Tag.create!(name: 'Sobremesa', restaurant: second_restaurant)
 
-      login_as dish.restaurant.user
+      login_as user
 
       post(restaurant_dish_assign_tag_path(second_restaurant, dish),
         params: {
@@ -692,9 +692,9 @@ describe 'User' do
         calories: 580,
         restaurant: restaurant
       )
-      Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
+      Tag.create!(name: 'Vegano', restaurant: restaurant)
 
-      login_as dish.restaurant.user
+      login_as user
 
       post(restaurant_dish_assign_tag_path(dish.restaurant, dish),
         params: {
@@ -728,9 +728,9 @@ describe 'User' do
         calories: 580,
         restaurant: restaurant
       )
-      tag = Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
+      tag = Tag.create!(name: 'Vegano', restaurant: restaurant)
 
-      login_as dish.restaurant.user
+      login_as user
 
       post(restaurant_dish_assign_tag_path(dish.restaurant, dish),
         params: {
@@ -764,9 +764,9 @@ describe 'User' do
         calories: 580,
         restaurant: restaurant
       )
-      tag = Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
+      tag = Tag.create!(name: 'Vegano', restaurant: restaurant)
 
-      login_as dish.restaurant.user
+      login_as user
 
       post(restaurant_dish_assign_tag_path(dish.restaurant, dish),
         params: {
@@ -802,7 +802,7 @@ describe 'User' do
         calories: 580,
         restaurant: restaurant
       )
-      Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
+      Tag.create!(name: 'Vegano', restaurant: restaurant)
 
       get(restaurant_dish_remove_tag_assignment_path(dish.restaurant, dish))
 
@@ -832,7 +832,7 @@ describe 'User' do
         calories: 580,
         restaurant: restaurant
       )
-      tag = Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
+      tag = Tag.create!(name: 'Vegano', restaurant: restaurant)
 
       delete(restaurant_dish_unassign_tag_path(dish.restaurant, dish),
         params: {
@@ -866,7 +866,7 @@ describe 'User' do
         calories: 580,
         restaurant: restaurant
       )
-      Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
+      Tag.create!(name: 'Vegano', restaurant: restaurant)
       second_user = User.create!(
         name: 'Jacquin',
         family_name: 'DuFrance',
@@ -884,7 +884,7 @@ describe 'User' do
         user: second_user
       )
 
-      login_as dish.restaurant.user
+      login_as user
 
       get(restaurant_dish_remove_tag_assignment_path(second_restaurant, dish))
 
@@ -914,7 +914,7 @@ describe 'User' do
         calories: 580,
         restaurant: restaurant
       )
-      tag = Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
+      tag = Tag.create!(name: 'Vegano', restaurant: restaurant)
       second_user = User.create!(
         name: 'Jacquin',
         family_name: 'DuFrance',
@@ -932,7 +932,7 @@ describe 'User' do
         user: second_user
       )
 
-      login_as dish.restaurant.user
+      login_as user
 
 
       delete(restaurant_dish_unassign_tag_path(second_restaurant, dish),
@@ -968,7 +968,7 @@ describe 'User' do
         calories: 580,
         restaurant: restaurant
       )
-      Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
+      Tag.create!(name: 'Vegano', restaurant: restaurant)
       second_user = User.create!(
         name: 'Jacquin',
         family_name: 'DuFrance',
@@ -993,7 +993,7 @@ describe 'User' do
       )
       tag = Tag.create!(name: 'Sobremesa', restaurant: second_restaurant)
 
-      login_as dish.restaurant.user
+      login_as user
 
 
       delete(restaurant_dish_unassign_tag_path(dish.restaurant, second_dish),
@@ -1029,7 +1029,7 @@ describe 'User' do
         calories: 580,
         restaurant: restaurant
       )
-      Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
+      Tag.create!(name: 'Vegano', restaurant: restaurant)
       second_user = User.create!(
         name: 'Jacquin',
         family_name: 'DuFrance',
@@ -1048,7 +1048,7 @@ describe 'User' do
       )
       tag = Tag.create!(name: 'Sobremesa', restaurant: second_restaurant)
 
-      login_as dish.restaurant.user
+      login_as user
 
 
       delete(restaurant_dish_unassign_tag_path(second_restaurant, dish),
@@ -1084,9 +1084,9 @@ describe 'User' do
         calories: 580,
         restaurant: restaurant
       )
-      Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
+      Tag.create!(name: 'Vegano', restaurant: restaurant)
 
-      login_as dish.restaurant.user
+      login_as user
 
 
       delete(restaurant_dish_unassign_tag_path(dish.restaurant, dish),
@@ -1122,9 +1122,9 @@ describe 'User' do
         calories: 580,
         restaurant: restaurant
       )
-      tag = Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
+      tag = Tag.create!(name: 'Vegano', restaurant: restaurant)
 
-      login_as dish.restaurant.user
+      login_as user
 
 
       delete(restaurant_dish_unassign_tag_path(dish.restaurant, dish),
@@ -1160,10 +1160,10 @@ describe 'User' do
         calories: 580,
         restaurant: restaurant
       )
-      dish.tags << Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
-      tag = Tag.create!(name: 'Sobremesa', restaurant: dish.restaurant)
+      dish.tags << Tag.create!(name: 'Vegano', restaurant: restaurant)
+      tag = Tag.create!(name: 'Sobremesa', restaurant: restaurant)
 
-      login_as dish.restaurant.user
+      login_as user
 
 
       delete(restaurant_dish_unassign_tag_path(dish.restaurant, dish),
@@ -1199,10 +1199,10 @@ describe 'User' do
         calories: 580,
         restaurant: restaurant
       )
-      tag = Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
+      tag = Tag.create!(name: 'Vegano', restaurant: restaurant)
       dish.tags << tag
 
-      login_as dish.restaurant.user
+      login_as user
 
 
       delete(restaurant_dish_unassign_tag_path(dish.restaurant, dish),

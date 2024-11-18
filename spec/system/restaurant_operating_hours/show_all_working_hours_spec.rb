@@ -74,7 +74,7 @@ describe 'User' do
         email: 'campus@ducodi.com.br',
         user: user
       )
-      login_as restaurant.user
+      login_as user
       restaurant.restaurant_operating_hours.create!(start_time: '09:00', end_time: '12:00', status: 1, weekday: 1)
       restaurant.restaurant_operating_hours.create!(start_time: '13:30', end_time: '17:30', status: 1, weekday: 1)
       restaurant.restaurant_operating_hours.create!(start_time: '19:00', end_time: '23:00', status: 1, weekday: 1)
@@ -107,7 +107,7 @@ describe 'User' do
         email: 'campus@ducodi.com.br',
         user: user
       )
-      login_as restaurant.user
+      login_as user
       restaurant.restaurant_operating_hours.create!(start_time: '09:00', end_time: '12:00', status: 1, weekday: 1)
       restaurant.restaurant_operating_hours.create!(start_time: '13:30', end_time: '17:30', status: 1, weekday: 1)
       restaurant.restaurant_operating_hours.create!(start_time: '19:00', end_time: '23:00', status: 1, weekday: 1)

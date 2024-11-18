@@ -35,7 +35,7 @@ describe 'User' do
       click_on 'Petit Gateau de Mousse Insuflado'
       click_on 'Desativar Prato'
 
-      expect(current_path).to eq restaurant_dish_path(dish.restaurant.id, dish.id)
+      expect(current_path).to eq restaurant_dish_path(restaurant.id, dish.id)
       expect(page).to have_content 'Inativo 🔴'
       expect(page).to have_content 'Sucesso! Prato desativado'
       expect(page).to have_button 'Ativar Prato'
@@ -77,7 +77,7 @@ describe 'User' do
       click_on 'Petit Gateau de Mousse Insuflado'
       click_on 'Ativar Prato'
 
-      expect(current_path).to eq restaurant_dish_path(dish.restaurant.id, dish.id)
+      expect(current_path).to eq restaurant_dish_path(restaurant.id, dish.id)
       expect(page).to have_content 'Ativo 🟢'
       expect(page).to have_content 'Sucesso! Prato ativado'
       expect(page).to have_button 'Desativar Prato'

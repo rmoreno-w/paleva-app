@@ -48,7 +48,7 @@ describe 'User' do
       )
       ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
 
-      login_as restaurant.user
+      login_as user
 
       get(root_path)
 
@@ -118,7 +118,7 @@ describe 'User' do
         email: 'atendimento@bjq.com.br',
         user: second_user
       )
-      login_as restaurant.user
+      login_as user
 
 
       get restaurant_item_option_set_path(second_restaurant, item_set)
@@ -162,7 +162,7 @@ describe 'User' do
         user: second_user
       )
       item_set = ItemOptionSet.create!(name: 'Pratos Franceses', restaurant: second_restaurant)
-      login_as restaurant.user
+      login_as user
 
       get restaurant_item_option_set_path(restaurant, item_set)
 
@@ -187,7 +187,7 @@ describe 'User' do
         user: user
       )
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
-      login_as restaurant.user
+      login_as user
 
       get(restaurant_item_option_set_path(restaurant, item_set))
 
@@ -229,7 +229,7 @@ describe 'User' do
         email: 'aloisio@email.com',
         password: 'fortissima12'
       )
-      restaurant = Restaurant.create!(
+      Restaurant.create!(
         brand_name: 'Pizzaria Campus du Codi',
         corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
         registration_number: '30.883.175/2481-06',
@@ -254,7 +254,7 @@ describe 'User' do
         email: 'atendimento@bjq.com.br',
         user: second_user
       )
-      login_as restaurant.user
+      login_as user
 
       get new_restaurant_item_option_set_path(second_restaurant)
 
@@ -278,7 +278,7 @@ describe 'User' do
         email: 'campus@ducodi.com.br',
         user: user
       )
-      login_as restaurant.user
+      login_as user
 
       get new_restaurant_item_option_set_path(restaurant)
 
@@ -322,7 +322,7 @@ describe 'User' do
         email: 'aloisio@email.com',
         password: 'fortissima12'
       )
-      restaurant = Restaurant.create!(
+      Restaurant.create!(
         brand_name: 'Pizzaria Campus du Codi',
         corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
         registration_number: '30.883.175/2481-06',
@@ -347,7 +347,7 @@ describe 'User' do
         email: 'atendimento@bjq.com.br',
         user: second_user
       )
-      login_as restaurant.user
+      login_as user
 
       post restaurant_item_option_sets_path(second_restaurant, params: {
         item_option_set: { name: 'Café da Tarde'}
@@ -373,7 +373,7 @@ describe 'User' do
         email: 'campus@ducodi.com.br',
         user: user
       )
-      login_as restaurant.user
+      login_as user
 
       post restaurant_item_option_sets_path(restaurant, params: {
         item_option_set: { name: 'Café da Tarde'}
@@ -444,7 +444,7 @@ describe 'User' do
         email: 'atendimento@bjq.com.br',
         user: second_user
       )
-      login_as restaurant.user
+      login_as user
 
       get restaurant_item_option_set_new_dish_path(second_restaurant, item_set)
 
@@ -486,7 +486,7 @@ describe 'User' do
         user: second_user
       )
       item_set = ItemOptionSet.create!(name: 'Pratos Franceses', restaurant: second_restaurant)
-      login_as restaurant.user
+      login_as user
 
       get restaurant_item_option_set_new_dish_path(restaurant, item_set)
 
@@ -511,7 +511,7 @@ describe 'User' do
         user: user
       )
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
-      login_as restaurant.user
+      login_as user
 
       get restaurant_item_option_set_new_dish_path(restaurant, item_set)
 
@@ -580,7 +580,7 @@ describe 'User' do
         email: 'atendimento@bjq.com.br',
         user: second_user
       )
-      login_as restaurant.user
+      login_as user
 
       post restaurant_item_option_set_add_dish_path(second_restaurant, item_set)
 
@@ -628,7 +628,7 @@ describe 'User' do
         user: second_user
       )
       item_set = ItemOptionSet.create!(name: 'Pratos Franceses', restaurant: second_restaurant)
-      login_as restaurant.user
+      login_as user
 
       post restaurant_item_option_set_add_dish_path(restaurant, item_set, params: { dish_id: dish.id })
 
@@ -675,7 +675,7 @@ describe 'User' do
         calories: 580,
         restaurant: second_restaurant
       )
-      login_as restaurant.user
+      login_as user
 
       post restaurant_item_option_set_add_dish_path(restaurant, item_set, params: { dish_id: dish_from_another_restaurant.id })
 
@@ -706,7 +706,7 @@ describe 'User' do
         calories: 580,
         restaurant: restaurant
       )
-      login_as restaurant.user
+      login_as user
 
       post restaurant_item_option_set_add_dish_path(restaurant, item_set, params: { dish_id: dish.id })
 
@@ -775,7 +775,7 @@ describe 'User' do
         email: 'atendimento@bjq.com.br',
         user: second_user
       )
-      login_as restaurant.user
+      login_as user
 
       get restaurant_item_option_set_new_beverage_path(second_restaurant, item_set)
 
@@ -817,7 +817,7 @@ describe 'User' do
         user: second_user
       )
       item_set = ItemOptionSet.create!(name: 'Pratos Franceses', restaurant: second_restaurant)
-      login_as restaurant.user
+      login_as user
 
       get restaurant_item_option_set_new_beverage_path(restaurant, item_set)
 
@@ -842,7 +842,7 @@ describe 'User' do
         user: user
       )
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
-      login_as restaurant.user
+      login_as user
 
       get restaurant_item_option_set_new_beverage_path(restaurant, item_set)
 
@@ -911,7 +911,7 @@ describe 'User' do
         email: 'atendimento@bjq.com.br',
         user: second_user
       )
-      login_as restaurant.user
+      login_as user
 
       post restaurant_item_option_set_add_beverage_path(second_restaurant, item_set)
 
@@ -960,7 +960,7 @@ describe 'User' do
         user: second_user
       )
       item_set = ItemOptionSet.create!(name: 'Pratos Franceses', restaurant: second_restaurant)
-      login_as restaurant.user
+      login_as user
 
       post restaurant_item_option_set_add_beverage_path(restaurant, item_set, params: { beverage_id: beverage.id })
 
@@ -1008,7 +1008,7 @@ describe 'User' do
         is_alcoholic: false,
         restaurant: second_restaurant
       )
-      login_as restaurant.user
+      login_as user
 
       post restaurant_item_option_set_add_beverage_path(restaurant, item_set, params: { beverage_id: beverage_from_another_restaurant.id })
 
@@ -1040,7 +1040,7 @@ describe 'User' do
         is_alcoholic: false,
         restaurant: restaurant
       )
-      login_as restaurant.user
+      login_as user
 
       post restaurant_item_option_set_add_beverage_path(restaurant, item_set, params: { beverage_id: beverage.id })
 
@@ -1109,7 +1109,7 @@ describe 'User' do
         email: 'atendimento@bjq.com.br',
         user: second_user
       )
-      login_as restaurant.user
+      login_as user
 
       get restaurant_item_option_set_remove_item_path(second_restaurant, item_set)
 
@@ -1151,7 +1151,7 @@ describe 'User' do
         user: second_user
       )
       item_set = ItemOptionSet.create!(name: 'Pratos Franceses', restaurant: second_restaurant)
-      login_as restaurant.user
+      login_as user
 
       get restaurant_item_option_set_remove_item_path(restaurant, item_set)
 
@@ -1176,7 +1176,7 @@ describe 'User' do
         user: user
       )
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
-      login_as restaurant.user
+      login_as user
 
       get restaurant_item_option_set_remove_item_path(restaurant, item_set)
 
@@ -1245,7 +1245,7 @@ describe 'User' do
         email: 'atendimento@bjq.com.br',
         user: second_user
       )
-      login_as restaurant.user
+      login_as user
 
       delete restaurant_item_option_set_delete_item_path(second_restaurant, item_set)
 
@@ -1296,7 +1296,7 @@ describe 'User' do
         user: second_user
       )
       item_set_from_another_restaurant = ItemOptionSet.create!(name: 'Pratos Franceses', restaurant: second_restaurant)
-      login_as restaurant.user
+      login_as user
 
 
       delete restaurant_item_option_set_delete_item_path(restaurant, item_set_from_another_restaurant, params: { item_id: item_entry.id })
@@ -1351,7 +1351,7 @@ describe 'User' do
       item_entry_from_another_restaurant = item_set_from_another_restaurant.item_option_entries.create!(
         itemable: beverage_from_another_restaurant
         )
-      login_as restaurant.user
+      login_as user
 
 
       delete restaurant_item_option_set_delete_item_path(restaurant, item_set, params: { item_id: item_entry_from_another_restaurant.id })
@@ -1386,7 +1386,7 @@ describe 'User' do
         restaurant: restaurant
       )
       item_entry = item_set.item_option_entries.create!(itemable: beverage)
-      login_as restaurant.user
+      login_as user
 
       delete restaurant_item_option_set_delete_item_path(restaurant, item_set, params: { item_id: item_entry.id })
 

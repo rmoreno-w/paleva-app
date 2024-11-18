@@ -54,7 +54,7 @@ describe 'User' do
         restaurant: restaurant
       )
       option_set.item_option_entries.create(itemable: beverage)
-      login_as restaurant.user
+      login_as user
 
       # Act
       visit root_path
@@ -83,7 +83,7 @@ describe 'User' do
         email: 'campus@ducodi.com.br',
         user: user
       )
-      login_as restaurant.user
+      login_as user
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
 
       # Act
@@ -112,7 +112,7 @@ describe 'User' do
         email: 'campus@ducodi.com.br',
         user: user
       )
-      login_as restaurant.user
+      login_as user
 
       beverage = Beverage.create!(
         name: 'Agua de coco Sócoco',
@@ -182,7 +182,7 @@ describe 'User' do
         email: 'campus@ducodi.com.br',
         user: user
       )
-      login_as restaurant.user
+      login_as user
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
 
       beverage = Beverage.create!(
@@ -253,7 +253,7 @@ describe 'User' do
         email: 'campus@ducodi.com.br',
         user: user
       )
-      login_as restaurant.user
+      login_as user
 
       beverage = Beverage.create!(
         name: 'Agua de coco Sócoco',

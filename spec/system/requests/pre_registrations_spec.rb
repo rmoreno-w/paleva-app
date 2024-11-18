@@ -72,7 +72,7 @@ describe 'User' do
         email: 'aloisio@email.com',
         password: 'fortissima12'
       )
-      restaurant = Restaurant.create!(
+      Restaurant.create!(
         brand_name: 'Pizzaria Campus du Codi',
         corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
         registration_number: '30.883.175/2481-06',
@@ -81,7 +81,7 @@ describe 'User' do
         email: 'campus@ducodi.com.br',
         user: user
       )
-      login_as restaurant.user
+      login_as user
 
       second_user = User.create!(
         name: 'Jacquin',
@@ -126,7 +126,7 @@ describe 'User' do
         email: 'campus@ducodi.com.br',
         user: user
       )
-      login_as restaurant.user
+      login_as user
 
       # Act
       get restaurant_staff_members_path(restaurant)
@@ -170,7 +170,7 @@ describe 'User' do
         email: 'aloisio@email.com',
         password: 'fortissima12'
       )
-      restaurant = Restaurant.create!(
+      Restaurant.create!(
         brand_name: 'Pizzaria Campus du Codi',
         corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
         registration_number: '30.883.175/2481-06',
@@ -179,7 +179,7 @@ describe 'User' do
         email: 'campus@ducodi.com.br',
         user: user
       )
-      login_as restaurant.user
+      login_as user
 
       second_user = User.create!(
         name: 'Jacquin',
@@ -259,7 +259,7 @@ describe 'User' do
         email: 'campus@ducodi.com.br',
         user: user
       )
-      login_as restaurant.user
+      login_as user
 
       # Act
       get new_restaurant_staff_member_path(restaurant)
@@ -306,7 +306,7 @@ describe 'User' do
         email: 'aloisio@email.com',
         password: 'fortissima12'
       )
-      restaurant = Restaurant.create!(
+      Restaurant.create!(
         brand_name: 'Pizzaria Campus du Codi',
         corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
         registration_number: '30.883.175/2481-06',
@@ -315,7 +315,7 @@ describe 'User' do
         email: 'campus@ducodi.com.br',
         user: user
       )
-      login_as restaurant.user
+      login_as user
 
       second_user = User.create!(
         name: 'Jacquin',
@@ -401,7 +401,7 @@ describe 'User' do
         email: 'campus@ducodi.com.br',
         user: user
       )
-      login_as restaurant.user
+      login_as user
 
       # Act
       post restaurant_staff_members_path(restaurant, params: { staff_member: {

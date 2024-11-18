@@ -76,13 +76,13 @@ describe 'User' do
         email: 'campus@ducodi.com.br',
         user: user
       )
-      dish = Dish.create!(
+      Dish.create!(
         name: 'Petit Gateau de Mousse Insuflado',
         description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
         calories: 580,
         restaurant: restaurant
       )
-      login_as dish.restaurant.user
+      login_as user
 
       # Act
       visit root_path

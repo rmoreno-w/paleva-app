@@ -34,7 +34,7 @@ describe 'User' do
       email: 'aloisio@email.com',
       password: 'fortissima12'
     )
-    restaurant = Restaurant.create!(
+    Restaurant.create!(
       brand_name: 'Pizzaria Campus du Codi',
       corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
       registration_number: '30.883.175/2481-06',
@@ -43,7 +43,7 @@ describe 'User' do
       email: 'campus@ducodi.com.br',
       user: user
     )
-    login_as restaurant.user
+    login_as user
     
     visit new_restaurant_path
     
@@ -123,7 +123,7 @@ describe 'User' do
       user: user
     )
 
-    login_as restaurant.user
+    login_as user
 
     visit root_path
     expect(page).to have_content "#{restaurant.brand_name} - Cardápios"
@@ -150,7 +150,6 @@ describe 'User' do
     fill_in 'Endereço Completo', with: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP'
     fill_in 'Telefone (digite apenas os números)', with: '12987654321'
     fill_in 'E-mail', with: 'campus@ducodi.com.br'
-    # fill_in 'Horários de Funcionamento', with: ''
     click_on 'Criar Restaurante'
 
     expect(page).to have_content 'Ops! Erro ao criar Restaurante'

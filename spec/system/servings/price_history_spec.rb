@@ -59,7 +59,7 @@ describe 'User' do
         restaurant: restaurant
       )
       serving = Serving.create!(description: 'Porção Individual (1 Bolinho e 1 Bola de Sorvete)', current_price: 24.5, servingable: dish)
-      login_as dish.restaurant.user
+      login_as user
 
       visit root_path
       click_on 'Pratos'
@@ -100,7 +100,7 @@ describe 'User' do
       serving = Serving.create!(description: 'Porção Individual (1 Bolinho e 1 Bola de Sorvete)', current_price: 24.5, servingable: dish)
       serving.current_price = 25.5
       serving.current_price = 31.98
-      login_as dish.restaurant.user
+      login_as user
 
       visit root_path
       click_on 'Pratos'
@@ -178,7 +178,7 @@ describe 'User' do
         restaurant: restaurant
       )
       serving = Serving.create!(description: 'Garrafa Individual', current_price: 2.5, servingable: beverage)
-      login_as beverage.restaurant.user
+      login_as user
 
       visit root_path
       click_on 'Bebidas'
@@ -223,7 +223,7 @@ describe 'User' do
       serving.current_price = 5.92
       serving.save
       
-      login_as beverage.restaurant.user
+      login_as user
 
       visit root_path
       click_on 'Bebidas'

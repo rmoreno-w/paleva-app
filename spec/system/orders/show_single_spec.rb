@@ -32,7 +32,7 @@ describe 'User' do
         customer_phone: '35999222299',
         customer_email: 'adeilson@email.com',
         customer_registration_number: CPF.generate,
-        restaurant: dish.restaurant
+        restaurant: restaurant
       )
       OrderItem.create!(
         item_name: dish.name, 
@@ -98,7 +98,7 @@ describe 'User' do
         customer_phone: '35999222299',
         customer_email: 'adeilson@email.com',
         customer_registration_number: CPF.generate,
-        restaurant: dish.restaurant
+        restaurant: restaurant
       )
       OrderItem.create!(
         item_name: dish.name, 
@@ -114,7 +114,7 @@ describe 'User' do
         number_of_servings: 1,
         order: order
       )
-      login_as dish.restaurant.user
+      login_as user
 
       # Act
       visit restaurant_order_path(dish.restaurant, order)
@@ -165,7 +165,7 @@ describe 'User' do
         customer_phone: '35999222299',
         customer_email: 'adeilson@email.com',
         customer_registration_number: CPF.generate,
-        restaurant: dish.restaurant
+        restaurant: restaurant
       )
       OrderItem.create!(
         item_name: dish.name, 
@@ -181,7 +181,7 @@ describe 'User' do
         number_of_servings: 1,
         order: order
       )
-      login_as dish.restaurant.user
+      login_as user
 
       second_user = User.create!(
         name: 'Jacquin',

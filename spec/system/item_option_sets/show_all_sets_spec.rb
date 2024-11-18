@@ -77,16 +77,16 @@ describe 'User' do
         email: 'campus@ducodi.com.br',
         user: user
       )
-      dish = Dish.create!(
+      Dish.create!(
         name: 'Petit Gateau de Mousse Insuflado',
         description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
         calories: 580,
         restaurant: restaurant
       )
-      ItemOptionSet.create!(name: 'Café da Tarde', restaurant: dish.restaurant)
-      ItemOptionSet.create!(name: 'Café da Manhã', restaurant: dish.restaurant)
-      ItemOptionSet.create!(name: 'Almoço', restaurant: dish.restaurant)
-      login_as dish.restaurant.user
+      ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
+      ItemOptionSet.create!(name: 'Café da Manhã', restaurant: restaurant)
+      ItemOptionSet.create!(name: 'Almoço', restaurant: restaurant)
+      login_as user
 
       # Act
       visit root_path
@@ -115,15 +115,15 @@ describe 'User' do
         email: 'campus@ducodi.com.br',
         user: user
       )
-      dish = Dish.create!(
+      Dish.create!(
         name: 'Petit Gateau de Mousse Insuflado',
         description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
         calories: 580,
         restaurant: restaurant
       )
-      ItemOptionSet.create!(name: 'Café da Tarde', restaurant: dish.restaurant)
-      ItemOptionSet.create!(name: 'Almoço', restaurant: dish.restaurant)
-      login_as dish.restaurant.user
+      ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
+      ItemOptionSet.create!(name: 'Almoço', restaurant: restaurant)
+      login_as user
       second_user = User.create!(
         name: 'Jacquin',
         family_name: 'DuFrance',

@@ -57,7 +57,7 @@ describe 'User' do
         calories: 580,
         restaurant: restaurant
       )
-      login_as dish.restaurant.user
+      login_as user
 
       visit root_path
       click_on 'Pratos'
@@ -94,7 +94,7 @@ describe 'User' do
         calories: 580,
         restaurant: restaurant
       )
-      login_as dish.restaurant.user
+      login_as user
 
       visit root_path
       click_on 'Pratos'
@@ -168,7 +168,7 @@ describe 'User' do
         is_alcoholic: false,
         restaurant: restaurant
       )
-      login_as beverage.restaurant.user
+      login_as user
 
       visit root_path
       click_on 'Bebidas'
@@ -206,7 +206,7 @@ describe 'User' do
         is_alcoholic: false,
         restaurant: restaurant
       )
-      login_as beverage.restaurant.user
+      login_as user
 
       visit root_path
       click_on 'Bebidas'

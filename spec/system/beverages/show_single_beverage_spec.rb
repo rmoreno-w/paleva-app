@@ -37,7 +37,7 @@ describe 'User' do
       click_on 'Agua de coco Sócoco'
 
       # Assert
-      expect(current_path).to eq restaurant_beverage_path(beverage.restaurant.id, beverage.id)
+      expect(current_path).to eq restaurant_beverage_path(restaurant.id, beverage.id)
       expect(page).to have_content 'Agua de coco Sócoco'
       expect(page).to have_content 'Caixa de 1L. Já vem gelada'
       expect(page).to have_content '150'
@@ -144,7 +144,7 @@ describe 'User' do
       click_on 'Agua de coco Sócoco'
 
       # Assert
-      expect(current_path).to eq restaurant_beverage_path(beverage.restaurant.id, beverage.id)
+      expect(current_path).to eq restaurant_beverage_path(restaurant.id, beverage.id)
       expect(page).to have_button 'Desativar Bebida'
     end
 
@@ -184,7 +184,7 @@ describe 'User' do
       click_on 'Agua de coco Sócoco'
 
       # Assert
-      expect(current_path).to eq restaurant_beverage_path(beverage.restaurant.id, beverage.id)
+      expect(current_path).to eq restaurant_beverage_path(restaurant.id, beverage.id)
       expect(page).to have_button 'Ativar Bebida'
     end
 
@@ -222,7 +222,7 @@ describe 'User' do
       click_on 'Agua de coco Sócoco'
 
       # Assert
-      expect(current_path).to eq restaurant_beverage_path(beverage.restaurant.id, beverage.id)
+      expect(current_path).to eq restaurant_beverage_path(restaurant.id, beverage.id)
       expect(page).to have_content 'Porções:'
       expect(page).to have_content "Nenhuma porção cadastrada para #{beverage.name}"
       expect(page).to have_link 'Cadastrar Porção'

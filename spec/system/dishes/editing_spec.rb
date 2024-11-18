@@ -98,7 +98,7 @@ describe 'User' do
       click_on 'Alterar Prato'
 
       # Assert
-      expect(current_path).to eq edit_restaurant_dish_path(dish.restaurant.id, dish.id)
+      expect(current_path).to eq edit_restaurant_dish_path(restaurant.id, dish.id)
       expect(page).to have_content 'Alterar Prato'
       expect(page).to have_field 'Nome', with: dish.name
     end
@@ -142,7 +142,7 @@ describe 'User' do
       click_on 'Atualizar Prato'
 
       # Assert
-      expect(current_path).to eq restaurant_dish_path(dish.restaurant.id, dish.id)
+      expect(current_path).to eq restaurant_dish_path(restaurant.id, dish.id)
       expect(page).to have_content 'Prato alterado com sucesso'
       expect(page).to have_content 'Grand Gateau'
     end
@@ -184,7 +184,7 @@ describe 'User' do
       click_on 'Atualizar Prato'
 
       # Assert
-      expect(current_path).to eq restaurant_dish_path(dish.restaurant.id, dish.id)
+      expect(current_path).to eq restaurant_dish_path(restaurant.id, dish.id)
       expect(page).to have_content 'Erro ao alterar o prato'
       expect(page).to have_field 'Nome', with: ''
     end

@@ -26,7 +26,7 @@ RSpec.describe DishTag, type: :model do
           calories: 580,
           restaurant: restaurant
         )
-        tag = Tag.create(name: 'Vegano', restaurant: dish.restaurant)
+        tag = Tag.create(name: 'Vegano', restaurant: restaurant)
 
         dish.tags << tag
         dish_tag = DishTag.new(tag_id: tag.id, dish_id: dish.id)

@@ -44,7 +44,7 @@ describe 'User' do
         email: 'campus@ducodi.com.br',
         user: user
       )
-      login_as restaurant.user
+      login_as user
 
       visit root_path
       click_on 'Funcionários'
@@ -71,7 +71,7 @@ describe 'User' do
         email: 'campus@ducodi.com.br',
         user: user
       )
-      login_as restaurant.user
+      login_as user
       PreRegistration.create!(email: 'ken@errero.com', registration_number: CPF.generate, restaurant: restaurant)
       pre_registration_to_confirm = PreRegistration.create!(email: 'valente@email.com', registration_number: CPF.generate, restaurant: restaurant)
       User.create!(
@@ -108,7 +108,7 @@ describe 'User' do
         email: 'campus@ducodi.com.br',
         user: user
       )
-      login_as restaurant.user
+      login_as user
 
       PreRegistration.create!(email: 'ken@errero.com', registration_number: CPF.generate, restaurant: restaurant)
       pre_registration_to_confirm = PreRegistration.create!(email: 'valente@email.com', registration_number: CPF.generate, restaurant: restaurant)

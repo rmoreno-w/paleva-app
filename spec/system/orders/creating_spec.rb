@@ -26,7 +26,7 @@ describe 'User' do
         restaurant: restaurant
       )
       dish.servings.create!(description: '1 Bolinho e 1 Bola de Sorvete', current_price: 24.50)
-      item_set = ItemOptionSet.create!(name: 'Almoço', restaurant: dish.restaurant)
+      item_set = ItemOptionSet.create!(name: 'Almoço', restaurant: restaurant)
       item_set.item_option_entries.create(itemable: dish)
 
       # Act
@@ -62,9 +62,9 @@ describe 'User' do
         restaurant: restaurant
       )
       serving = dish.servings.create!(description: '1 Bolinho e 1 Bola de Sorvete', current_price: 24.50)
-      item_set = ItemOptionSet.create!(name: 'Almoço', restaurant: dish.restaurant)
+      item_set = ItemOptionSet.create!(name: 'Almoço', restaurant: restaurant)
       item_set.item_option_entries.create(itemable: dish)
-      login_as dish.restaurant.user
+      login_as user
 
       # Act
       visit root_path
@@ -103,9 +103,9 @@ describe 'User' do
         restaurant: restaurant
       )
       serving = dish.servings.create!(description: '1 Bolinho e 1 Bola de Sorvete', current_price: 24.50)
-      item_set = ItemOptionSet.create!(name: 'Almoço', restaurant: dish.restaurant)
+      item_set = ItemOptionSet.create!(name: 'Almoço', restaurant: restaurant)
       item_set.item_option_entries.create(itemable: dish)
-      login_as dish.restaurant.user
+      login_as user
 
       # Act
       visit root_path
@@ -160,7 +160,7 @@ describe 'User' do
         restaurant: restaurant
       )
       serving = dish.servings.create!(description: '1 Bolinho e 1 Bola de Sorvete', current_price: 24.50)
-      item_set = ItemOptionSet.create!(name: 'Almoço', restaurant: dish.restaurant)
+      item_set = ItemOptionSet.create!(name: 'Almoço', restaurant: restaurant)
       item_set.item_option_entries.create(itemable: dish)
 
       second_user = User.create!(
@@ -170,7 +170,7 @@ describe 'User' do
         email: 'ajc@cquin.com',
         password: 'fortissima12',
         role: :staff,
-        restaurant: dish.restaurant
+        restaurant: restaurant
       )
       login_as second_user
 

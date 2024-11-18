@@ -33,7 +33,7 @@ describe 'User' do
         email: 'aloisio@email.com',
         password: 'fortissima12'
       )
-      restaurant = Restaurant.create!(
+      Restaurant.create!(
         brand_name: 'Pizzaria Campus du Codi',
         corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
         registration_number: '30.883.175/2481-06',
@@ -42,7 +42,7 @@ describe 'User' do
         email: 'campus@ducodi.com.br',
         user: user
       )
-      login_as restaurant.user
+      login_as user
 
       visit root_path
 
@@ -91,7 +91,7 @@ describe 'User' do
           restaurant: restaurant
         )
 
-      login_as restaurant.user
+      login_as user
 
 
       visit root_path
@@ -149,7 +149,7 @@ describe 'User' do
       )
 
 
-      login_as restaurant.user
+      login_as user
       visit root_path
       fill_in 'Procurar no Menu', with: 'a'
       click_on 'Buscar'
@@ -196,7 +196,7 @@ describe 'User' do
       )
 
 
-      login_as restaurant.user
+      login_as user
       visit root_path
       fill_in 'Procurar no Menu', with: 'a'
       click_on 'Buscar'
@@ -217,7 +217,7 @@ describe 'User' do
         email: 'aloisio@email.com',
         password: 'fortissima12'
       )
-      restaurant = Restaurant.create!(
+      Restaurant.create!(
         brand_name: 'Pizzaria Campus du Codi',
         corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
         registration_number: '30.883.175/2481-06',
@@ -229,7 +229,7 @@ describe 'User' do
       search_query = 'a'
 
 
-      login_as restaurant.user
+      login_as user
       visit root_path
       fill_in 'Procurar no Menu', with: search_query
       click_on 'Buscar'
@@ -280,7 +280,7 @@ describe 'User' do
       )
 
 
-      login_as restaurant.user
+      login_as user
       visit root_path
       fill_in 'Procurar no Menu', with: ''
       click_on 'Buscar'
@@ -359,7 +359,7 @@ describe 'User' do
       )
 
 
-      login_as restaurant.user
+      login_as user
       visit root_path
       fill_in 'Procurar no Menu', with: 'c'
       click_on 'Buscar'
@@ -389,7 +389,7 @@ describe 'User' do
         email: 'campus@ducodi.com.br',
         user: user
       )
-      login_as restaurant.user
+      login_as user
 
       beverage = Beverage.create!(
         name: 'Agua de coco Sócoco',

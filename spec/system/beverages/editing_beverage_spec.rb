@@ -101,7 +101,7 @@ describe 'User' do
       click_on 'Alterar Bebida'
 
       # Assert
-      expect(current_path).to eq edit_restaurant_beverage_path(beverage.restaurant.id, beverage.id)
+      expect(current_path).to eq edit_restaurant_beverage_path(restaurant.id, beverage.id)
       expect(page).to have_content 'Alterar Bebida'
       expect(page).to have_field 'Nome', with: beverage.name
     end
@@ -146,7 +146,7 @@ describe 'User' do
       click_on 'Atualizar Bebida'
 
       # Assert
-      expect(current_path).to eq restaurant_beverage_path(beverage.restaurant.id, beverage.id)
+      expect(current_path).to eq restaurant_beverage_path(restaurant.id, beverage.id)
       expect(page).to have_content 'Bebida alterada com sucesso'
       expect(page).to have_content 'Água de coco KeroCoco'
     end
@@ -189,7 +189,7 @@ describe 'User' do
       click_on 'Atualizar Bebida'
 
       # Assert
-      expect(current_path).to eq restaurant_beverage_path(beverage.restaurant.id, beverage.id)
+      expect(current_path).to eq restaurant_beverage_path(restaurant.id, beverage.id)
       expect(page).to have_content 'Erro ao alterar a bebida'
       expect(page).to have_field 'Nome', with: ''
     end
