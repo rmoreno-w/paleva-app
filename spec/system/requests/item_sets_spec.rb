@@ -3,7 +3,22 @@ require 'rails_helper'
 describe 'User' do
   context 'tries to access the items sets of their restaurant' do
     it 'but is not authenticated' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
 
       # Act
@@ -15,7 +30,22 @@ describe 'User' do
     end
 
     it 'and succeeds' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
 
       login_as restaurant.user
@@ -29,7 +59,22 @@ describe 'User' do
 
   context 'tries to access a set of items of their restaurant' do
     it 'but is not authenticated' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
 
       # Act
@@ -40,7 +85,22 @@ describe 'User' do
     end
 
     it 'but fails to get to the page for providing an id for a restaurant that they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
       second_user = User.create!(
         name: 'Jacquin',
@@ -60,13 +120,30 @@ describe 'User' do
       )
       login_as restaurant.user
 
+
       get restaurant_item_option_set_path(second_restaurant, item_set)
+
 
       expect(response.status).to redirect_to root_path
     end
 
     it 'but fails to get to the page for providing an id for a item set that they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
       second_user = User.create!(
         name: 'Jacquin',
@@ -93,9 +170,23 @@ describe 'User' do
     end
 
     it 'and succeeds' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
-
       login_as restaurant.user
 
       get(restaurant_item_option_set_path(restaurant, item_set))
@@ -106,7 +197,22 @@ describe 'User' do
 
   context 'tries to get the form to create a set of items for their restaurant' do
     it 'but is not authenticated' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
 
       # Act
       get new_restaurant_item_option_set_path(restaurant)
@@ -116,7 +222,22 @@ describe 'User' do
     end
 
     it 'but fails to get to the page for providing an id for a restaurant that they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       second_user = User.create!(
         name: 'Jacquin',
         family_name: 'DuFrance',
@@ -141,7 +262,22 @@ describe 'User' do
     end
 
     it 'and succeeds' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       login_as restaurant.user
 
       get new_restaurant_item_option_set_path(restaurant)
@@ -152,7 +288,22 @@ describe 'User' do
 
   context 'tries to create a set of items for their restaurant (post request)' do
     it 'but is not authenticated' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
 
       # Act
       post restaurant_item_option_sets_path(restaurant, params: {
@@ -164,7 +315,22 @@ describe 'User' do
     end
 
     it 'but fails to get to the page for providing an id for a restaurant that they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       second_user = User.create!(
         name: 'Jacquin',
         family_name: 'DuFrance',
@@ -191,7 +357,22 @@ describe 'User' do
     end
 
     it 'and succeeds' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       login_as restaurant.user
 
       post restaurant_item_option_sets_path(restaurant, params: {
@@ -204,7 +385,22 @@ describe 'User' do
 
   context 'tries to get the form to add a dish to a set of items for their restaurant' do
     it 'but is not authenticated' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
 
       # Act
@@ -215,7 +411,22 @@ describe 'User' do
     end
 
     it 'but fails to get to the page for providing an id for a restaurant that they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
       second_user = User.create!(
         name: 'Jacquin',
@@ -241,7 +452,22 @@ describe 'User' do
     end
 
     it 'but fails to get to the page for providing an id for a set of items that they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
       second_user = User.create!(
         name: 'Jacquin',
@@ -268,7 +494,22 @@ describe 'User' do
     end
 
     it 'and succeeds' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
       login_as restaurant.user
 
@@ -280,7 +521,22 @@ describe 'User' do
 
   context 'tries to add a dish to a set of items for their restaurant (via post request)' do
     it 'but is not authenticated' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
 
       # Act
@@ -291,7 +547,22 @@ describe 'User' do
     end
 
     it 'but fails to for providing an id for a restaurant that they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
       second_user = User.create!(
         name: 'Jacquin',
@@ -317,7 +588,22 @@ describe 'User' do
     end
 
     it 'but fails to get to the page for providing an id for a set of items that they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
       dish = Dish.create!(
         name: 'Petit Gateau de Mousse Insuflado',
@@ -350,7 +636,22 @@ describe 'User' do
     end
 
     it 'but fails to get to the page for providing an id for a dish that they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
       second_user = User.create!(
         name: 'Jacquin',
@@ -382,7 +683,22 @@ describe 'User' do
     end
 
     it 'and succeeds' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
       dish = Dish.create!(
         name: 'Petit Gateau de Mousse Insuflado',
@@ -400,7 +716,22 @@ describe 'User' do
 
   context 'tries to get the form to add a beverage to a set of items for their restaurant' do
     it 'but is not authenticated' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
 
       # Act
@@ -411,7 +742,22 @@ describe 'User' do
     end
 
     it 'but fails to get to the page for providing an id for a restaurant that they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
       second_user = User.create!(
         name: 'Jacquin',
@@ -437,7 +783,22 @@ describe 'User' do
     end
 
     it 'but fails to get to the page for providing an id for a set of items that they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
       second_user = User.create!(
         name: 'Jacquin',
@@ -464,7 +825,22 @@ describe 'User' do
     end
 
     it 'and succeeds' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
       login_as restaurant.user
 
@@ -476,7 +852,22 @@ describe 'User' do
 
   context 'tries to add a beverage to a set of items for their restaurant (via post request)' do
     it 'but is not authenticated' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
 
       # Act
@@ -487,7 +878,22 @@ describe 'User' do
     end
 
     it 'but fails to for providing an id for a restaurant that they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
       second_user = User.create!(
         name: 'Jacquin',
@@ -513,7 +919,22 @@ describe 'User' do
     end
 
     it 'but fails to get to the page for providing an id for a set of items that they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
       beverage = Beverage.create!(
         name: 'Agua de coco Sócoco',
@@ -547,7 +968,22 @@ describe 'User' do
     end
 
     it 'but fails to get to the page for providing an id for a beverage that they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
       second_user = User.create!(
         name: 'Jacquin',
@@ -580,7 +1016,22 @@ describe 'User' do
     end
 
     it 'and succeeds' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
       beverage = Beverage.create!(
         name: 'Agua de coco Sócoco',
@@ -599,7 +1050,22 @@ describe 'User' do
 
   context 'tries to get the form to remove an item from a set of items for their restaurant' do
     it 'but is not authenticated' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
 
       # Act
@@ -610,7 +1076,22 @@ describe 'User' do
     end
 
     it 'but fails to get to the page for providing an id for a restaurant that they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
       second_user = User.create!(
         name: 'Jacquin',
@@ -636,7 +1117,22 @@ describe 'User' do
     end
 
     it 'but fails to get to the page for providing an id for a set of items that they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
       second_user = User.create!(
         name: 'Jacquin',
@@ -663,7 +1159,22 @@ describe 'User' do
     end
 
     it 'and succeeds' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
       login_as restaurant.user
 
@@ -675,7 +1186,22 @@ describe 'User' do
 
   context 'tries to delete an item from a set of items for their restaurant (via delete request)' do
     it 'but is not authenticated' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
 
       # Act
@@ -686,7 +1212,22 @@ describe 'User' do
     end
 
     it 'but fails to for providing an id for a restaurant that they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
       second_user = User.create!(
         name: 'Jacquin',
@@ -712,7 +1253,22 @@ describe 'User' do
     end
 
     it 'but fails to for providing an id for a set of items that they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
       beverage = Beverage.create!(
         name: 'Agua de coco Sócoco',
@@ -742,13 +1298,30 @@ describe 'User' do
       item_set_from_another_restaurant = ItemOptionSet.create!(name: 'Pratos Franceses', restaurant: second_restaurant)
       login_as restaurant.user
 
+
       delete restaurant_item_option_set_delete_item_path(restaurant, item_set_from_another_restaurant, params: { item_id: item_entry.id })
+
 
       expect(response.status).to redirect_to root_path
     end
 
     it 'but fails to get to the page for providing an id for an item entry that they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
 
       second_user = User.create!(
@@ -780,13 +1353,30 @@ describe 'User' do
         )
       login_as restaurant.user
 
+
       delete restaurant_item_option_set_delete_item_path(restaurant, item_set, params: { item_id: item_entry_from_another_restaurant.id })
+
 
       expect(response.status).to redirect_to root_path
     end
 
     it 'and succeeds' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
       beverage = Beverage.create!(
         name: 'Agua de coco Sócoco',
@@ -799,6 +1389,8 @@ describe 'User' do
       login_as restaurant.user
 
       delete restaurant_item_option_set_delete_item_path(restaurant, item_set, params: { item_id: item_entry.id })
+
+      expect(response).to redirect_to restaurant_item_option_set_path(restaurant, item_set)
     end
   end
 end

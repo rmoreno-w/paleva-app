@@ -21,7 +21,22 @@ describe 'User' do
   end
 
   it 'can not access the restaurant creation page if they have a previous restaurant' do
-    restaurant = create_restaurant_and_user
+    user = User.create!(
+      name: 'Aloisio',
+      family_name: 'Silveira',
+      registration_number: '08000661110',
+      email: 'aloisio@email.com',
+      password: 'fortissima12'
+    )
+    restaurant = Restaurant.create!(
+      brand_name: 'Pizzaria Campus du Codi',
+      corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+      registration_number: '30.883.175/2481-06',
+      address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+      phone: '12987654321',
+      email: 'campus@ducodi.com.br',
+      user: user
+    )
     login_as restaurant.user
     
     visit new_restaurant_path
@@ -73,7 +88,22 @@ describe 'User' do
   end
 
   it 'sees the restaurant item sets page if logged in and has a restaurant' do
-    restaurant = create_restaurant_and_user
+    user = User.create!(
+      name: 'Aloisio',
+      family_name: 'Silveira',
+      registration_number: '08000661110',
+      email: 'aloisio@email.com',
+      password: 'fortissima12'
+    )
+    restaurant = Restaurant.create!(
+      brand_name: 'Pizzaria Campus du Codi',
+      corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+      registration_number: '30.883.175/2481-06',
+      address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+      phone: '12987654321',
+      email: 'campus@ducodi.com.br',
+      user: user
+    )
 
     login_as restaurant.user
 

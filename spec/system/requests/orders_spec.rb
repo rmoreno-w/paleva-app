@@ -3,7 +3,22 @@ require 'rails_helper'
 describe 'User' do
   context 'tries to get the form to finish an order' do
     it 'but is not authenticated' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
 
       # Act
       get restaurant_new_order_path(restaurant)
@@ -13,7 +28,22 @@ describe 'User' do
     end
 
     it 'and fails if they provide an id of a restaurant they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       login_as restaurant.user
       second_user = User.create!(
         name: 'Jacquin',
@@ -40,7 +70,22 @@ describe 'User' do
     end
 
     it 'and succeeds' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       login_as restaurant.user
 
       # Act
@@ -53,7 +98,22 @@ describe 'User' do
 
   context 'tries to visualize the page of an order' do
     it 'but is not authenticated' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       order = Order.create(
         customer_name: 'Adeilson',
         customer_phone: '35999222299',
@@ -70,7 +130,22 @@ describe 'User' do
     end
 
     it 'and fails if they provide an id of a restaurant they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       order = Order.create(
         customer_name: 'Adeilson',
         customer_phone: '35999222299',
@@ -104,7 +179,22 @@ describe 'User' do
     end
 
     it 'and fails if they provide an id of a restaurant they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       Order.create(
         customer_name: 'Adeilson',
         customer_phone: '35999222299',
@@ -145,7 +235,22 @@ describe 'User' do
     end
 
     it 'and succeeds' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       order = Order.create(
         customer_name: 'Adeilson',
         customer_phone: '35999222299',
@@ -165,7 +270,22 @@ describe 'User' do
 
   context 'tries to visualize all the orders of their restaurant' do
     it 'but is not authenticated' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       Order.create(
         customer_name: 'Adeilson',
         customer_phone: '35999222299',
@@ -182,7 +302,22 @@ describe 'User' do
     end
 
     it 'and fails if they provide an id of a restaurant they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       Order.create(
         customer_name: 'Adeilson',
         customer_phone: '35999222299',
@@ -216,7 +351,22 @@ describe 'User' do
     end
 
     it 'and succeeds' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       Order.create(
         customer_name: 'Adeilson',
         customer_phone: '35999222299',
@@ -236,7 +386,22 @@ describe 'User' do
 
   context 'tries to add an item to an order of their restaurant' do
     it 'but is not authenticated' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       dish = Dish.create!(
         name: 'Petit Gateau de Mousse Insuflado',
         description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
@@ -251,6 +416,7 @@ describe 'User' do
       item_set = ItemOptionSet.create!(name: 'Café Frances', restaurant: restaurant)
       item_set.item_option_entries.create!(itemable: dish)
 
+
       # Act
       post restaurant_order_add_item_path(
         restaurant,
@@ -259,12 +425,28 @@ describe 'User' do
           item_set_id: item_set.id
         })
 
+
       # Assert
       expect(response).to redirect_to new_user_session_path
     end
 
     it 'and fails if they provide an id of a restaurant they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       dish = Dish.create!(
         name: 'Petit Gateau de Mousse Insuflado',
         description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
@@ -297,6 +479,7 @@ describe 'User' do
         user: second_user
       )
 
+
       # Act
       post restaurant_order_add_item_path(
         second_restaurant,
@@ -305,12 +488,28 @@ describe 'User' do
           item_id: serving.id
         })
 
+
       # Assert
       expect(response).to redirect_to root_path
     end
 
     it 'and fails if they provide an id of an item set they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       dish = Dish.create!(
         name: 'Petit Gateau de Mousse Insuflado',
         description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
@@ -357,6 +556,7 @@ describe 'User' do
       item_set_from_another_restaurant = ItemOptionSet.create!(name: 'Café Frances', restaurant: second_restaurant)
       item_set_from_another_restaurant.item_option_entries.create!(itemable: beverage)
 
+
       # Act
       post restaurant_order_add_item_path(
         restaurant,
@@ -365,12 +565,28 @@ describe 'User' do
           item_id: serving.id
         })
 
+
       # Assert
       expect(response).to redirect_to root_path
     end
 
     it 'and fails if they provide an id of a serving they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       dish = Dish.create!(
         name: 'Petit Gateau de Mousse Insuflado',
         description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
@@ -417,6 +633,7 @@ describe 'User' do
       item_set_from_another_restaurant = ItemOptionSet.create!(name: 'Café Frances', restaurant: second_restaurant)
       item_set_from_another_restaurant.item_option_entries.create!(itemable: beverage)
 
+
       # Act
       post restaurant_order_add_item_path(
         restaurant,
@@ -425,12 +642,28 @@ describe 'User' do
           item_id: serving_from_another_restaurant.id
         })
 
+
       # Assert
       expect(response).to redirect_to root_path
     end
 
     it 'and succeeds' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       dish = Dish.create!(
         name: 'Petit Gateau de Mousse Insuflado',
         description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
@@ -465,7 +698,22 @@ describe 'User' do
     end
 
     it 'but is not authenticated' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       dish = Dish.create!(
         name: 'Petit Gateau de Mousse Insuflado',
         description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
@@ -491,6 +739,7 @@ describe 'User' do
       item_set = ItemOptionSet.create!(name: 'Café Frances', restaurant: restaurant)
       item_set.item_option_entries.create!(itemable: dish)
 
+
       # Act
       post restaurant_orders_path(
         restaurant,
@@ -506,12 +755,28 @@ describe 'User' do
           item_set_id: item_set.id
         })
 
+
       # Assert
       expect(response).to redirect_to new_user_session_path
     end
 
     it 'and fails if they provide an id of a restaurant they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       dish = Dish.create!(
         name: 'Petit Gateau de Mousse Insuflado',
         description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
@@ -555,6 +820,7 @@ describe 'User' do
         user: second_user
       )
 
+
       # Act
       post restaurant_orders_path(
         second_restaurant,
@@ -570,12 +836,28 @@ describe 'User' do
           item_set_id: item_set.id
         })
 
+
       # Assert
       expect(response).to redirect_to root_path
     end
 
     it 'and succeeds' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       dish = Dish.create!(
         name: 'Petit Gateau de Mousse Insuflado',
         description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
@@ -602,6 +884,7 @@ describe 'User' do
       item_set.item_option_entries.create!(itemable: dish)
       login_as restaurant.user
 
+
       # Act
       post restaurant_orders_path(
         restaurant,
@@ -616,6 +899,7 @@ describe 'User' do
           ],
           item_set_id: item_set.id
         })
+
 
       # Assert
       expect(response).to redirect_to restaurant_orders_path(restaurant)

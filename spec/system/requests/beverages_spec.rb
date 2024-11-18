@@ -20,7 +20,22 @@ describe 'User' do
   end
 
   it 'creates a beverage with success' do
-    restaurant = create_restaurant_and_user
+    user = User.create!(
+      name: 'Aloisio',
+      family_name: 'Silveira',
+      registration_number: '08000661110',
+      email: 'aloisio@email.com',
+      password: 'fortissima12'
+    )
+    restaurant = Restaurant.create!(
+      brand_name: 'Pizzaria Campus du Codi',
+      corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+      registration_number: '30.883.175/2481-06',
+      address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+      phone: '12987654321',
+      email: 'campus@ducodi.com.br',
+      user: user
+    )
     beverage = new_beverage
 
     login_as restaurant.user
@@ -42,7 +57,22 @@ describe 'User' do
   end
 
   it 'fails to creates a beverage with invalid data' do
-    restaurant = create_restaurant_and_user
+    user = User.create!(
+      name: 'Aloisio',
+      family_name: 'Silveira',
+      registration_number: '08000661110',
+      email: 'aloisio@email.com',
+      password: 'fortissima12'
+    )
+    restaurant = Restaurant.create!(
+      brand_name: 'Pizzaria Campus du Codi',
+      corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+      registration_number: '30.883.175/2481-06',
+      address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+      phone: '12987654321',
+      email: 'campus@ducodi.com.br',
+      user: user
+    )
     beverage = new_beverage
 
     login_as restaurant.user

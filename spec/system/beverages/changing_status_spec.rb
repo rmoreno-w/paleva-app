@@ -39,7 +39,6 @@ describe 'User' do
         email: 'campus@ducodi.com.br',
         user: user
       )
-      # puts "ALOW #{restaurant.user.id} "
       beverage = Beverage.create!(
         name: 'Agua de coco Sócoco',
         description: 'Caixa de 1L. Já vem gelada',
@@ -48,8 +47,6 @@ describe 'User' do
         restaurant: restaurant
       )
       beverage.inactive!
-      # puts user.restaurant.inspect
-      # puts restaurant.user.inspect
 
       visit root_path
       click_on 'Entrar'

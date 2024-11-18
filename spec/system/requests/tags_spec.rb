@@ -3,7 +3,22 @@ require 'rails_helper'
 describe 'User' do
   context 'tries to create a tag' do
     it 'but cannot access the creation page if they are not authenticated' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       Tag.new(name: 'Vegano')
 
       get(new_restaurant_tag_path(restaurant))
@@ -12,7 +27,22 @@ describe 'User' do
     end
 
     it 'but cannot create a tag (post it) if they are not authenticated' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
 
       post(restaurant_tags_path(restaurant),
         params: {
@@ -26,7 +56,22 @@ describe 'User' do
     end
 
     it 'but fails to get to the creation page for providing an id for a restaurant that they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       second_user = User.create!(
         name: 'Jacquin',
         family_name: 'DuFrance',
@@ -52,7 +97,22 @@ describe 'User' do
     end
 
     it 'but fails to create a tag providing an id for a restaurant that they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       second_user = User.create!(
         name: 'Jacquin',
         family_name: 'DuFrance',
@@ -72,6 +132,7 @@ describe 'User' do
 
       login_as restaurant.user
 
+
       post(restaurant_tags_path(second_restaurant),
         params: {
           tag: {
@@ -80,11 +141,27 @@ describe 'User' do
         }
       )
 
+
       expect(response.status).to redirect_to root_path
     end
 
     it 'and succeeds' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
 
       login_as restaurant.user
 
@@ -100,9 +177,25 @@ describe 'User' do
     end
 
     it 'but fails for providing invalid data - empty name' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
 
       login_as restaurant.user
+
 
       post(restaurant_tags_path(restaurant),
         params: {
@@ -112,13 +205,29 @@ describe 'User' do
         }
       )
 
+
       expect(response.status).to eq 422
     end
   end
 
   context 'tries to delete a tag' do
     it 'but cannot get access to the form if they are not authenticated' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       Tag.create!(name: 'Vegano', restaurant: restaurant)
 
       get(restaurant_exclude_tag_path(restaurant))
@@ -127,7 +236,22 @@ describe 'User' do
     end
 
     it 'but cannot delete a tag if they are not authenticated' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       tag = Tag.create!(name: 'Vegano', restaurant: restaurant)
 
       delete(restaurant_destroy_tag_path(restaurant),
@@ -140,7 +264,22 @@ describe 'User' do
     end
 
     it 'but fails to get to the form to delete a tag for providing an id for a restaurant that they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       tag = Tag.new(name: 'Vegano', restaurant: restaurant)
       second_user = User.create!(
         name: 'Jacquin',
@@ -161,17 +300,34 @@ describe 'User' do
 
       login_as restaurant.user
 
+
       delete(restaurant_destroy_tag_path(second_restaurant),
         params: {
           tag_id: tag.id
         }
       )
 
+
       expect(response.status).to redirect_to root_path
     end
 
     it 'but fails to delete a tag providing an id for a restaurant that they dont own' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       tag = Tag.create!(name: 'Vegano', restaurant: restaurant)
       second_user = User.create!(
         name: 'Jacquin',
@@ -192,26 +348,45 @@ describe 'User' do
 
       login_as restaurant.user
 
+
       delete(restaurant_destroy_tag_path(second_restaurant),
         params: {
           tag_id: tag.id
         }
       )
 
+
       expect(response.status).to redirect_to root_path
     end
 
     it 'and succeeds' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       tag = Tag.create!(name: 'Vegano', restaurant: restaurant)
 
       login_as restaurant.user
+
 
       delete(restaurant_destroy_tag_path(restaurant),
         params: {
           tag_id: tag.id
         }
       )
+
 
       expect(response.status).to redirect_to restaurant_dishes_path
     end

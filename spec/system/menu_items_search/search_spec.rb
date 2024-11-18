@@ -20,7 +20,22 @@ describe 'User' do
     end
 
     it 'and is able to find the search field in the navigation bar if it already has a restaurant' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       login_as restaurant.user
 
       visit root_path
@@ -30,7 +45,22 @@ describe 'User' do
     end
 
     it 'and makes a successful search' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
 
       Beverage.create!(
         name: 'Agua de coco Sócoco',
@@ -56,11 +86,14 @@ describe 'User' do
         )
 
       login_as restaurant.user
+
+
       visit root_path
       within '#menu-search' do
         fill_in 'Procurar no Menu', with: 'f'
         click_on 'Buscar'
       end
+
 
       dish = Dish.last
       first_beverage = Beverage.first
@@ -77,7 +110,22 @@ describe 'User' do
     end
 
     it 'and sees a link to see details of an item' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
 
       beverage = Beverage.create!(
         name: 'Agua de coco Sócoco',
@@ -94,10 +142,12 @@ describe 'User' do
         restaurant: restaurant
       )
 
+
       login_as restaurant.user
       visit root_path
       fill_in 'Procurar no Menu', with: 'a'
       click_on 'Buscar'
+
 
       expect(page).to have_content 'Resultados da busca por: a'
       expect(page).to have_content 'Agua de coco Sócoco'
@@ -107,7 +157,22 @@ describe 'User' do
     end
 
     it 'and sees a link to edit an item' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
 
       beverage = Beverage.create!(
         name: 'Agua de coco Sócoco',
@@ -124,10 +189,12 @@ describe 'User' do
         restaurant: restaurant
       )
 
+
       login_as restaurant.user
       visit root_path
       fill_in 'Procurar no Menu', with: 'a'
       click_on 'Buscar'
+
 
       expect(page).to have_content 'Resultados da busca por: a'
       expect(page).to have_content 'Agua de coco Sócoco'
@@ -137,20 +204,52 @@ describe 'User' do
     end
 
     it 'and sees a message when there are no items found' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       search_query = 'a'
+
 
       login_as restaurant.user
       visit root_path
       fill_in 'Procurar no Menu', with: search_query
       click_on 'Buscar'
 
+
       expect(page).to have_content 'Resultados da busca por: a'
       expect(page).to have_content "Nenhum resultado encontrado na busca por bebidas e pratos com \"#{search_query}\""
     end
 
     it 'and sees a list with all the dishes and beverages when the query is blank' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
 
       Beverage.create!(
         name: 'Agua de coco Sócoco',
@@ -174,10 +273,12 @@ describe 'User' do
         restaurant: restaurant
       )
 
+
       login_as restaurant.user
       visit root_path
       fill_in 'Procurar no Menu', with: ''
       click_on 'Buscar'
+
 
       expect(page).to have_content 'Resultados da busca por:'
       expect(page).to have_content 'Agua de coco Sócoco'
@@ -186,7 +287,22 @@ describe 'User' do
     end
 
     it 'and doesnt see items from other users' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
 
       Beverage.create!(
         name: 'Agua de coco Sócoco',
@@ -236,10 +352,12 @@ describe 'User' do
         restaurant: second_restaurant
       )
 
+
       login_as restaurant.user
       visit root_path
       fill_in 'Procurar no Menu', with: 'c'
       click_on 'Buscar'
+
 
       expect(page).to have_content 'Resultados da busca por: c'
       expect(page).to have_content 'Agua de coco Sócoco'
@@ -249,7 +367,22 @@ describe 'User' do
     end
 
     it 'and is able to find the search field in the navigation bar in any page thath needs login and a restaurant - If it already has a restaurant' do
-      restaurant = create_restaurant_and_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
       login_as restaurant.user
 
       beverage = Beverage.create!(
