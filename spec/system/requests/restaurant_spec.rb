@@ -2,7 +2,13 @@ require 'rails_helper'
 
 describe 'User' do
   it 'creates a restaurant is not authenticated' do
-    user = create_user
+    user = User.create!(
+      name: 'Aloisio',
+      family_name: 'Silveira',
+      registration_number: '08000661110',
+      email: 'aloisio@email.com',
+      password: 'fortissima12'
+    )
 
     post(
       restaurants_path(user), 
@@ -23,7 +29,13 @@ describe 'User' do
   end
 
   it 'creates a restaurant with success' do
-    user = create_user
+    user = User.create!(
+      name: 'Aloisio',
+      family_name: 'Silveira',
+      registration_number: '08000661110',
+      email: 'aloisio@email.com',
+      password: 'fortissima12'
+    )
     login_as user
 
     post(
@@ -52,7 +64,13 @@ describe 'User' do
   end
 
   it 'fails to creates a restaurant with invalid data' do
-    user = create_user
+    user = User.create!(
+      name: 'Aloisio',
+      family_name: 'Silveira',
+      registration_number: '08000661110',
+      email: 'aloisio@email.com',
+      password: 'fortissima12'
+    )
     login_as user
 
     post(

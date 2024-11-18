@@ -10,7 +10,13 @@ describe 'User' do
   end
 
   it 'can access the restaurant creation page if logged in and has no previous restaurant' do
-    user = create_user
+    user = User.create!(
+      name: 'Aloisio',
+      family_name: 'Silveira',
+      registration_number: '08000661110',
+      email: 'aloisio@email.com',
+      password: 'fortissima12'
+    )
     login_as user
     
     visit new_restaurant_path
@@ -47,7 +53,13 @@ describe 'User' do
   end
 
   it 'sees the restaurant creation page if logged in and has no previous restaurant' do
-    user = create_user
+    user = User.create!(
+      name: 'Aloisio',
+      family_name: 'Silveira',
+      registration_number: '08000661110',
+      email: 'aloisio@email.com',
+      password: 'fortissima12'
+    )
 
     visit root_path
     click_on 'Entrar'
@@ -60,7 +72,13 @@ describe 'User' do
   end
 
   it 'creates a restaurant with success' do
-    user = create_user
+    user = User.create!(
+      name: 'Aloisio',
+      family_name: 'Silveira',
+      registration_number: '08000661110',
+      email: 'aloisio@email.com',
+      password: 'fortissima12'
+    )
 
     visit root_path
     click_on 'Entrar'
@@ -113,7 +131,13 @@ describe 'User' do
   end
 
   it 'fails to create a restaurant when informing invalid data' do
-    user = create_user
+    user = User.create!(
+      name: 'Aloisio',
+      family_name: 'Silveira',
+      registration_number: '08000661110',
+      email: 'aloisio@email.com',
+      password: 'fortissima12'
+    )
 
     visit root_path
     click_on 'Entrar'
@@ -136,7 +160,13 @@ describe 'User' do
   end
 
   it 'must have a restaurant before navigating to any page. If it doesnt, it is redirected to creation page' do
-    user = create_user
+    user = User.create!(
+      name: 'Aloisio',
+      family_name: 'Silveira',
+      registration_number: '08000661110',
+      email: 'aloisio@email.com',
+      password: 'fortissima12'
+    )
     login_as user
 
     second_user = User.create!(

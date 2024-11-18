@@ -3,7 +3,13 @@ require 'rails_helper'
 describe 'User' do
   context 'tries to access the dish listing page' do
     it 'and should only see a link to dishes if a restaurant was previously created' do
-      create_user
+      User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
 
       # Act
       visit root_path

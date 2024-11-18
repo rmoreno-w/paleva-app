@@ -10,7 +10,13 @@ describe 'User' do
     end
 
     it 'and is not able to find the search field if it has no restaurant' do
-      user = create_user
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
       login_as user
 
       visit root_path

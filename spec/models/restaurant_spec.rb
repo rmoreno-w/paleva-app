@@ -4,7 +4,13 @@ RSpec.describe Restaurant, type: :model do
   describe '#valid' do
     context 'presence' do
       it 'should have a brand name' do
-        u = create_user
+        user = User.create!(
+          name: 'Aloisio',
+          family_name: 'Silveira',
+          registration_number: '08000661110',
+          email: 'aloisio@email.com',
+          password: 'fortissima12'
+        )
         restaurant = Restaurant.new(
           brand_name: '',
           corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
@@ -12,7 +18,7 @@ RSpec.describe Restaurant, type: :model do
           address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
           phone: '12987654321',
           email: 'campus@ducodi.com.br',
-          user: u
+          user: user
         )
 
         is_restaurant_valid = restaurant.valid?
@@ -23,7 +29,13 @@ RSpec.describe Restaurant, type: :model do
       end
 
       it 'should have a corporate name' do
-        u = create_user
+        user = User.create!(
+          name: 'Aloisio',
+          family_name: 'Silveira',
+          registration_number: '08000661110',
+          email: 'aloisio@email.com',
+          password: 'fortissima12'
+        )
         restaurant = Restaurant.new(
           brand_name: 'Pizzaria Campus du Codi',
           corporate_name: '',
@@ -31,7 +43,7 @@ RSpec.describe Restaurant, type: :model do
           address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
           phone: '12987654321',
           email: 'campus@ducodi.com.br',
-          user: u
+          user: user
         )
 
         is_restaurant_valid = restaurant.valid?
@@ -42,7 +54,13 @@ RSpec.describe Restaurant, type: :model do
       end
 
       it 'should have a registration number' do
-        u = create_user
+        user = User.create!(
+          name: 'Aloisio',
+          family_name: 'Silveira',
+          registration_number: '08000661110',
+          email: 'aloisio@email.com',
+          password: 'fortissima12'
+        )
         restaurant = Restaurant.new(
           brand_name: 'Pizzaria Campus du Codi',
           corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
@@ -50,7 +68,7 @@ RSpec.describe Restaurant, type: :model do
           address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
           phone: '12987654321',
           email: 'campus@ducodi.com.br',
-          user: u
+          user: user
         )
 
         is_restaurant_valid = restaurant.valid?
@@ -61,7 +79,13 @@ RSpec.describe Restaurant, type: :model do
       end
 
       it 'should have an address' do
-        u = create_user
+        user = User.create!(
+          name: 'Aloisio',
+          family_name: 'Silveira',
+          registration_number: '08000661110',
+          email: 'aloisio@email.com',
+          password: 'fortissima12'
+        )
         restaurant = Restaurant.new(
           brand_name: 'Pizzaria Campus du Codi',
           corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
@@ -69,7 +93,7 @@ RSpec.describe Restaurant, type: :model do
           address: '',
           phone: '12987654321',
           email: 'campus@ducodi.com.br',
-          user: u
+          user: user
         )
 
         is_restaurant_valid = restaurant.valid?
@@ -80,7 +104,13 @@ RSpec.describe Restaurant, type: :model do
       end
 
       it 'should have a phone' do
-        u = create_user
+        user = User.create!(
+          name: 'Aloisio',
+          family_name: 'Silveira',
+          registration_number: '08000661110',
+          email: 'aloisio@email.com',
+          password: 'fortissima12'
+        )
         restaurant = Restaurant.new(
           brand_name: 'Pizzaria Campus du Codi',
           corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
@@ -88,7 +118,7 @@ RSpec.describe Restaurant, type: :model do
           address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
           phone: '',
           email: 'campus@ducodi.com.br',
-          user: u
+          user: user
         )
 
         is_restaurant_valid = restaurant.valid?
@@ -99,7 +129,13 @@ RSpec.describe Restaurant, type: :model do
       end
 
       it 'should have an email' do
-        u = create_user
+        user = User.create!(
+          name: 'Aloisio',
+          family_name: 'Silveira',
+          registration_number: '08000661110',
+          email: 'aloisio@email.com',
+          password: 'fortissima12'
+        )
         restaurant = Restaurant.new(
           brand_name: 'Pizzaria Campus du Codi',
           corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
@@ -107,7 +143,7 @@ RSpec.describe Restaurant, type: :model do
           address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
           phone: '12987654321',
           email: '',
-          user: u
+          user: user
         )
 
         is_restaurant_valid = restaurant.valid?
@@ -118,7 +154,13 @@ RSpec.describe Restaurant, type: :model do
       end
 
       it 'should have a code' do
-        u = create_user
+        user = User.create!(
+          name: 'Aloisio',
+          family_name: 'Silveira',
+          registration_number: '08000661110',
+          email: 'aloisio@email.com',
+          password: 'fortissima12'
+        )
         restaurant = Restaurant.new(
           brand_name: 'Pizzaria Campus du Codi',
           corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
@@ -126,7 +168,7 @@ RSpec.describe Restaurant, type: :model do
           address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
           phone: '12987654321',
           email: 'campus@ducodi.com.br',
-          user: u
+          user: user
         )
 
         is_restaurant_valid = restaurant.valid?
@@ -140,7 +182,13 @@ RSpec.describe Restaurant, type: :model do
 
     context 'length' do
       it 'phone should not have less than 10 characters' do
-        u = create_user
+        user = User.create!(
+          name: 'Aloisio',
+          family_name: 'Silveira',
+          registration_number: '08000661110',
+          email: 'aloisio@email.com',
+          password: 'fortissima12'
+        )
         restaurant = Restaurant.new(
           brand_name: 'Pizzaria Campus du Codi',
           corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
@@ -148,7 +196,7 @@ RSpec.describe Restaurant, type: :model do
           address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
           phone: '123456789',
           email: 'campus@ducodi.com.br',
-          user: u
+          user: user
         )
 
         is_restaurant_valid = restaurant.valid?
@@ -159,7 +207,13 @@ RSpec.describe Restaurant, type: :model do
       end
 
       it 'phone should not have less than 10 characters' do
-        u = create_user
+        user = User.create!(
+          name: 'Aloisio',
+          family_name: 'Silveira',
+          registration_number: '08000661110',
+          email: 'aloisio@email.com',
+          password: 'fortissima12'
+        )
         restaurant = Restaurant.new(
           brand_name: 'Pizzaria Campus du Codi',
           corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
@@ -167,7 +221,7 @@ RSpec.describe Restaurant, type: :model do
           address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
           phone: '123456789012',
           email: 'campus@ducodi.com.br',
-          user: u
+          user: user
         )
 
         is_restaurant_valid = restaurant.valid?
@@ -180,7 +234,13 @@ RSpec.describe Restaurant, type: :model do
 
     context 'numericality' do
       it 'phone should be composed by only numerical characters' do
-        u = create_user
+        user = User.create!(
+          name: 'Aloisio',
+          family_name: 'Silveira',
+          registration_number: '08000661110',
+          email: 'aloisio@email.com',
+          password: 'fortissima12'
+        )
         restaurant = Restaurant.new(
           brand_name: 'Pizzaria Campus du Codi',
           corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
@@ -188,7 +248,7 @@ RSpec.describe Restaurant, type: :model do
           address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
           phone: 'aaaaaaaaaa',
           email: 'campus@ducodi.com.br',
-          user: u
+          user: user
         )
 
         is_restaurant_valid = restaurant.valid?
@@ -204,7 +264,7 @@ RSpec.describe Restaurant, type: :model do
     context 'uniqueness' do
       it 'user can only have one restaurant linked to his profile' do
         # Arrange
-        u = User.create!(
+        user = User.create!(
           name: 'Aloisio',
           family_name: 'Silveira',
           registration_number: '08000661110',
@@ -218,7 +278,7 @@ RSpec.describe Restaurant, type: :model do
           address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
           phone: '9876543210',
           email: 'campus@ducodi.com.br',
-          user: u
+          user: user
         )
         second_restaurant = Restaurant.new(
           brand_name: 'Pizzaria Campus du Contra',
@@ -227,7 +287,7 @@ RSpec.describe Restaurant, type: :model do
           address: 'Rua Barão de Cocais, 42. Bairro Laranjeiras. CEP: 50.001-002. Cubatão - SP',
           phone: '98765123401',
           email: 'campus@ducontra.com.br',
-          user: u
+          user: user
         )
 
         is_second_restaurant_valid = second_restaurant.valid?
@@ -285,13 +345,13 @@ RSpec.describe Restaurant, type: :model do
 
     context 'registration number validity' do
       it 'should match the pattern' do
-        u = User.create!(
-            name: 'Aloisio',
-            family_name: 'Silveira',
-            registration_number: '08000661110',
-            email: 'aloisio@email.com',
-            password: 'fortissima12'
-            )
+        user = User.create!(
+          name: 'Aloisio',
+          family_name: 'Silveira',
+          registration_number: '08000661110',
+          email: 'aloisio@email.com',
+          password: 'fortissima12'
+        )
         restaurant = Restaurant.new(
           brand_name: 'Pizzaria Campus du Codi',
           corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
@@ -299,7 +359,7 @@ RSpec.describe Restaurant, type: :model do
           address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
           phone: '9876543210',
           email: 'campus@ducodi.com.br',
-          user: u
+          user: user
         )
 
         is_restaurant_valid = restaurant.valid?
@@ -312,13 +372,13 @@ RSpec.describe Restaurant, type: :model do
 
     context 'email validity' do
       it 'should match the pattern' do
-        u = User.create!(
-            name: 'Aloisio',
-            family_name: 'Silveira',
-            registration_number: '08000661110',
-            email: 'aloisio@email.com',
-            password: 'fortissima12'
-            )
+        user = User.create!(
+          name: 'Aloisio',
+          family_name: 'Silveira',
+          registration_number: '08000661110',
+          email: 'aloisio@email.com',
+          password: 'fortissima12'
+        )
         restaurant = Restaurant.new(
           brand_name: 'Pizzaria Campus du Codi',
           corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
@@ -326,7 +386,7 @@ RSpec.describe Restaurant, type: :model do
           address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
           phone: '9876543210',
           email: 'a@a',
-          user: u
+          user: user
         )
 
         is_restaurant_valid = restaurant.valid?
@@ -340,13 +400,13 @@ RSpec.describe Restaurant, type: :model do
 
   describe '#code generation' do
     it "should happen automatically before a restaurant is registered" do
-      u = User.create!(
-            name: 'Aloisio',
-            family_name: 'Silveira',
-            registration_number: '08000661110',
-            email: 'aloisio@email.com',
-            password: 'fortissima12'
-            )
+        user = User.create!(
+          name: 'Aloisio',
+          family_name: 'Silveira',
+          registration_number: '08000661110',
+          email: 'aloisio@email.com',
+          password: 'fortissima12'
+        )
         restaurant = Restaurant.new(
           brand_name: 'Pizzaria Campus du Codi',
           corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
@@ -354,7 +414,7 @@ RSpec.describe Restaurant, type: :model do
           address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
           phone: '9876543210',
           email: 'campus@ducodi.com',
-          user: u
+          user: user
         )
 
         is_restaurant_valid = restaurant.valid?
@@ -368,7 +428,7 @@ RSpec.describe Restaurant, type: :model do
 
   describe '#user attribution' do
     it "should add the restaurant id to the user when registering them as an owner" do
-      u = User.create!(
+      user = User.create!(
         name: 'Aloisio',
         family_name: 'Silveira',
         registration_number: '08000661110',
@@ -382,11 +442,11 @@ RSpec.describe Restaurant, type: :model do
         address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
         phone: '9876543210',
         email: 'campus@ducodi.com',
-        user: u
+        user: user
       )
 
-      has_user_a_restaurant = u.restaurant.present?
-      is_user_restaurant_the_newly_created_restaurant = u.restaurant == restaurant
+      has_user_a_restaurant = user.restaurant.present?
+      is_user_restaurant_the_newly_created_restaurant = user.restaurant == restaurant
 
       expect(has_user_a_restaurant).to be true
       expect(is_user_restaurant_the_newly_created_restaurant).to be true
