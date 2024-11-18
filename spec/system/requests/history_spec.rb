@@ -4,7 +4,28 @@ describe 'User' do
   context 'tries to access the price history' do
     context 'for a serving of a Dish' do
       it 'but is not authenticated' do
-        dish = create_dish
+        user = User.create!(
+          name: 'Aloisio',
+          family_name: 'Silveira',
+          registration_number: '08000661110',
+          email: 'aloisio@email.com',
+          password: 'fortissima12'
+        )
+        restaurant = Restaurant.create!(
+          brand_name: 'Pizzaria Campus du Codi',
+          corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+          registration_number: '30.883.175/2481-06',
+          address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+          phone: '12987654321',
+          email: 'campus@ducodi.com.br',
+          user: user
+        )
+        dish = Dish.create!(
+          name: 'Petit Gateau de Mousse Insuflado',
+          description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+          calories: 580,
+          restaurant: restaurant
+        )
         serving = Serving.create!(description: '1 Bolinho', current_price: 24.5, servingable: dish)
 
         get(restaurant_dish_serving_history_path(dish.restaurant, dish, serving))
@@ -13,7 +34,28 @@ describe 'User' do
       end
 
       it 'but fails to get to the page for providing an id for a restaurant that they dont own' do
-        dish = create_dish
+        user = User.create!(
+          name: 'Aloisio',
+          family_name: 'Silveira',
+          registration_number: '08000661110',
+          email: 'aloisio@email.com',
+          password: 'fortissima12'
+        )
+        restaurant = Restaurant.create!(
+          brand_name: 'Pizzaria Campus du Codi',
+          corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+          registration_number: '30.883.175/2481-06',
+          address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+          phone: '12987654321',
+          email: 'campus@ducodi.com.br',
+          user: user
+        )
+        dish = Dish.create!(
+          name: 'Petit Gateau de Mousse Insuflado',
+          description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+          calories: 580,
+          restaurant: restaurant
+        )
         serving = Serving.create!(description: '1 Bolinho', current_price: 24.5, servingable: dish)
         second_user = User.create!(
           name: 'Jacquin',
@@ -39,7 +81,28 @@ describe 'User' do
       end
 
       it 'but fails to get to the page for providing an id for a dish that they dont own' do
-        dish = create_dish
+        user = User.create!(
+          name: 'Aloisio',
+          family_name: 'Silveira',
+          registration_number: '08000661110',
+          email: 'aloisio@email.com',
+          password: 'fortissima12'
+        )
+        restaurant = Restaurant.create!(
+          brand_name: 'Pizzaria Campus du Codi',
+          corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+          registration_number: '30.883.175/2481-06',
+          address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+          phone: '12987654321',
+          email: 'campus@ducodi.com.br',
+          user: user
+        )
+        dish = Dish.create!(
+          name: 'Petit Gateau de Mousse Insuflado',
+          description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+          calories: 580,
+          restaurant: restaurant
+        )
         serving = Serving.create!(description: '1 Bolinho', current_price: 12.80, servingable: dish)
         second_user = User.create!(
           name: 'Jacquin',
@@ -71,7 +134,28 @@ describe 'User' do
       end
 
       it 'but fails to get to the page for providing an id for a serving that they dont own' do
-        dish = create_dish
+        user = User.create!(
+          name: 'Aloisio',
+          family_name: 'Silveira',
+          registration_number: '08000661110',
+          email: 'aloisio@email.com',
+          password: 'fortissima12'
+        )
+        restaurant = Restaurant.create!(
+          brand_name: 'Pizzaria Campus du Codi',
+          corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+          registration_number: '30.883.175/2481-06',
+          address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+          phone: '12987654321',
+          email: 'campus@ducodi.com.br',
+          user: user
+        )
+        dish = Dish.create!(
+          name: 'Petit Gateau de Mousse Insuflado',
+          description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+          calories: 580,
+          restaurant: restaurant
+        )
         serving = Serving.create!(description: '1 Bolinho', current_price: 24.5, servingable: dish)
         second_user = User.create!(
           name: 'Jacquin',
@@ -103,7 +187,28 @@ describe 'User' do
       end
 
       it 'with success' do
-        dish = create_dish
+        user = User.create!(
+          name: 'Aloisio',
+          family_name: 'Silveira',
+          registration_number: '08000661110',
+          email: 'aloisio@email.com',
+          password: 'fortissima12'
+        )
+        restaurant = Restaurant.create!(
+          brand_name: 'Pizzaria Campus du Codi',
+          corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+          registration_number: '30.883.175/2481-06',
+          address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+          phone: '12987654321',
+          email: 'campus@ducodi.com.br',
+          user: user
+        )
+        dish = Dish.create!(
+          name: 'Petit Gateau de Mousse Insuflado',
+          description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+          calories: 580,
+          restaurant: restaurant
+        )
         serving = Serving.create!(description: '1 Bolinho', current_price: 24.5, servingable: dish)
         login_as dish.restaurant.user
 

@@ -3,7 +3,28 @@ require 'rails_helper'
 describe 'User' do
   context 'tries to access the dish viewing page' do
     it 'and should get to the correct page, seeing the dish detail' do
-      dish = create_dish
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      dish = Dish.create!(
+        name: 'Petit Gateau de Mousse Insuflado',
+        description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+        calories: 580,
+        restaurant: restaurant
+      )
 
       # Act
       visit root_path
@@ -88,7 +109,28 @@ describe 'User' do
     end
 
     it 'and should see the button to inactivate a dish, if it is active (default)' do
-      dish = create_dish
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      dish = Dish.create!(
+        name: 'Petit Gateau de Mousse Insuflado',
+        description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+        calories: 580,
+        restaurant: restaurant
+      )
 
       # Act
       visit root_path
@@ -105,7 +147,28 @@ describe 'User' do
     end
 
     it 'and should see the button to activate a dish, if it is inactive' do
-      dish = create_dish
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      dish = Dish.create!(
+        name: 'Petit Gateau de Mousse Insuflado',
+        description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+        calories: 580,
+        restaurant: restaurant
+      )
       dish.inactive!
 
       # Act
@@ -123,7 +186,28 @@ describe 'User' do
     end
 
     it 'and should see the serving options of a dish' do
-      dish = create_dish
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      dish = Dish.create!(
+        name: 'Petit Gateau de Mousse Insuflado',
+        description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+        calories: 580,
+        restaurant: restaurant
+      )
 
       visit root_path
       click_on 'Entrar'

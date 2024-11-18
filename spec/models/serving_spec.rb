@@ -5,7 +5,28 @@ RSpec.describe Serving, type: :model do
     context 'presence' do
       context 'when creating for a Dish' do
         it 'should have a description' do
-          dish = create_dish
+          user = User.create!(
+            name: 'Aloisio',
+            family_name: 'Silveira',
+            registration_number: '08000661110',
+            email: 'aloisio@email.com',
+            password: 'fortissima12'
+          )
+          restaurant = Restaurant.create!(
+            brand_name: 'Pizzaria Campus du Codi',
+            corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+            registration_number: '30.883.175/2481-06',
+            address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+            phone: '12987654321',
+            email: 'campus@ducodi.com.br',
+            user: user
+          )
+          dish = Dish.create!(
+            name: 'Petit Gateau de Mousse Insuflado',
+            description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+            calories: 580,
+            restaurant: restaurant
+          )
           serving = Serving.new(description: '', current_price: 25.5, servingable: dish)
 
           is_serving_valid = serving.valid?
@@ -16,7 +37,28 @@ RSpec.describe Serving, type: :model do
         end
 
         it 'should have a current price' do
-          dish = create_dish
+          user = User.create!(
+            name: 'Aloisio',
+            family_name: 'Silveira',
+            registration_number: '08000661110',
+            email: 'aloisio@email.com',
+            password: 'fortissima12'
+          )
+          restaurant = Restaurant.create!(
+            brand_name: 'Pizzaria Campus du Codi',
+            corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+            registration_number: '30.883.175/2481-06',
+            address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+            phone: '12987654321',
+            email: 'campus@ducodi.com.br',
+            user: user
+          )
+          dish = Dish.create!(
+            name: 'Petit Gateau de Mousse Insuflado',
+            description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+            calories: 580,
+            restaurant: restaurant
+          )
           serving = Serving.new(description: 'Bolinho individual', current_price: nil, servingable: dish)
 
           is_serving_valid = serving.valid?
@@ -67,7 +109,28 @@ RSpec.describe Serving, type: :model do
     context 'current price' do
       context 'for a Dish' do
         it 'should be greater than 0 when creating a Serving' do
-          dish = create_dish
+          user = User.create!(
+            name: 'Aloisio',
+            family_name: 'Silveira',
+            registration_number: '08000661110',
+            email: 'aloisio@email.com',
+            password: 'fortissima12'
+          )
+          restaurant = Restaurant.create!(
+            brand_name: 'Pizzaria Campus du Codi',
+            corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+            registration_number: '30.883.175/2481-06',
+            address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+            phone: '12987654321',
+            email: 'campus@ducodi.com.br',
+            user: user
+          )
+          dish = Dish.create!(
+            name: 'Petit Gateau de Mousse Insuflado',
+            description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+            calories: 580,
+            restaurant: restaurant
+          )
           serving = Serving.new(description: '1 Bolinho', current_price: -25.5, servingable: dish)
 
           is_serving_valid = serving.valid?
@@ -78,7 +141,28 @@ RSpec.describe Serving, type: :model do
         end
 
         it 'should be greater than 0 when updating a Serving' do
-          dish = create_dish
+          user = User.create!(
+            name: 'Aloisio',
+            family_name: 'Silveira',
+            registration_number: '08000661110',
+            email: 'aloisio@email.com',
+            password: 'fortissima12'
+          )
+          restaurant = Restaurant.create!(
+            brand_name: 'Pizzaria Campus du Codi',
+            corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+            registration_number: '30.883.175/2481-06',
+            address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+            phone: '12987654321',
+            email: 'campus@ducodi.com.br',
+            user: user
+          )
+          dish = Dish.create!(
+            name: 'Petit Gateau de Mousse Insuflado',
+            description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+            calories: 580,
+            restaurant: restaurant
+          )
           serving = Serving.create!(description: '1 Bolinho', current_price: 5.5, servingable: dish)
           serving.current_price = -35.6
 
@@ -119,7 +203,28 @@ RSpec.describe Serving, type: :model do
 
   context '#price registry generation' do
     it 'should generate an initial price registry when creating a serving for a Dish' do
-      dish = create_dish
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      dish = Dish.create!(
+        name: 'Petit Gateau de Mousse Insuflado',
+        description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+        calories: 580,
+        restaurant: restaurant
+      )
       serving = Serving.create!(description: '1 bolinho', current_price: 25.5, servingable: dish)
 
       is_serving_valid = serving.valid?
@@ -149,7 +254,28 @@ RSpec.describe Serving, type: :model do
     end
 
     it 'should generate a price registry automatically when updating the price of a serving for a Dish' do
-      dish = create_dish
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      dish = Dish.create!(
+        name: 'Petit Gateau de Mousse Insuflado',
+        description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+        calories: 580,
+        restaurant: restaurant
+      )
       serving = Serving.create!(description: '1 bolinho', current_price: 25.5, servingable: dish)
       serving.current_price = 30.90
       serving.save
@@ -179,7 +305,28 @@ RSpec.describe Serving, type: :model do
     end
 
     it 'should not generate a price registry automatically when updating the description of a serving for a Dish' do
-      dish = create_dish
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      dish = Dish.create!(
+        name: 'Petit Gateau de Mousse Insuflado',
+        description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+        calories: 580,
+        restaurant: restaurant
+      )
       serving = Serving.create!(description: '1 bolinho', current_price: 25.5, servingable: dish)
       serving.description = '2 bolinhos, servem 2 pessoas'
       serving.save

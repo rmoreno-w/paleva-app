@@ -394,7 +394,28 @@ describe 'User' do
 
   context 'tries to assign a tag to a dish' do
     it 'but cannot get access to the form if they are not authenticated' do
-      dish = create_dish
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      dish = Dish.create!(
+        name: 'Petit Gateau de Mousse Insuflado',
+        description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+        calories: 580,
+        restaurant: restaurant
+      )
       Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
 
       get(restaurant_dish_new_tag_assignment_path(dish.restaurant, dish))
@@ -403,7 +424,28 @@ describe 'User' do
     end
 
     it 'but cannot assign if they are not authenticated' do
-      dish = create_dish
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      dish = Dish.create!(
+        name: 'Petit Gateau de Mousse Insuflado',
+        description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+        calories: 580,
+        restaurant: restaurant
+      )
       tag = Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
 
       post(restaurant_dish_assign_tag_path(dish.restaurant, dish),
@@ -416,7 +458,28 @@ describe 'User' do
     end
 
     it 'but fails to get to the form to assign a tag for providing an id for a restaurant that they dont own' do
-      dish = create_dish
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      dish = Dish.create!(
+        name: 'Petit Gateau de Mousse Insuflado',
+        description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+        calories: 580,
+        restaurant: restaurant
+      )
       Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
       second_user = User.create!(
         name: 'Jacquin',
@@ -443,7 +506,28 @@ describe 'User' do
     end
 
     it 'but fails to delete a tag providing an id for a restaurant that they dont own' do
-      dish = create_dish
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      dish = Dish.create!(
+        name: 'Petit Gateau de Mousse Insuflado',
+        description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+        calories: 580,
+        restaurant: restaurant
+      )
       tag = Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
       second_user = User.create!(
         name: 'Jacquin',
@@ -474,7 +558,28 @@ describe 'User' do
     end
 
     it 'and fails for providing a dish that is not from the restaurant the user owns' do
-      dish = create_dish
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      dish = Dish.create!(
+        name: 'Petit Gateau de Mousse Insuflado',
+        description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+        calories: 580,
+        restaurant: restaurant
+      )
       Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
       second_user = User.create!(
         name: 'Jacquin',
@@ -512,7 +617,28 @@ describe 'User' do
     end
 
     it 'and fails for providing a tag that is not from the restaurant the user owns' do
-      dish = create_dish
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      dish = Dish.create!(
+        name: 'Petit Gateau de Mousse Insuflado',
+        description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+        calories: 580,
+        restaurant: restaurant
+      )
       Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
       second_user = User.create!(
         name: 'Jacquin',
@@ -544,7 +670,28 @@ describe 'User' do
     end
 
     it 'and fails for providing invalid data - empty id' do
-      dish = create_dish
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      dish = Dish.create!(
+        name: 'Petit Gateau de Mousse Insuflado',
+        description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+        calories: 580,
+        restaurant: restaurant
+      )
       Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
 
       login_as dish.restaurant.user
@@ -559,7 +706,28 @@ describe 'User' do
     end
 
     it 'and fails for providing invalid data - empty id' do
-      dish = create_dish
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      dish = Dish.create!(
+        name: 'Petit Gateau de Mousse Insuflado',
+        description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+        calories: 580,
+        restaurant: restaurant
+      )
       tag = Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
 
       login_as dish.restaurant.user
@@ -574,7 +742,28 @@ describe 'User' do
     end
 
     it 'and succeeds' do
-      dish = create_dish
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      dish = Dish.create!(
+        name: 'Petit Gateau de Mousse Insuflado',
+        description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+        calories: 580,
+        restaurant: restaurant
+      )
       tag = Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
 
       login_as dish.restaurant.user
@@ -591,7 +780,28 @@ describe 'User' do
 
   context 'tries to unassign a tag to a dish' do
     it 'but cannot get access to the form if they are not authenticated' do
-      dish = create_dish
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      dish = Dish.create!(
+        name: 'Petit Gateau de Mousse Insuflado',
+        description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+        calories: 580,
+        restaurant: restaurant
+      )
       Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
 
       get(restaurant_dish_remove_tag_assignment_path(dish.restaurant, dish))
@@ -600,7 +810,28 @@ describe 'User' do
     end
 
     it 'but cannot unassign if they are not authenticated' do
-      dish = create_dish
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      dish = Dish.create!(
+        name: 'Petit Gateau de Mousse Insuflado',
+        description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+        calories: 580,
+        restaurant: restaurant
+      )
       tag = Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
 
       delete(restaurant_dish_unassign_tag_path(dish.restaurant, dish),
@@ -613,7 +844,28 @@ describe 'User' do
     end
 
     it 'but fails to get to the form to assign a tag for providing an id for a restaurant that they dont own' do
-      dish = create_dish
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      dish = Dish.create!(
+        name: 'Petit Gateau de Mousse Insuflado',
+        description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+        calories: 580,
+        restaurant: restaurant
+      )
       Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
       second_user = User.create!(
         name: 'Jacquin',
@@ -640,7 +892,28 @@ describe 'User' do
     end
 
     it 'but fails to delete a tag providing an id for a restaurant that they dont own' do
-      dish = create_dish
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      dish = Dish.create!(
+        name: 'Petit Gateau de Mousse Insuflado',
+        description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+        calories: 580,
+        restaurant: restaurant
+      )
       tag = Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
       second_user = User.create!(
         name: 'Jacquin',
@@ -661,17 +934,40 @@ describe 'User' do
 
       login_as dish.restaurant.user
 
+
       delete(restaurant_dish_unassign_tag_path(second_restaurant, dish),
         params: {
           tag_id: tag.id
         }
       )
 
+
       expect(response.status).to redirect_to root_path
     end
 
     it 'and fails for providing a dish that is not from the restaurant the user owns' do
-      dish = create_dish
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      dish = Dish.create!(
+        name: 'Petit Gateau de Mousse Insuflado',
+        description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+        calories: 580,
+        restaurant: restaurant
+      )
       Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
       second_user = User.create!(
         name: 'Jacquin',
@@ -699,17 +995,40 @@ describe 'User' do
 
       login_as dish.restaurant.user
 
+
       delete(restaurant_dish_unassign_tag_path(dish.restaurant, second_dish),
         params: {
           tag_id: tag.id
         }
       )
 
+
       expect(response.status).to redirect_to root_path
     end
 
     it 'and fails for providing a tag that is not from the restaurant the user owns' do
-      dish = create_dish
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      dish = Dish.create!(
+        name: 'Petit Gateau de Mousse Insuflado',
+        description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+        calories: 580,
+        restaurant: restaurant
+      )
       Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
       second_user = User.create!(
         name: 'Jacquin',
@@ -731,20 +1050,44 @@ describe 'User' do
 
       login_as dish.restaurant.user
 
+
       delete(restaurant_dish_unassign_tag_path(second_restaurant, dish),
         params: {
           tag_id: tag.id
         }
       )
 
+
       expect(response.status).to redirect_to root_path
     end
 
     it 'and fails for providing invalid data - empty id' do
-      dish = create_dish
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      dish = Dish.create!(
+        name: 'Petit Gateau de Mousse Insuflado',
+        description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+        calories: 580,
+        restaurant: restaurant
+      )
       Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
 
       login_as dish.restaurant.user
+
 
       delete(restaurant_dish_unassign_tag_path(dish.restaurant, dish),
         params: {
@@ -752,14 +1095,37 @@ describe 'User' do
         }
       )
 
+
       expect(response.status).to redirect_to root_path
     end
 
     it 'and fails for providing invalid data - empty id' do
-      dish = create_dish
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      dish = Dish.create!(
+        name: 'Petit Gateau de Mousse Insuflado',
+        description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+        calories: 580,
+        restaurant: restaurant
+      )
       tag = Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
 
       login_as dish.restaurant.user
+
 
       delete(restaurant_dish_unassign_tag_path(dish.restaurant, dish),
         params: {
@@ -767,37 +1133,84 @@ describe 'User' do
         }
       )
 
+
       expect(response.status).to redirect_to root_path
     end
 
     it 'and fails for providing invalid data - tag id not associated to the dish' do
-      dish = create_dish
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      dish = Dish.create!(
+        name: 'Petit Gateau de Mousse Insuflado',
+        description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+        calories: 580,
+        restaurant: restaurant
+      )
       dish.tags << Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
       tag = Tag.create!(name: 'Sobremesa', restaurant: dish.restaurant)
 
       login_as dish.restaurant.user
 
+
       delete(restaurant_dish_unassign_tag_path(dish.restaurant, dish),
         params: {
           tag_id: tag.id
         }
       )
+
 
       expect(response.status).to redirect_to root_path
     end
 
     it 'and succeeds' do
-      dish = create_dish
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      dish = Dish.create!(
+        name: 'Petit Gateau de Mousse Insuflado',
+        description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+        calories: 580,
+        restaurant: restaurant
+      )
       tag = Tag.create!(name: 'Vegano', restaurant: dish.restaurant)
       dish.tags << tag
 
       login_as dish.restaurant.user
+
 
       delete(restaurant_dish_unassign_tag_path(dish.restaurant, dish),
         params: {
           tag_id: tag.id
         }
       )
+
 
       expect(response.status).to redirect_to restaurant_dish_path(dish.restaurant, dish)
     end
