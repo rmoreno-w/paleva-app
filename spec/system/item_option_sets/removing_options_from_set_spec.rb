@@ -66,6 +66,56 @@ describe 'User' do
       expect(page).to have_selector 'h2', text: "Remover Item de #{option_set.name}"
     end
 
+    it 'and should not see a link to remove a dish from the item set if they are a staff member' do
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant)
+      beverage = Beverage.create!(
+        name: 'Agua de coco Sócoco',
+        description: 'Extraída de coco à vacuo, pasteurizada',
+        calories: 150,
+        is_alcoholic: false,
+        restaurant: restaurant
+      )
+      Serving.create!(description: 'Garrafa 750ml', current_price: 12.5, servingable: beverage)
+      item_set.item_option_entries << ItemOptionEntry.new(itemable: beverage)
+      User.create!(
+        name: 'Adeilson',
+        family_name: 'Gomes',
+        registration_number: CPF.generate(),
+        email: 'adeilson@email.com',
+        password: 'fortissima12',
+        restaurant: restaurant,
+        role: :staff
+      )
+
+      # Act
+      visit root_path
+      click_on 'Entrar'
+      fill_in 'E-mail', with: 'adeilson@email.com'
+      fill_in 'Senha', with: 'fortissima12'
+      click_on 'Entrar'
+      click_on 'Café da Tarde'
+
+      # Assert
+      expect(current_path).to eq restaurant_item_option_set_path(restaurant, item_set)
+      expect(page).not_to have_link 'Remover Prato/Bebida do Cardápio'
+    end
+
     it 'and should only see the button to remove items if there is already an item in the item set' do
       user = User.create!(
         name: 'Aloisio',
@@ -95,7 +145,7 @@ describe 'User' do
       expect(page).not_to have_link 'Remover Prato/Bebida'
     end
 
-    it 'and removes a dish with success' do
+    it 'and removes a dish from a set of item options with success' do
       user = User.create!(
         name: 'Aloisio',
         family_name: 'Silveira',

@@ -29,22 +29,13 @@ describe 'User' do
       expect(page).to have_link 'Criar Conta'
     end
 
-    it 'and should land in the correct page if it has a restaurant' do
-      user = User.create!(
+    it 'and should only see a link to item sets if a restaurant was previously created' do
+      User.create!(
         name: 'Aloisio',
         family_name: 'Silveira',
         registration_number: '08000661110',
         email: 'aloisio@email.com',
         password: 'fortissima12'
-      )
-      Restaurant.create!(
-        brand_name: 'Pizzaria Campus du Codi',
-        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
-        registration_number: '30.883.175/2481-06',
-        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
-        phone: '12987654321',
-        email: 'campus@ducodi.com.br',
-        user: user
       )
 
       # Act
@@ -55,12 +46,11 @@ describe 'User' do
       click_on 'Entrar'
 
       # Assert
-      expect(current_path).to eq root_path
-      expect(page).to have_content 'Cardápios'
-      expect(page).to have_link 'Criar Cardápio'
+      expect(current_path).to eq new_restaurant_path
+      expect(page).not_to have_content 'Cardápios'
     end
 
-    it 'and succeeds' do
+    it 'and should land in the correct page if it has a restaurant' do
       user = User.create!(
         name: 'Aloisio',
         family_name: 'Silveira',

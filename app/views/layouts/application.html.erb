@@ -28,12 +28,14 @@
         <% if user_signed_in? %>
             <div class= "flex items-center justify-end flex-1 gap-4">
                 <% if current_user.has_restaurant? %>
-                    <%= form_with url: restaurant_menu_items_search_path(current_user), class: 'flex flex-col items-center flex-wrap gap-2', method: :get do | f | %>
-                        <%= f.label :query, 'Procurar no Menu', class: 'input_label text-center' %>
-                        <div id="menu-search" class="flex items-center justify-center flex-wrap gap-4">
-                            <%= f.search_field :query, placeholder: 'Ex: Pizza, Caipirinha...', class: 'input w-52 lg:w-auto' %>
-                            <%= f.submit 'Buscar', class: 'form_button mt-0' %>
-                        </div>
+                    <% if current_user.owner? %>
+                        <%= form_with url: restaurant_menu_items_search_path(current_user), class: 'flex flex-col items-center flex-wrap gap-2', method: :get do | f | %>
+                            <%= f.label :query, 'Procurar no Menu', class: 'input_label text-center' %>
+                            <div id="menu-search" class="flex items-center justify-center flex-wrap gap-4">
+                                <%= f.search_field :query, placeholder: 'Ex: Pizza, Caipirinha...', class: 'input w-52 lg:w-auto' %>
+                                <%= f.submit 'Buscar', class: 'form_button mt-0' %>
+                            </div>
+                        <% end %>
                     <% end %>
 
                     <%= render 'layouts/user_links' %>

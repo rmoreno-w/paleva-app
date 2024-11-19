@@ -7,7 +7,7 @@
     <% if @pre_registrations.empty? %>
         <p>Ainda não há Funcionários cadastrados e/ou pré-cadastrados</p>
     <% else %>
-        <li class="grid grid-cols-3 border-b border-projectPurple pb-2">
+        <li class="grid grid-cols-3 border-b border-projectPurple pb-2 px-4">
                 <p class="font-bold text-projectPurple text-lg text-center"><%= PreRegistration.human_attribute_name :email %></p>
                 <p class="font-bold text-projectPurple text-lg text-center"><%= PreRegistration.human_attribute_name :registration_number %></p>
                 <p class="font-bold text-projectPurple text-lg text-center"><%= PreRegistration.human_attribute_name :status %></p>

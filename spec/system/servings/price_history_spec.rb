@@ -74,7 +74,7 @@ describe 'User' do
       expect(page).to have_content '24,50'
     end
 
-    it 'and succeeds, seeing the history when there is more than one record' do
+    it 'and succeeds, seeing the history of prices for that item' do
       user = User.create!(
         name: 'Aloisio',
         family_name: 'Silveira',
@@ -193,7 +193,7 @@ describe 'User' do
       expect(page).to have_content '2,50'
     end
 
-    it 'and succeeds, seeing the history when there is more than one record' do
+    it 'and succeeds, seeing the history of prices for that item' do
       user = User.create!(
         name: 'Aloisio',
         family_name: 'Silveira',

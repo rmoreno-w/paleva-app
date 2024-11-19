@@ -83,7 +83,7 @@ describe 'User' do
       expect(page).not_to have_content "Nome do Cliente: Adinomar Santos"
     end
 
-    it 'and succeeds' do
+    it 'and succeeds, getting to the correct page and seeing the orders for their restaurant' do
       user = User.create!(
         name: 'Aloisio',
         family_name: 'Silveira',

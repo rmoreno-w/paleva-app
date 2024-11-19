@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'User' do
-  context 'tries to access the tag creation page' do
+  context 'tries to access the dish tag creation page' do
     it 'but has to first be logged in' do
       user = User.create!(
         name: 'Aloisio',

@@ -27,34 +27,7 @@ describe 'User' do
       expect(page).not_to have_link '+ Realizar Pré-Cadastro'
     end
 
-    it 'and gets to the correct page' do
-      user = User.create!(
-        name: 'Aloisio',
-        family_name: 'Silveira',
-        registration_number: '08000661110',
-        email: 'aloisio@email.com',
-        password: 'fortissima12'
-      )
-      restaurant = Restaurant.create!(
-        brand_name: 'Pizzaria Campus du Codi',
-        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
-        registration_number: '30.883.175/2481-06',
-        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
-        phone: '12987654321',
-        email: 'campus@ducodi.com.br',
-        user: user
-      )
-      login_as user
-
-      visit root_path
-      click_on 'Funcionários'
-
-      expect(current_path).to eq restaurant_staff_members_path(restaurant)
-      expect(page).to have_content 'Funcionários'
-      expect(page).to have_link '+ Realizar Pré-Cadastro'
-    end
-
-    it 'and succeed' do
+    it 'and gets to the correct page, seeing staff members for their restaurant' do
       user = User.create!(
         name: 'Aloisio',
         family_name: 'Silveira',
@@ -89,6 +62,44 @@ describe 'User' do
       expect(page).to have_content "Registrado ✅"
       expect(page).to have_content 'ken@errero.com'
       expect(page).to have_content "Pendente 🟠"
+    end
+
+    it 'and should not see a link to the staffing page if they are a staff member' do
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      User.create!(
+        name: 'Adeilson',
+        family_name: 'Gomes',
+        registration_number: CPF.generate(),
+        email: 'adeilson@email.com',
+        password: 'fortissima12',
+        restaurant: restaurant,
+        role: :staff
+      )
+
+      # Act
+      visit root_path
+      click_on 'Entrar'
+      fill_in 'E-mail', with: 'adeilson@email.com'
+      fill_in 'Senha', with: 'fortissima12'
+      click_on 'Entrar'
+
+      # Assert
+      expect(page).not_to have_link 'Funcionários'
     end
 
     it 'and doesnt see pre registrations from other restaurants' do

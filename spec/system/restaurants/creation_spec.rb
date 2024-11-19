@@ -105,7 +105,7 @@ describe 'User' do
     expect(current_path).to eq root_path
   end
 
-  it 'sees the restaurant item sets page if logged in and has a restaurant' do
+  it 'sees the restaurant item sets (home page) page if logged in and has a restaurant' do
     user = User.create!(
       name: 'Aloisio',
       family_name: 'Silveira',

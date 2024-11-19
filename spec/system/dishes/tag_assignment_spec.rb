@@ -43,7 +43,7 @@ describe 'User' do
       end
     end
 
-    it 'and only sees tags from its own restaurant' do
+    it 'and only sees tags from its own restaurant on the dropdown menu' do
       user = User.create!(
         name: 'Aloisio',
         family_name: 'Silveira',
@@ -104,7 +104,7 @@ describe 'User' do
       end
     end
 
-    it 'and canot add/see a tag to a dish that it already owns' do
+    it 'and canot add/see a tag to a dish that already has it' do
       user = User.create!(
         name: 'Aloisio',
         family_name: 'Silveira',
@@ -263,7 +263,7 @@ describe 'User' do
       expect(page).to have_link '-'
     end
 
-    it 'and finds only tags assigned to the dish on the form' do
+    it 'and only finds on the form tags that were already assigned to the dish' do
       user = User.create!(
         name: 'Aloisio',
         family_name: 'Silveira',

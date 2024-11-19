@@ -2,6 +2,32 @@ require 'rails_helper'
 
 describe 'User' do
   context 'tries to access the dish listing page' do
+    it 'but first, has to be logged in' do
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+
+      # Act
+      visit restaurant_dishes_path(restaurant)
+
+      # Assert
+      expect(current_path).to eq new_user_session_path
+      expect(page).not_to have_content 'Pratos do Meu Restaurante'
+    end
+
     it 'and should only see a link to dishes if a restaurant was previously created' do
       User.create!(
         name: 'Aloisio',
@@ -21,6 +47,45 @@ describe 'User' do
       # Assert
       expect(current_path).to eq new_restaurant_path
       expect(page).not_to have_content 'Pratos'
+    end
+
+    it 'and should not see a link to dishes if they are a staff member' do
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      User.create!(
+        name: 'Adeilson',
+        family_name: 'Gomes',
+        registration_number: CPF.generate(),
+        email: 'adeilson@email.com',
+        password: 'fortissima12',
+        restaurant: restaurant,
+        role: :staff
+      )
+
+      # Act
+      visit root_path
+      click_on 'Entrar'
+      fill_in 'E-mail', with: 'adeilson@email.com'
+      fill_in 'Senha', with: 'fortissima12'
+      click_on 'Entrar'
+
+      # Assert
+      expect(current_path).to eq root_path
+      expect(page).not_to have_link 'Pratos'
     end
 
     it 'and should land in the correct page if it has a restaurant' do
@@ -170,7 +235,7 @@ describe 'User' do
       end
     end
 
-    it 'and should see only the dishes marked with a tag when clicking on a tag button' do
+    it 'and should see only the dishes marked with a tag when clicking on a tag filter button' do
       user = User.create!(
         name: 'Aloisio',
         family_name: 'Silveira',

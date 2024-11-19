@@ -50,6 +50,44 @@ describe 'User' do
       expect(page).to have_selector 'input[placeholder="Ex: Pizza, Caipirinha..."]'
     end
 
+    it 'and should not see the search field if they are a staff member' do
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      User.create!(
+        name: 'Adeilson',
+        family_name: 'Gomes',
+        registration_number: CPF.generate(),
+        email: 'adeilson@email.com',
+        password: 'fortissima12',
+        restaurant: restaurant,
+        role: :staff
+      )
+
+      # Act
+      visit root_path
+      click_on 'Entrar'
+      fill_in 'E-mail', with: 'adeilson@email.com'
+      fill_in 'Senha', with: 'fortissima12'
+      click_on 'Entrar'
+
+      # Assert
+      expect(page).not_to have_selector 'input[placeholder="Ex: Pizza, Caipirinha..."]'
+    end
+
     it 'and makes a successful search' do
       user = User.create!(
         name: 'Aloisio',
@@ -115,7 +153,7 @@ describe 'User' do
 
     end
 
-    it 'and sees a link to see details of an item' do
+    it 'and sees a link to see details of each item' do
       user = User.create!(
         name: 'Aloisio',
         family_name: 'Silveira',
@@ -162,7 +200,7 @@ describe 'User' do
       expect(page).to have_link 'Ver detalhes', href: restaurant_dish_path(restaurant, dish)
     end
 
-    it 'and sees a link to edit an item' do
+    it 'and sees a link to edit each item' do
       user = User.create!(
         name: 'Aloisio',
         family_name: 'Silveira',
@@ -292,7 +330,7 @@ describe 'User' do
       expect(page).to have_content 'Pacote de Bala 7 Belo'
     end
 
-    it 'and doesnt see items from other users' do
+    it 'and doesnt see items from other users on the results of a search' do
       user = User.create!(
         name: 'Aloisio',
         family_name: 'Silveira',

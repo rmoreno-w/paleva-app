@@ -27,37 +27,7 @@ describe 'User' do
       expect(page).to have_content 'Login'
     end
 
-    it 'and should land in the correct page' do
-      user = User.create!(
-        name: 'Aloisio',
-        family_name: 'Silveira',
-        registration_number: '08000661110',
-        email: 'aloisio@email.com',
-        password: 'fortissima12'
-      )
-      restaurant = Restaurant.create!(
-        brand_name: 'Pizzaria Campus du Codi',
-        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
-        registration_number: '30.883.175/2481-06',
-        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
-        phone: '12987654321',
-        email: 'campus@ducodi.com.br',
-        user: user
-      )
-
-      visit root_path
-      click_on 'Entrar'
-      fill_in 'E-mail', with: 'aloisio@email.com'
-      fill_in 'Senha', with: 'fortissima12'
-      click_on 'Entrar'
-      click_on 'Horários'
-
-      # Assert
-      expect(current_path).to eq restaurant_restaurant_operating_hours_path(restaurant.id)
-      expect(page).to have_link '+ Criar Horário'
-    end
-
-    it 'and succeeds' do
+    it 'and should land in the correct page, seeing operating hours for their restaurant' do
       user = User.create!(
         name: 'Aloisio',
         family_name: 'Silveira',
@@ -84,6 +54,7 @@ describe 'User' do
       click_on 'Horários'
 
       # Assert
+      expect(current_path).to eq restaurant_restaurant_operating_hours_path(restaurant)
       expect(page).to have_content 'Horários de Funcionamento'
       expect(page).to have_content 'Segunda-feira - 09:00 às 12:00 - Aberto'
       expect(page).to have_content 'Segunda-feira - 13:30 às 17:30 - Aberto'
