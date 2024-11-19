@@ -1,0 +1,56 @@
+<h2>Pedido <span class="text-projectGreen"> #</span><%= @order.code %></h2>
+
+<section class="flex flex-col gap-2 text-lg mt-10">
+    <h3 class="text-projectPurple">Dados do Restaurante</h3>
+    <p>
+        <span class="font-bold">Nome: </span>
+        <%= @order.restaurant.brand_name %>
+    </p>
+
+    <p>
+        <span class="font-bold">Endereço: </span>
+        <%= @order.restaurant.address %>
+    </p>
+
+    <p>
+        <span class="font-bold">E-mail: </span>
+        <%= @order.restaurant.email %>
+    </p>
+
+    <p>
+        <span class="font-bold">Telefone: </span>
+        <%= @order.restaurant.phone  %>
+    </p>
+</section>
+
+<hr class="my-10 border border-projectPurple border-dashed" />
+
+<section class="flex flex-col gap-2 text-lg">
+    <h3 class="text-projectPurple">Dados do Pedido</h3>
+
+    <p>
+        <span class="font-bold">Status: </span>
+        <%= t(@order.status) %>
+    </p>
+
+    <header class="border-y-2 mt-4 mx-6 border-projectPurple border-dashed grid grid-cols-2">
+        <p class="p-5 flex-1 text-center text-projectPurple font-bold text-lg border-r-2 border-dashed border-projectPurple">Data de Alteração</p>
+        <p class="p-5 flex-1 text-center text-projectPurple font-bold text-lg">Status</p>
+    </header>
+
+    <article class="flex flex-col mx-6">
+        <div class="last:border-b-0 border-b-2 border-projectPurple border-dashed flex">
+            <p class="flex-1 p-5 text-center font-semibold border-r-2 border-projectPurple border-dashed"><%= l(@order.created_at, format: :long_date) %></p>
+            <p class="flex-1 p-5 text-center font-semibold">Criação</p>
+        </div>
+
+        <% if @order.order_status_changes %>
+            <% @order.order_status_changes.each do |status_change| %>
+                <div class="last:border-b-0 border-b-2 border-projectPurple border-dashed flex">
+                    <p class="flex-1 p-5 text-center font-semibold border-r-2 border-projectPurple border-dashed"><%= l(status_change.change_time, format: :long_date) %></p>
+                    <p class="flex-1 p-5 text-center font-semibold"><%= t(status_change.status) %></p>
+                </div>
+            <% end %>
+        <% end %>
+    </article>
+</section>

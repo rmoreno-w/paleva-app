@@ -3,11 +3,13 @@
 <% else %>
     <section class="grid grid-cols-2 gap-10 -m-12 min-h-[400px]">
         <div class="py-12 pl-12 flex flex-col justify-around">
-            <h2 class="text-center text-projectBlack">Para acessar o sistema, faça <span class="text-projectPurple">login</span> ou <span class="text-projectPurple">crie uma conta</span></h2>
+            <h2 class="text-center text-projectBlack">Para acessar o sistema, faça <span class="text-projectPurple">login</span> ou <span class="text-projectPurple">crie uma conta</span>. Ou ainda, acesse os dados de um pedido através do seu <span class="text-projectPurple">código</span>.</h2>
 
-            <div class="mt-10 flex gap-4">
-                <%= link_to 'Entrar', new_user_session_path, class: 'outline_button w-full text-center' %>
-                <%= link_to 'Criar Conta', new_user_registration_path, class:'outline_button w-full text-center' %>
+            <div class="mt-10 flex flex-col gap-4 items-center">
+                <%= link_to 'Entrar', new_user_session_path, class: 'form_button w-full text-center mt-0 w-[75%]' %>
+                <%= link_to 'Criar Conta', new_user_registration_path, class:'outline_button w-full text-center w-[75%]' %>
+                <span class="h-4"></span>
+                <%= link_to 'Acessar Pedido com Código', check_order_form_path, class:'outline_button w-full text-center w-[75%]' %>
             </div>
         </div>
 

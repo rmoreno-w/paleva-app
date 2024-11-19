@@ -1,6 +1,7 @@
 class Order < ApplicationRecord
   belongs_to :restaurant
   has_many :order_items
+  has_many :order_status_changes
 
   validates :customer_name, presence: true
   validates :customer_email, presence: true, if: Proc.new { self.customer_phone == nil || self.customer_phone == '' }

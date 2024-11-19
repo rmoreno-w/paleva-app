@@ -1,0 +1,10 @@
+<h2>Informe o Código do Pedido (8 dígitos) para obter mais informações</h2>
+
+<%= form_with(url: check_order_path, class: 'form', method: :get) do |f| %>
+    <div class="input_container">
+        <%= f.label :code, 'Código', class: 'input_label' %>
+        <%= f.text_field :code, class: 'input', placeholder: 'ex: A8B769E4', value: @code %>
+    </div>
+
+    <%= f.submit 'Buscar Pedido', class: 'form_button' %>
+<% end %>

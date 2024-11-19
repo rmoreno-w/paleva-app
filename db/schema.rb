@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_10_212735) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_19_061710) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -99,6 +99,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_10_212735) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_order_items_on_order_id"
+  end
+
+  create_table "order_status_changes", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.string "status"
+    t.datetime "change_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_status_changes_on_order_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -203,6 +212,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_10_212735) do
   add_foreign_key "item_option_entries", "item_option_sets"
   add_foreign_key "item_option_sets", "restaurants"
   add_foreign_key "order_items", "orders"
+  add_foreign_key "order_status_changes", "orders"
   add_foreign_key "orders", "restaurants"
   add_foreign_key "pre_registrations", "restaurants"
   add_foreign_key "price_records", "servings"

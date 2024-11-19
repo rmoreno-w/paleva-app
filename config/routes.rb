@@ -59,12 +59,16 @@ Rails.application.routes.draw do
     resources :orders, only: [ :show ]
   end
 
+  get '/check_order', to: 'check_orders#check_order_form', as: 'check_order_form'
+  get '/check_order/order', to: 'check_orders#show', as: 'check_order'
+
   namespace :api, :defaults => { :format => 'json' } do
     namespace :v1 do
       get '/orders', to: 'orders#index'
       get '/order', to: 'orders#show'
       post '/order/prepare', to: 'orders#prepare'
       post '/order/mark_ready', to: 'orders#mark_ready'
+      post '/order/deliver', to: 'orders#deliver'
     end
   end
 end
