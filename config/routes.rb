@@ -69,6 +69,7 @@ Rails.application.routes.draw do
       post '/order/prepare', to: 'orders#prepare'
       post '/order/mark_ready', to: 'orders#mark_ready'
       post '/order/deliver', to: 'orders#deliver'
+      post '/order/cancel', to: 'orders#cancel'
     end
   end
 end

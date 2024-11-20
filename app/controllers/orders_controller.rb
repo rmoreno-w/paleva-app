@@ -15,6 +15,11 @@ class OrdersController < UserController
     return if performed?
 
     @number_of_items = @order.order_items.count
+
+    if @order.canceled?
+      last_change =  @order.order_status_changes.last
+      @annotation = last_change.order_status_change_annotation.annotation
+    end
   end
 
   def index

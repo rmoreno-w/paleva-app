@@ -6,10 +6,10 @@
             <h2 class="text-center text-projectBlack">Para acessar o sistema, faça <span class="text-projectPurple">login</span> ou <span class="text-projectPurple">crie uma conta</span>. Ou ainda, acesse os dados de um pedido através do seu <span class="text-projectPurple">código</span>.</h2>
 
             <div class="mt-10 flex flex-col gap-4 items-center">
-                <%= link_to 'Entrar', new_user_session_path, class: 'form_button w-full text-center mt-0 w-[75%]' %>
-                <%= link_to 'Criar Conta', new_user_registration_path, class:'outline_button w-full text-center w-[75%]' %>
+                <%= link_to 'Entrar', new_user_session_path, class: 'form_button text-center mt-0 self-center w-3/5' %>
+                <%= link_to 'Criar Conta', new_user_registration_path, class:'outline_button text-center self-center w-3/5' %>
                 <span class="h-4"></span>
-                <%= link_to 'Acessar Pedido com Código', check_order_form_path, class:'outline_button w-full text-center w-[75%]' %>
+                <%= link_to 'Acessar Pedido com Código', check_order_form_path, class:'outline_button text-center self-center w-3/5' %>
             </div>
         </div>
 

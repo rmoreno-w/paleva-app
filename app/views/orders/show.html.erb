@@ -1,5 +1,9 @@
 <h2>Pedido <span class="text-projectGreen"> #</span><%= @order.code %></h2>
-<h3 class="mt-4">Status: <span class="text-projectPurple"><%= t(@order.status) %></span></h3>
+<h3 class="mt-4">Status: <span class="<%= @order.canceled? ? 'text-projectRed' : 'text-projectPurple' %>"><%= t(@order.status) %></span>
+    <% if @order.canceled? %>
+        <span>(Motivo: <%= @annotation %>)</span>
+    <% end %>
+</h3>
 
 <% if @number_of_items == 1 %>
     <p class="mt-10 mb-4">

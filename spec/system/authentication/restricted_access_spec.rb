@@ -87,7 +87,6 @@ describe 'User' do
         item_set: item_set
       )
 
-      # Act
       allowed_pages = [
         root_path,
         restaurant_item_option_set_path(restaurant.id, item_set.id),
