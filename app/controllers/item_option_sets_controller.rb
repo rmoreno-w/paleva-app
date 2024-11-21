@@ -10,7 +10,7 @@ class ItemOptionSetsController < UserController
   end
 
   def create
-    item_option_set_params = params.require(:item_option_set).permit(:name)
+    item_option_set_params = params.require(:item_option_set).permit(:name, :start_date, :end_date)
 
     @item_option_set = @restaurant.item_option_sets.build
     @item_option_set.assign_attributes(item_option_set_params)
@@ -28,6 +28,8 @@ class ItemOptionSetsController < UserController
     @item_option_set = ItemOptionSet.find(set_id)
 
     verify_item_set_ownership
+
+    return redirect_to root_path, alert: 'Voce não tem acesso a este cardápio' if current_user.staff? && @item_option_set.is_seasonal? && !@item_option_set.is_in_season?
 
     @item_option_entries = @item_option_set.active_item_option_entries
   end

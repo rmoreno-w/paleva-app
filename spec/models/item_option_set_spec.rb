@@ -12,6 +12,30 @@ RSpec.describe ItemOptionSet, type: :model do
         expect(is_item_set_valid).to be false
         expect(has_item_set_errors_on_name).to be true
       end
+
+      it 'may have no start and end dates' do
+        restaurant = Restaurant.new()
+        item_set = ItemOptionSet.new(name: 'Almoço', restaurant: restaurant)
+
+        is_item_set_valid = item_set.valid?
+        has_item_set_errors_on_start_date = item_set.errors.include? :start_date
+        has_item_set_errors_on_end_date = item_set.errors.include? :end_date
+
+        expect(is_item_set_valid).to be true
+        expect(has_item_set_errors_on_start_date).to be false
+        expect(has_item_set_errors_on_end_date).to be false
+      end
+
+      it 'if it has a start date, than it should have an end date' do
+        restaurant = Restaurant.new()
+        item_set = ItemOptionSet.new(name: 'Almoço', start_date: '2024-05-04', restaurant: restaurant)
+
+        is_item_set_valid = item_set.valid?
+        has_item_set_errors_on_end_date = item_set.errors.include? :end_date
+
+        expect(is_item_set_valid).to be false
+        expect(has_item_set_errors_on_end_date).to be true
+      end
     end
 
     context 'uniqueness' do
@@ -83,6 +107,19 @@ RSpec.describe ItemOptionSet, type: :model do
 
         expect(is_item_set_valid).to be true
         expect(has_item_set_errors_on_name).to be false
+      end
+    end
+
+    context 'comparison' do
+      it 'if it has a start date, end date should be a date post start date' do
+        restaurant = Restaurant.new()
+        item_set = ItemOptionSet.new(name: 'Almoço', start_date: '2024-05-04', end_date: '2024-05-03', restaurant: restaurant)
+
+        is_item_set_valid = item_set.valid?
+        has_item_set_errors_on_end_date = item_set.errors.include? :end_date
+
+        expect(is_item_set_valid).to be false
+        expect(has_item_set_errors_on_end_date).to be true
       end
     end
   end

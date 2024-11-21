@@ -7,3 +7,5 @@ pt-BR:
     attributes:
       item_option_set:
         name: Nome
+        start_date: Data de Início
+        end_date: Data de Fim

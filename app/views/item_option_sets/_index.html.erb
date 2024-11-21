@@ -12,10 +12,12 @@
 <% else %>
     <ul class="mt-10 flex flex-wrap gap-4">
     <% @item_option_sets.each do |option_set| %>
-        <%= link_to restaurant_item_option_set_path(@restaurant, option_set) do %>
-            <li class="border border-projectPurple p-8 rounded-xl hover:bg-projectPurple hover:text-projectWhite transition-all">
-                <p ><%= option_set.name %></p>
-            </li>
+        <% if !option_set.is_seasonal? || current_user.owner? && option_set.is_seasonal? || current_user.staff? && option_set.is_seasonal? && option_set.is_in_season? %>
+            <%= link_to restaurant_item_option_set_path(@restaurant, option_set) do %>
+                <li class="border border-projectPurple p-8 rounded-xl hover:bg-projectPurple hover:text-projectWhite transition-all">
+                    <p ><%= option_set.name %></p>
+                </li>
+            <% end %>
         <% end %>
     <% end %>
     </ul>

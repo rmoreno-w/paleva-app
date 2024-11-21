@@ -135,4 +135,45 @@ describe 'User' do
       expect(page).to have_content 'Almoço'
     end
   end
+
+  context 'creates a seasonal set of item options' do
+    it 'with success' do
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      Dish.create!(
+        name: 'Petit Gateau de Mousse Insuflado',
+        description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+        calories: 580,
+        restaurant: restaurant
+      )
+      login_as user
+
+      # Act
+      visit root_path
+      click_on 'Criar Cardápio'
+      fill_in 'Nome', with: 'Almoço da temporada Francês'
+      fill_in 'Data de Início', with: 1.month.from_now.to_fs(:db).split(' ').first
+      fill_in 'Data de Fim', with: 2.months.from_now.to_fs(:db).split(' ').first
+      click_on 'Criar Cardápio'
+
+      # Assert
+      expect(current_path).to eq root_path
+      expect(page).to have_content 'Cardápio criado com sucesso'
+      expect(page).to have_content 'Almoço da temporada Francês'
+    end
+  end
 end

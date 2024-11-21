@@ -169,6 +169,40 @@ describe 'User' do
       expect(response.status).to redirect_to root_path
     end
 
+    it 'but fails to get to the page for providing an id for being a staff member trying to acces a item set that is out of season' do
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      item_set = ItemOptionSet.create!(name: 'Café da Tarde', restaurant: restaurant, start_date: 1.month.from_now, end_date: 2.months.from_now)
+      staff_member = User.create!(
+        name: 'Jacquin',
+        family_name: 'DuFrance',
+        registration_number: CPF.generate,
+        email: 'ajc@cquin.com',
+        password: 'fortissima12',
+        restaurant: restaurant,
+        role: :staff
+      )
+      login_as staff_member
+
+      get restaurant_item_option_set_path(restaurant, item_set)
+
+      expect(response.status).to redirect_to root_path
+    end
+
     it 'and succeeds' do
       user = User.create!(
         name: 'Aloisio',

@@ -11,6 +11,14 @@
     <% end %>
 </div>
 
+<% if current_user.owner? && @item_option_set.is_seasonal? %>
+    <p class="my-10 font-bold text-lg">
+        Valido de  <span class="text-projectPurple"pan><%= l(@item_option_set.start_date) %></span>
+        até 
+        <span class="text-projectPurple"><%= l(@item_option_set.end_date) %></span>
+    </p>
+<% end %>
+
 <section class="mt-10 flex flex-col">
     <% if @item_option_entries.empty? %>
         <p>Ainda não há nenhum prato ou bebida cadastrados neste Cardápio.</p>
