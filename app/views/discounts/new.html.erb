@@ -1,0 +1,30 @@
+<h2>Novo Desconto</h2>
+
+<%= form_with(model: [@restaurant, @discount], class: 'form') do |f| %>
+    <div class="input_container">
+        <%= f.label :name, class: 'input_label' %>
+        <%= f.text_field :name, class: 'input' %>
+    </div>
+
+    <div class="input_container">
+        <%= f.label :percentage, class: 'input_label' %>
+        <%= f.number_field :percentage, min: 0, max: 100, step: 0.01, class: 'input' %>
+    </div>
+
+    <div class="input_container">
+        <%= f.label :start_date, class: 'input_label' %>
+        <%= f.date_field :start_date, class: 'input' %>
+    </div>
+
+    <div class="input_container">
+        <%= f.label :end_date, class: 'input_label' %>
+        <%= f.date_field :end_date, class: 'input' %>
+    </div>
+
+    <div class="input_container">
+        <%= f.label :limit_of_uses, class: 'input_label' %>
+        <%= f.number_field :limit_of_uses, min: 0, max: 100, step: 1, class: 'input' %>
+    </div>
+
+    <%= f.submit class: 'form_button' %>
+<% end %>

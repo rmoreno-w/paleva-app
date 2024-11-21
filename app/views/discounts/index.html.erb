@@ -1,0 +1,18 @@
+<div class="flex justify-between items-center">
+    <h2>Descontos</h2>
+    <%= link_to '+ Criar Desconto', new_restaurant_discount_path(@restaurant), class: 'outline_button' %>
+</div>
+
+<% if @discounts.empty? %>
+    <p class="mt-10">Ainda não há Descontos cadastrados para o seu restaurante.</p>
+<% else %>
+    <ul class="mt-10 flex flex-col gap-4 list-disc marker:text-projectPurple list-inside	">
+        <% @discounts.each do |discount| %>
+            <%= link_to restaurant_discount_path(@restaurant.id, discount.id) do %>
+                <li class="hover:cursor-pointer hover:underline hover:decoration-projectPurple  hover:decoration-2 hover:underline-offset-2 transition-transform">
+                    <span class="font-bold"><%= discount.name%></span> - <%= number_with_precision(discount.percentage, precision: 2) %>%
+                </li>
+            <% end %>
+        <% end %>
+    </ul>
+<% end %>

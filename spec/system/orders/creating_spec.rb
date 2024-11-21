@@ -177,7 +177,6 @@ describe 'User' do
       # Act
       visit root_path
       click_on 'Almoço'
-      # save_page
       find("#serving_#{serving.id}").click
       find("#serving_#{serving.id}").click
       click_on "Pedidos"

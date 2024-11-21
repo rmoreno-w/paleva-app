@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      discount:
+        one: Desconto
+        other: Descontos
+    attributes:
+      discount:
+        name: Nome
+        percentage: Porcentagem de Desconto
+        start_date: Data de Início
+        end_date: Data de Fim
+        limit_of_uses: Limite de Usos (número de Pedidos)

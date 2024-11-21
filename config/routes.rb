@@ -52,6 +52,8 @@ Rails.application.routes.draw do
       delete 'delete_item', to: 'item_option_sets#delete_item'
     end
 
+    resources :discounts, only: [ :index, :new, :create, :show ]
+
     post 'order_add_item', to: 'orders#add_item'
     get 'new_order', to: 'orders#new'
     post 'orders', to: 'orders#create'

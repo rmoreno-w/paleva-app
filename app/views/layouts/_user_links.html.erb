@@ -6,6 +6,8 @@
         <span class="link_separator"></span>
         <%= link_to 'Bebidas', restaurant_beverages_path(current_user.restaurant), class: controller_name == 'beverages' ? 'nav_link_active' : 'nav_link_inactive' %>
         <span class="link_separator"></span>
+        <%= link_to 'Descontos', restaurant_discounts_path(current_user.restaurant), class: controller_name == 'discounts' ? 'nav_link_active' : 'nav_link_inactive' %>
+        <span class="link_separator"></span>
         <%= link_to 'Pedidos', restaurant_orders_path(@restaurant), class: controller_name == 'orders' ? 'nav_link_active' : 'nav_link_inactive' %>
         <span class="link_separator"></span>
         <%= link_to 'Funcionários', restaurant_staff_members_path(@restaurant), class: controller_name == 'staff_members' ? 'nav_link_active' : 'nav_link_inactive' %>

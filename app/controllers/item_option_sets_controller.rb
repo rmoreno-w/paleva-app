@@ -28,6 +28,7 @@ class ItemOptionSetsController < UserController
     @item_option_set = ItemOptionSet.find(set_id)
 
     verify_item_set_ownership
+    return if performed?
 
     return redirect_to root_path, alert: 'Voce não tem acesso a este cardápio' if current_user.staff? && @item_option_set.is_seasonal? && !@item_option_set.is_in_season?
 
@@ -39,6 +40,7 @@ class ItemOptionSetsController < UserController
     @item_option_set = ItemOptionSet.find(set_id)
 
     verify_item_set_ownership
+    return if performed?
 
     restaurant_dishes = @restaurant.dishes.active
     set_dishes_ids = @item_option_set.dish_ids
@@ -53,6 +55,7 @@ class ItemOptionSetsController < UserController
     @dish = Dish.find(dish_id)
 
     verify_dish_ownership
+    return if performed?
 
     @item_option_set = ItemOptionSet.find(item_set_params)
     @item_option_set.item_option_entries.build(itemable: @dish)

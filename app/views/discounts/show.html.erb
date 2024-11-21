@@ -1,0 +1,23 @@
+<h2><%= @discount.name%></h2>
+
+<section class="flex flex-col gap-2 text-lg">
+    <p>
+        <span class="font-bold">Porcentagem de Desconto: </span>
+        <%= number_with_precision(@discount.percentage, precision: 2) %>%
+    </p>
+
+    <p>
+        <span class="font-bold">Data de Início: </span>
+        <%= l(@discount.start_date) %>
+    </p>
+
+    <p>
+        <span class="font-bold">Data de Fim: </span>
+        <%= l(@discount.end_date) %>
+    </p>
+
+    <p>
+        <span class="font-bold">Limite de Usos (número de Pedidos): </span>
+        <%= @discount.limit_of_uses %>
+    </p>
+</section>
