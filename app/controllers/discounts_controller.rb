@@ -26,6 +26,44 @@ class DiscountsController < UserController
     end
   end
 
+  def new_dish_serving
+    get_discount_param_discount_id
+    return if performed?
+    
+    restaurant_dishes = @restaurant.dishes.active
+    @available_dishes_servings = []
+    
+    restaurant_dishes.each do |dish|
+      if dish.servings.length > 0
+        @available_dishes_servings << dish.servings
+      end
+    end
+
+    @available_dishes_servings = @available_dishes_servings.flatten
+    @available_dishes_servings = @available_dishes_servings.map { |serving| [serving.id, serving.full_description]}
+  end
+  
+  def assign
+    get_discount_param_discount_id
+    return if performed?
+    
+    serving_id = params[:serving_id]
+    serving = Serving.find_by(id: serving_id)
+
+    discounted_serving = DiscountedServing.new(discount: @discount, serving: serving)
+
+    if discounted_serving.save
+      redirect_to restaurant_discount_path(@restaurant, @discount), notice: "#{serving.servingable.name} - #{serving.description} adicionado(a) ao Desconto com sucesso!"
+    else
+      flash[:alert] = "Ops :( Erro ao adicionar o item ao desconto"
+      if serving.servingable_type == "Dish"
+        redirect_to restaurant_discount_new_dish_serving_path(@restaurant, @discount)
+      else
+        redirect_to restaurant_discount_new_beverage_serving_path(@restaurant, @discount)
+      end
+    end
+  end
+
   private
   def get_discount_params
     params.require(:discount).permit(:name, :percentage, :start_date, :end_date, :limit_of_uses)
@@ -41,7 +79,12 @@ class DiscountsController < UserController
   def get_discount
     discount_id = params[:id]
     @discount = Discount.find_by(id: discount_id)
+    redirect_to root_path, alert: 'Ops, você não tem acesso a este desconto' if @discount.restaurant.id != @restaurant.id
+  end
 
+  def get_discount_param_discount_id
+    discount_id = params[:discount_id]
+    @discount = Discount.find_by(id: discount_id)
     redirect_to root_path, alert: 'Ops, você não tem acesso a este desconto' if @discount.restaurant.id != @restaurant.id
   end
 end

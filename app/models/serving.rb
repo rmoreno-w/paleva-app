@@ -1,6 +1,8 @@
 class Serving < ApplicationRecord
   belongs_to :servingable, polymorphic: true
   has_many :price_records
+  
+  has_many :discounted_servings
 
   after_save :save_price_record
 
@@ -9,6 +11,10 @@ class Serving < ApplicationRecord
 
   def price_history
     self.price_records
+  end
+
+  def full_description
+    "#{self.servingable.name} --- Porção: #{self.description}" 
   end
 
   private

@@ -52,7 +52,11 @@ Rails.application.routes.draw do
       delete 'delete_item', to: 'item_option_sets#delete_item'
     end
 
-    resources :discounts, only: [ :index, :new, :create, :show ]
+    resources :discounts, only: [ :index, :new, :create, :show ] do
+      get 'new_dish_serving', to: 'discounts#new_dish_serving'
+      get 'new_beverage_serving', to: 'discounts#new_beverage_serving'
+      post 'assign_serving', to: 'discounts#assign'
+    end
 
     post 'order_add_item', to: 'orders#add_item'
     get 'new_order', to: 'orders#new'

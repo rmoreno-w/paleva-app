@@ -1,23 +1,48 @@
 <h2><%= @discount.name%></h2>
 
-<section class="flex flex-col gap-2 text-lg">
-    <p>
-        <span class="font-bold">Porcentagem de Desconto: </span>
-        <%= number_with_precision(@discount.percentage, precision: 2) %>%
-    </p>
+<section class="flex justify-between mt-10">
+    <section class="flex flex-col gap-2 text-lg">
+        <p>
+            <span class="font-bold">Porcentagem de Desconto: </span>
+            <%= number_with_precision(@discount.percentage, precision: 2) %>%
+        </p>
 
-    <p>
-        <span class="font-bold">Data de Início: </span>
-        <%= l(@discount.start_date) %>
-    </p>
+        <p>
+            <span class="font-bold">Data de Início: </span>
+            <%= l(@discount.start_date) %>
+        </p>
 
-    <p>
-        <span class="font-bold">Data de Fim: </span>
-        <%= l(@discount.end_date) %>
-    </p>
+        <p>
+            <span class="font-bold">Data de Fim: </span>
+            <%= l(@discount.end_date) %>
+        </p>
 
-    <p>
-        <span class="font-bold">Limite de Usos (número de Pedidos): </span>
-        <%= @discount.limit_of_uses %>
-    </p>
+        <p>
+            <span class="font-bold">Limite de Usos (número de Pedidos): </span>
+            <%= @discount.limit_of_uses %>
+        </p>
+    </section>
+
+    <section class="flex flex-col gap-2 justify-start max-w-5xl items-end">
+        <span class="font-bold text-lg text-projectPurple">Opções</span>
+        
+        <%= link_to 'Adicionar Porção (Pratos)', restaurant_discount_new_dish_serving_path(@restaurant, @discount), class: 'outline_button w-full' %>
+    </section>
+</section>
+
+<section class="flex flex-col gap-2 text-lg mt-10">
+    <h3 class="text-projectPurple">Itens adicionados ao Desconto:</h3>
+
+    <ul class="mt-10 flex flex-col gap-4 list-disc marker:text-projectPurple list-inside">
+        <% @discount.discounted_servings.each do | discounted_serving | %>
+            <li class="w-[70%] flex items-center justify-between border-l border-projectPurple">
+                <p class="ml-4">
+                    <span class="font-bold"><%= discounted_serving.serving.full_description %></span>
+                </p>
+        <% end %>
+    </ul>
+</section>
+
+<section class="flex flex-col gap-2 text-lg mt-10">
+    <h3 class="text-projectPurple">Pedidos que usaram este desconto:</h3>
 </section>
