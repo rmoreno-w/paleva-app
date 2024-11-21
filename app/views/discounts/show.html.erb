@@ -26,7 +26,8 @@
     <section class="flex flex-col gap-2 justify-start max-w-5xl items-end">
         <span class="font-bold text-lg text-projectPurple">Opções</span>
         
-        <%= link_to 'Adicionar Porção (Pratos)', restaurant_discount_new_dish_serving_path(@restaurant, @discount), class: 'outline_button w-full' %>
+        <%= link_to 'Adicionar Porção (Prato)', restaurant_discount_new_dish_serving_path(@restaurant, @discount), class: 'outline_button w-full' %>
+        <%= link_to 'Adicionar Porção (Bebida)', restaurant_discount_new_beverage_serving_path(@restaurant, @discount), class: 'outline_button w-full' %>
     </section>
 </section>
 

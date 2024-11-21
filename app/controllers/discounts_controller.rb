@@ -41,6 +41,29 @@ class DiscountsController < UserController
 
     @available_dishes_servings = @available_dishes_servings.flatten
     @available_dishes_servings = @available_dishes_servings.map { |serving| [serving.id, serving.full_description]}
+
+    servings_already_on_discount_ids = @discount.discounted_servings.map { |discounted_serving| discounted_serving.serving.id}
+    @available_dishes_servings = @available_dishes_servings.reject { |serving_id, description| servings_already_on_discount_ids.include? serving_id } if !servings_already_on_discount_ids.empty?
+  end
+
+  def new_beverage_serving
+    get_discount_param_discount_id
+    return if performed?
+    
+    restaurant_beverages = @restaurant.beverages.active
+    @available_beverages_servings = []
+    
+    restaurant_beverages.each do |beverage|
+      if beverage.servings.length > 0
+        @available_beverages_servings << beverage.servings
+      end
+    end
+
+    @available_beverages_servings = @available_beverages_servings.flatten
+    @available_beverages_servings = @available_beverages_servings.map { |serving| [serving.id, serving.full_description]}
+
+    servings_already_on_discount_ids = @discount.discounted_servings.map { |discounted_serving| discounted_serving.serving.id}
+    @available_beverages_servings = @available_beverages_servings.reject { |serving_id, description| servings_already_on_discount_ids.include? serving_id } if !servings_already_on_discount_ids.empty?
   end
   
   def assign

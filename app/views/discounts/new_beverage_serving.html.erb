@@ -1,0 +1,14 @@
+<h2>Adicionar Porção de Bebida a "<%= @discount.name %>"</h2>
+
+<% if @available_beverages_servings.empty? %>
+    <p class="mt-10">Não há Bebidas disponíveis ou todas Bebidas já foram assignadas a este Desconto</p>
+<% else %>
+    <%= form_with(url: restaurant_discount_assign_serving_path(@restaurant, @discount), method: :post, class:'form') do |f| %>
+        <div class="input_container">
+            <%= f.label :serving_id, 'Porções de Bebidas Disponíveis', class: 'input_label' %>
+            <%= f.collection_select :serving_id, @available_beverages_servings, :first, :second %>
+        </div>
+
+        <%= f.submit 'Adicionar', class: 'form_button'%>
+    <% end %>
+<% end %>
