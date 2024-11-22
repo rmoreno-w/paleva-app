@@ -1,3 +1,5 @@
+<%= link_to '< Voltar', request.referer, class: "h-fit w-fit underline decoration-2 underline-offset-8 decoration-projectPurple mb-10 font-bold" %>
+
 <h2>Remover Característica</h2>
 
 <%= form_with(url: restaurant_dish_unassign_tag_path(@restaurant, @dish), method: :delete, class: 'form') do |f| %>

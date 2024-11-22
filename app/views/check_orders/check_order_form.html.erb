@@ -1,3 +1,5 @@
+<%= link_to '< Voltar', request.referer, class: "h-fit w-fit underline decoration-2 underline-offset-8 decoration-projectPurple mb-10 font-bold" %>
+
 <h2>Informe o Código do Pedido (8 dígitos) para obter mais informações</h2>
 
 <%= form_with(url: check_order_path, class: 'form', method: :get) do |f| %>

@@ -1,3 +1,5 @@
+<%= link_to '< Voltar', request.referer, class: "h-fit w-fit underline decoration-2 underline-offset-8 decoration-projectPurple mb-10 font-bold" %>
+
 <h2>Novo Desconto</h2>
 
 <%= form_with(model: [@restaurant, @discount], class: 'form') do |f| %>

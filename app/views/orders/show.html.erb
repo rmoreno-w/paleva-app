@@ -1,4 +1,7 @@
+<%= link_to '< Voltar', request.referer, class: "h-fit w-fit underline decoration-2 underline-offset-8 decoration-projectPurple mb-10 font-bold" %>
+
 <h2>Pedido <span class="text-projectGreen"> #</span><%= @order.code %></h2>
+
 <h3 class="mt-4">Status: <span class="<%= @order.canceled? ? 'text-projectRed' : 'text-projectPurple' %>"><%= t(@order.status) %></span>
     <% if @order.canceled? %>
         <span>(Motivo: <%= @annotation %>)</span>
