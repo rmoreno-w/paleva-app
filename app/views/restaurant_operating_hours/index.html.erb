@@ -12,9 +12,15 @@
     </div>
 
     <% if @restaurant.restaurant_operating_hours.present? %>
-        <ul class="list-disc marker:text-projectPurple list-inside">
-            <% @restaurant.restaurant_operating_hours.each do |op_hour| %>
-                <li><%=  t(op_hour.weekday) %> - <%=  l(op_hour.start_time, format: :hours) %> às <%=  l(op_hour.end_time, format: :hours) %> - <%=  t(op_hour.status) %></li>
+        <ul class="flex flex-col gap-10">
+            <% @operating_hours_per_day.each_pair do |weekday, operating_hours | %>
+                <li class="border-l-2 border-projectPurple pl-4 flex flex-col gap-4">
+                    <h3 class="font-bold text-projectPurple"><%=  t(weekday) %></h3>
+
+                    <% operating_hours.each do |operating_hour| %>
+                        <p class="font-medium"><%=  l(operating_hour.start_time, format: :hours) %> às <%=  l(operating_hour.end_time, format: :hours) %> - <span class="font-bold <%= operating_hour.opened? ? 'text-projectGreenDark' : 'text-projectRed' %>"><%=  t(operating_hour.status) %></span></p>
+                    <% end %>
+                </li>
             <% end %>
         </ul>
     <% else %>

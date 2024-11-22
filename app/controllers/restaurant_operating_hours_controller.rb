@@ -1,6 +1,7 @@
 class RestaurantOperatingHoursController < UserController
   def index
     @restaurant = current_user.restaurant
+    @operating_hours_per_day = @restaurant.restaurant_operating_hours.group_by { |operating_hour| operating_hour.weekday }
   end
 
   def new
