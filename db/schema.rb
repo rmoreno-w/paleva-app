@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_21_210512) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_22_010844) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -69,6 +69,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_21_210512) do
     t.integer "restaurant_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "number_of_uses", default: 0
     t.index ["restaurant_id"], name: "index_discounts_on_restaurant_id"
   end
 
@@ -121,6 +122,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_21_210512) do
     t.integer "order_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "discounted_serving_price"
     t.index ["order_id"], name: "index_order_items_on_order_id"
   end
 
@@ -216,6 +218,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_21_210512) do
     t.index ["restaurant_id"], name: "index_tags_on_restaurant_id"
   end
 
+  create_table "used_discounts", force: :cascade do |t|
+    t.integer "order_item_id", null: false
+    t.integer "discount_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["discount_id"], name: "index_used_discounts_on_discount_id"
+    t.index ["order_item_id"], name: "index_used_discounts_on_order_item_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -254,5 +265,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_21_210512) do
   add_foreign_key "restaurant_operating_hours", "restaurants"
   add_foreign_key "restaurants", "users"
   add_foreign_key "tags", "restaurants"
+  add_foreign_key "used_discounts", "discounts"
+  add_foreign_key "used_discounts", "order_items"
   add_foreign_key "users", "restaurants"
 end

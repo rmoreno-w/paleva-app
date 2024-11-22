@@ -11,3 +11,4 @@ pt-BR:
         start_date: Data de Início
         end_date: Data de Fim
         limit_of_uses: Limite de Usos (número de Pedidos)
+        number_of_uses: Número de descontos já usados

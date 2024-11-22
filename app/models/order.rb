@@ -19,12 +19,28 @@ class Order < ApplicationRecord
   # before_validation :ensure_has_at_least_one_order_item
 
   def total
-    order_item_prices = self.order_items.map { |order_item| order_item.serving_price * order_item.number_of_servings }
+    order_item_prices = self.order_items.map { |order_item| order_item.subtotal }
+    order_item_prices.sum
+  end
+
+  def discounted_total
+    order_item_prices = self.order_items.map do |order_item|
+      if order_item.discounted_serving_price
+        order_item.discounted_subtotal 
+      else
+        order_item.subtotal
+      end
+    end
+
     order_item_prices.sum
   end
 
   def item_count
     self.order_items.count
+  end
+
+  def is_discounted_order?
+    self.order_items.any? { |order_item| order_item.discounted_serving_price }
   end
 
   private

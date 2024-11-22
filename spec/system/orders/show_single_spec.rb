@@ -176,6 +176,101 @@ describe 'User' do
       expect(page).to have_content "CPF: #{CPF.new(order.customer_registration_number).formatted}"
     end
 
+    it 'and succeeds. If the order has discounts, show discounts for items and for grand total' do
+      user = User.create!(
+        name: 'Aloisio',
+        family_name: 'Silveira',
+        registration_number: '08000661110',
+        email: 'aloisio@email.com',
+        password: 'fortissima12'
+      )
+      restaurant = Restaurant.create!(
+        brand_name: 'Pizzaria Campus du Codi',
+        corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+        registration_number: '30.883.175/2481-06',
+        address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+        phone: '12987654321',
+        email: 'campus@ducodi.com.br',
+        user: user
+      )
+      dish = Dish.create!(
+        name: 'Petit Gateau de Mousse Insuflado',
+        description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+        calories: 580,
+        restaurant: restaurant
+      )
+      serving = dish.servings.create!(description: '1 Bolinho e 1 Bola de Sorvete', current_price: 24.00)
+      beverage = Beverage.create!(
+        name: 'Agua de coco Sócoco',
+        description: 'Caixa de 1L. Já vem gelada',
+        calories: 150,
+        is_alcoholic: false,
+        restaurant: restaurant
+      )
+      second_serving = beverage.servings.create!(description: 'Garrafa 750ml', current_price: 5.00)
+      item_set = ItemOptionSet.create!(name: 'Almoço', restaurant: restaurant)
+      item_set.item_option_entries.create!(itemable: dish)
+      item_set.item_option_entries.create!(itemable: beverage)
+      first_discount = Discount.create!(
+        name: 'Semana do Petit Gateau',
+        percentage: 50,
+        start_date: 1.day.ago.to_fs(:db).split(' ').first,
+        end_date: 2.weeks.from_now.to_fs(:db).split(' ').first,
+        limit_of_uses: 100, 
+        restaurant: restaurant
+      )
+      DiscountedServing.create!(discount: first_discount, serving: serving)
+      second_discount = Discount.create!(
+        name: 'Semana da Agua de Coco',
+        percentage: 10,
+        start_date: 1.day.ago.to_fs(:db).split(' ').first,
+        end_date: 2.weeks.from_now.to_fs(:db).split(' ').first,
+        limit_of_uses: 100, 
+        restaurant: restaurant
+      )
+      DiscountedServing.create!(discount: second_discount, serving: second_serving)
+      login_as user
+
+      # Act
+      visit root_path
+      click_on 'Almoço'
+      find("#serving_#{serving.id}").click
+      find("#serving_#{serving.id}").click
+      find("#serving_#{second_serving.id}").click
+      click_on "Pedidos"
+      find('#open-order-details').click
+
+      fill_in 'Nome do Cliente', with: 'Aloisio Fonseca'
+      fill_in 'E-mail do Cliente', with: 'aloisio_teste@email.com'
+      fill_in 'Telefone do Cliente', with: '12999116633'
+      fill_in 'CPF do Cliente (Opcional)', with: CPF.generate
+      find("#serving_#{serving.id}").set 'Sem Glúten'
+      click_on "Realizar Pedido"
+      order = Order.last
+      visit restaurant_order_path(restaurant, order)
+
+
+      # Assert
+      expect(current_path).to eq restaurant_order_path(restaurant, order)
+
+      expect(page).to have_content "Pedido ##{order.code}"
+      expect(page).to have_content "Status: Aguardando confirmação da cozinha"
+      expect(page).to have_content "2 Itens no Pedido"
+
+      expect(page).to have_content "Sub-Total com Desconto"
+      expect(page).to have_content "R$ 24,00"
+      expect(page).to have_content "R$ 4,50"
+      expect(page).to have_content "Total do Pedido"
+      expect(page).to have_content "R$ 53,00"
+      expect(page).to have_content "Total com Descontos"
+      expect(page).to have_content "R$ 28,50"
+      expect(page).to have_content "Dados do Cliente"
+      expect(page).to have_content "Nome: Aloisio Fonseca"
+      expect(page).to have_content "Telefone: 12999116633"
+      expect(page).to have_content "E-mail: aloisio_teste@email.com"
+      expect(page).to have_content "CPF: #{CPF.new(order.customer_registration_number).formatted}"
+    end
+
     it 'and cannot access an order from other restaurants' do
       user = User.create!(
         name: 'Aloisio',

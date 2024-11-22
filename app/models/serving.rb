@@ -3,6 +3,7 @@ class Serving < ApplicationRecord
   has_many :price_records
   
   has_many :discounted_servings
+  has_many :discounts, through: :discounted_servings
 
   after_save :save_price_record
 
@@ -15,6 +16,14 @@ class Serving < ApplicationRecord
 
   def full_description
     "#{self.servingable.name} --- Porção: #{self.description}" 
+  end
+
+  def has_active_discount?
+    self.discounts.where('start_date <= ? and end_date >= ? and number_of_uses < limit_of_uses', Time.now, Time.now).length > 0
+  end
+
+  def best_discount
+    self.discounts.where('start_date <= ? and end_date >= ? and number_of_uses < limit_of_uses', Time.now, Time.now).order(percentage: :asc).last
   end
 
   private

@@ -21,6 +21,11 @@
             <span class="font-bold">Limite de Usos (número de Pedidos): </span>
             <%= @discount.limit_of_uses %>
         </p>
+
+        <p>
+            <span class="font-bold">Número de descontos já usados: </span>
+            <%= @discount.number_of_uses %>
+        </p>
     </section>
 
     <section class="flex flex-col gap-2 justify-start max-w-5xl items-end">
@@ -46,4 +51,21 @@
 
 <section class="flex flex-col gap-2 text-lg mt-10">
     <h3 class="text-projectPurple">Pedidos que usaram este desconto:</h3>
+
+    <% if @discount.used_discounts.count == 0 %>
+        <p class="font-bold text-lg mt-4">
+    <% else %>
+        <% @discount.orders.each do |order| %>
+            <ul class="mt-4 flex flex-wrap gap-4">
+                <%= link_to restaurant_order_path(@restaurant, order) do %>
+                    <li class="p-4 border-2 border-projectPurple rounded-lg max-w-fit flex items-center justify-center">
+                        <p class="font-bold text-lg">
+                            <span class="mr-1">Pedido</span>
+                            <span class="text-projectGreen"> #</span><span class="text-projectPurple"><%= order.code %></span>
+                        </p>
+                    </li>
+                <% end %>
+            </ul>
+        <% end %>
+    <% end %>
 </section>

@@ -17,28 +17,33 @@
 <% end %>
 
 <ul class="flex flex-col gap-2 border-2 border-projectPurple rounded-md p-2 bg-projectPaperWhite">
-    <li class="grid grid-cols-5 border-b border-projectPurple pb-2 -mx-2">
+    <li class="grid grid-cols-6 border-b border-projectPurple pb-2 -mx-2">
         <span class="text-center font-bold text-projectPurple">Nome do Item</span>
         <span class="text-center font-bold text-projectPurple">Observações do Cliente</span>
         <span class="text-center font-bold text-projectPurple">Descrição da Porção</span>
         <span class="text-center font-bold text-projectPurple">Número de Porções</span>
         <span class="text-center font-bold text-projectPurple">Sub-Total</span>
+        <span class="text-center font-bold text-projectPurple">Sub-Total com Desconto</span>
     </li>
     <% @order.order_items.each_with_index do |item, index| %>
-        <li class="grid grid-cols-5 border-b last:border-0 border-projectPurple border-dashed py-2">
+        <li class="grid grid-cols-6 border-b last:border-0 border-projectPurple border-dashed py-2">
             <span class="text-center font-mono"><%= item.item_name %></span>
             <span class="text-center font-mono"><%= item.customer_notes %></span>
             <span class="text-center font-mono"><%= item.serving_description %></span>
             <span class="text-center font-mono"><%= item.number_of_servings %></span>
             <span class="text-center font-mono"><%= number_to_currency(item.subtotal) %></span>
+            <span class="text-center font-mono"><%= item.discounted_serving_price ? number_to_currency(item.discounted_subtotal) : number_to_currency(item.subtotal) %></span>
         </li>
     <% end %>
 </ul>
 
-<div class="grid grid-cols-5 px-2 pt-4">
-    <div class="col-start-5 px-2">
-        <p class="font-bold text-lg text-center">Total do Pedido:</p>
-        <p class="font-bold text-lg text-center text-projectPurple"><%= number_to_currency(@order.total) %></p>
+<div class="grid grid-cols-6 px-2 pt-4">
+    <div class="col-start-6 px-2">
+        <p class="font-bold text-lg text-right">Total do Pedido:</p>
+        <p class="font-bold text-lg text-right text-projectPurple"><%= number_to_currency(@order.total) %></p>
+        <hr class="my-4 border border-projectPurple border-dashed" />
+        <p class="font-bold text-lg text-right">Total com Descontos:</p>
+        <p class="font-bold text-lg text-right text-projectPurple"><%= @order.is_discounted_order? ? number_to_currency(@order.discounted_total) :  number_to_currency(@order.total) %></p>
     </div>
 </div>
 

@@ -49,25 +49,49 @@ describe 'User tries to visualize the discounts for their restaurant' do
       email: 'campus@ducodi.com.br',
       user: user
     )
+    dish = Dish.create!(
+      name: 'Petit Gateau de Mousse Insuflado',
+      description: 'Delicioso bolinho com sorvete. Ao partir, voce é presenteado com massa quentinha escorrendo, parecendo um mousse',
+      calories: 580,
+      restaurant: restaurant
+    )
+    serving = dish.servings.create!(description: '1 Bolinho e 1 Bola de Sorvete', current_price: 24.00)
+    item_set = ItemOptionSet.create!(name: 'Almoço', restaurant: restaurant)
+    item_set.item_option_entries.create!(itemable: dish)
     discount = Discount.create!(
-      name: 'Semana da Batata Frita',
-      percentage: 30,
-      start_date: 1.week.from_now.to_fs(:db).split(' ').first,
+      name: 'Semana do Petit Gateau',
+      percentage: 50,
+      start_date: 1.day.ago.to_fs(:db).split(' ').first,
       end_date: 2.weeks.from_now.to_fs(:db).split(' ').first,
       limit_of_uses: 100, 
       restaurant: restaurant
     )
+    DiscountedServing.create!(discount: discount, serving: serving)
     login_as user
 
+
+    # Act
     visit root_path
-    click_on 'Descontos'
-    click_on 'Semana da Batata Frita'
+    click_on 'Almoço'
+    find("#serving_#{serving.id}").click
+    find("#serving_#{serving.id}").click
+    click_on "Pedidos"
+    find('#open-order-details').click
+
+    fill_in 'Nome do Cliente', with: 'Aloisio Fonseca'
+    fill_in 'E-mail do Cliente', with: 'aloisio_teste@email.com'
+    fill_in 'Telefone do Cliente', with: '12999116633'
+    fill_in 'CPF do Cliente (Opcional)', with: CPF.generate
+    find("#serving_#{serving.id}").set 'Sem Glúten'
+    click_on "Realizar Pedido"
+    order = Order.last
+    visit restaurant_discount_path(restaurant, discount)
+
 
     expect(current_path).to eq restaurant_discount_path(restaurant, discount)
-    expect(page).to have_content 'Semana da Batata Frita' 
-    expect(page).to have_content 'Porcentagem de Desconto: 30,00%'
-    expect(page).to have_content "Data de Início: #{I18n.l(discount.start_date)}"
-    expect(page).to have_content "Data de Fim: #{I18n.l(discount.end_date)}"
-    expect(page).to have_content "Limite de Usos (número de Pedidos): 100"
+    expect(page).to have_content 'Semana do Petit Gateau' 
+    expect(page).to have_content 'Porcentagem de Desconto: 50,00%'
+    expect(page).to have_content 'Número de descontos já usados: 1'
+    expect(page).to have_link "Pedido ##{order.code}"
   end
 end

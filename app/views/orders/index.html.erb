@@ -33,7 +33,7 @@
                         </p>
 
                         <p>
-                            <span class="font-bold mr-1">Total do Pedido:</span> <%= number_to_currency(order.total) %>
+                            <span class="font-bold mr-1">Total do Pedido:</span> <%= order.is_discounted_order? ? number_to_currency(order.discounted_total) : number_to_currency(order.total) %>
                         </p>
 
                         <p>

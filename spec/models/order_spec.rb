@@ -84,7 +84,6 @@ RSpec.describe Order, type: :model do
         is_order_valid = order.valid?
         has_order_errors_on_customer_registration_number = order.errors.include? :customer_registration_number
 
-        puts order.errors.full_messages.to_a
         expect(is_order_valid).to eq true
         expect(has_order_errors_on_customer_registration_number).to eq false
       end

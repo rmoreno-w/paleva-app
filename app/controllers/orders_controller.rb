@@ -66,9 +66,10 @@ class OrdersController < UserController
     )
 
     @order_items = []
+    @used_discounts = []
 
     @servings.each do |serving, quantity|
-      @order_items << OrderItem.new(
+      order_item = OrderItem.new(
         item_name: serving.servingable.name,
         serving_description: serving.description,
         serving_price: serving.current_price,
@@ -76,6 +77,14 @@ class OrdersController < UserController
         customer_notes: customer_notes[serving.id.to_s],
         order: @order
       )
+
+      if serving.has_active_discount?
+        best_discount = serving.best_discount
+        order_item.discounted_serving_price = order_item.serving_price * (1 - (best_discount.percentage / 100))
+        @used_discounts << UsedDiscount.new(discount: best_discount, order_item: order_item)
+      end
+
+      @order_items << order_item
     end
 
     begin 
@@ -83,6 +92,12 @@ class OrdersController < UserController
         @order.save!
         @order_items.each do |item|
           item.save!
+        end
+
+        if @used_discounts.length > 0 
+          @used_discounts.each do |used_discount|
+            used_discount.save!
+          end
         end
 
         session.delete :order

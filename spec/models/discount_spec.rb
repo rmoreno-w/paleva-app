@@ -67,6 +67,40 @@ RSpec.describe Discount, type: :model do
         expect(has_discount_errors_on_end_date).to be true
       end
 
+      it 'should have a number_of_uses automatically created with 0' do
+        user = User.create!(
+          name: 'Aloisio',
+          family_name: 'Silveira',
+          registration_number: '08000661110',
+          email: 'aloisio@email.com',
+          password: 'fortissima12'
+        )
+        restaurant = Restaurant.create!(
+          brand_name: 'Pizzaria Campus du Codi',
+          corporate_name: 'Restaurante Entregas Pizzaria Campus du Codi S.A',
+          registration_number: '62.354.981/5223-31',
+          address: 'Rua Barão de Codais, 42. Bairro Laranjeiras. CEP: 40.001-002. Santos - SP',
+          phone: '12987654321',
+          email: 'campus@ducodi.com.br',
+          user: user
+        )
+        discount = Discount.create!(
+          name: 'Semana do Suco de Laranja',
+          percentage: 30,
+          start_date: 1.week.from_now,
+          end_date: 2.weeks.from_now,
+          limit_of_uses: 30,
+          restaurant: restaurant
+        )
+
+        is_discount_valid = discount.valid?
+        has_discount_errors_on_number_of_uses = discount.errors.include? :number_of_uses
+
+        expect(is_discount_valid).to be true
+        expect(has_discount_errors_on_number_of_uses).to be false
+        expect(discount.number_of_uses).to eq 0
+      end
+
       it 'may have no limit_of_uses' do
         restaurant = Restaurant.new()
         discount = Discount.new(
